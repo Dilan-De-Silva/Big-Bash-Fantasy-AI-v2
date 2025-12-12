@@ -474,11 +474,7 @@ def _run_single_simulation(sim_id, conf_int, lower_z_thresh, upper_z_thresh, cur
     """
     import pandas as pd
     import numpy as np
-    import time
-    
-    print(f"----- Simulation Run: {sim_id + 1} -----")
-    start_time = time.time()
-    
+
     # a. Calculate Player Z Score
     player_df_init = player_df_raw.copy()
     player_df_init["z_score"] = np.random.uniform(lower_z_thresh, upper_z_thresh, size=len(player_df_raw))
@@ -894,9 +890,6 @@ def _run_single_simulation(sim_id, conf_int, lower_z_thresh, upper_z_thresh, cur
     sim_sel_players = sel_player_df_r1[['Name']][sel_player_df_r1['In_Team'] == 0]
     sim_sel_players['Simulation'] = sim_id + 1
 
-    end_time = time.time()
-    print(f"Simulation Run {sim_id+1} completed in {end_time - start_time:.2f} seconds.\n")
-
     # Drop dataframes to free up memory
     del player_df_init, sel_player_df_r1, sel_player_df_r2, sel_player_df_r3, sel_player_df_r4, sel_player_df_r5
     del sel_player_df_r6, sel_player_df_r7, sel_player_df_r8, sel_player_df_r9, sel_player_df
@@ -950,7 +943,7 @@ def optimise_fn_sim_fp(conf_int, sim_num, current_rnd, player_df_raw, price_df, 
 
     if use_parallel:
         # Run simulations in parallel
-        with ProcessPoolExecutor(max_workers=10) as executor:
+        with ProcessPoolExecutor(max_workers=15) as executor:
             futures = [
                 executor.submit(
                     _run_single_simulation,
