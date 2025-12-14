@@ -280,11 +280,11 @@ def optimise_fn_efp(
                 m += z_rnd[(i, j)] <= next_x[j]
                 m += z_rnd[(i, j)] >= curr_x[i] + next_x[j] - 1
 
-            # Trade Boost Constraint (4 Trades Allowed for 2 Rounds (Only 8 In Team Players Required))
+            # Trade Boost Constraint (4 Trades Allowed for 2 Rounds (Only 9 In Team Players Required))
             extra_trade = m.add_var(var_type=BINARY)
             extra_trade_vars.append(extra_trade)
 
-            # If Trade Boost is used, allow 8 players from previous round, else allow 9
+            # If Trade Boost is used, allow 9 players from previous round, else allow 10
             m += xsum(z_rnd[(i, j)] for (i, j) in z_rnd.keys()) >= team_min - extra_trade
 
     # Only Two Trade Boosts Allowed in season
@@ -570,14 +570,14 @@ def optimise_fn_efp(
     if not sel_bench_df_r1.empty:
         bench_player = sel_player_df_r1[sel_player_df_r1['Is_Bench'] == 1]
         print("Bench Player (rnd 1):", bench_player["Name"].values[0], f"(${bench_player['Price'].values[0]:,})")
-    print("Current Players Remaining (rnd 1):", sum(sel_player_df_r1[sel_player_df_r1['Is_Bench'] == 0]["In_Team"]))
+    print("Current Players Remaining (rnd 1):", sum(sel_player_df_r1["In_Team"]))
 
     # Round 2
     sel_player_df_r2 = player_df_r2.iloc[selected_r2].copy()
     sel_bench_df_r2 = player_df_r2.iloc[benched_r2].copy() if benched_r2 else pd.DataFrame()
     sel_captain_df_r2 = player_df_r2.iloc[captained_r2]
     # In Team Flag
-    sel_names_r1 = player_df_r1.iloc[selected_r1]['Name'].astype(str).tolist() if selected_r1 else []
+    sel_names_r1 = player_df_r1.iloc[all_selected_r1]['Name'].astype(str).tolist() if all_selected_r1 else []
     sel_player_df_r2['In_Team'] = sel_player_df_r2['Name'].astype(str).isin(sel_names_r1).astype(int)
     # Add bench flag
     sel_player_df_r2['Is_Bench'] = 0
@@ -593,14 +593,14 @@ def optimise_fn_efp(
     if not sel_bench_df_r2.empty:
         bench_player = sel_player_df_r2[sel_player_df_r2['Is_Bench'] == 1]
         print("Bench Player (rnd 2):", bench_player["Name"].values[0], f"(${bench_player['Price'].values[0]:,})")
-    print("Current Players Remaining (rnd 2):", sum(sel_player_df_r2[sel_player_df_r2['Is_Bench'] == 0]["In_Team"]))
+    print("Current Players Remaining (rnd 2):", sum(sel_player_df_r2["In_Team"]))
 
     # Round 3
     sel_player_df_r3 = player_df_r3.iloc[selected_r3].copy()
     sel_bench_df_r3 = player_df_r3.iloc[benched_r3].copy() if benched_r3 else pd.DataFrame()
     sel_captain_df_r3 = player_df_r3.iloc[captained_r3]
     # In Team Flag
-    sel_names_r2 = player_df_r2.iloc[selected_r2]['Name'].astype(str).tolist() if selected_r2 else []
+    sel_names_r2 = player_df_r2.iloc[all_selected_r2]['Name'].astype(str).tolist() if all_selected_r2 else []
     sel_player_df_r3['In_Team'] = sel_player_df_r3['Name'].astype(str).isin(sel_names_r2).astype(int)
     # Add bench flag
     sel_player_df_r3['Is_Bench'] = 0
@@ -616,14 +616,14 @@ def optimise_fn_efp(
     if not sel_bench_df_r3.empty:
         bench_player = sel_player_df_r3[sel_player_df_r3['Is_Bench'] == 1]
         print("Bench Player (rnd 3):", bench_player["Name"].values[0], f"(${bench_player['Price'].values[0]:,})")
-    print("Current Players Remaining (rnd 3):", sum(sel_player_df_r3[sel_player_df_r3['Is_Bench'] == 0]["In_Team"]))
+    print("Current Players Remaining (rnd 3):", sum(sel_player_df_r3["In_Team"]))
     
     # Round 4
     sel_player_df_r4 = player_df_r4.iloc[selected_r4].copy()
     sel_bench_df_r4 = player_df_r4.iloc[benched_r4].copy() if benched_r4 else pd.DataFrame()
     sel_captain_df_r4 = player_df_r4.iloc[captained_r4]
     # In Team Flag
-    sel_names_r3 = player_df_r3.iloc[selected_r3]['Name'].astype(str).tolist() if selected_r3 else []
+    sel_names_r3 = player_df_r3.iloc[all_selected_r3]['Name'].astype(str).tolist() if all_selected_r3 else []
     sel_player_df_r4['In_Team'] = sel_player_df_r4['Name'].astype(str).isin(sel_names_r3).astype(int)
     # Add bench flag
     sel_player_df_r4['Is_Bench'] = 0
@@ -639,14 +639,14 @@ def optimise_fn_efp(
     if not sel_bench_df_r4.empty:
         bench_player = sel_player_df_r4[sel_player_df_r4['Is_Bench'] == 1]
         print("Bench Player (rnd 4):", bench_player["Name"].values[0], f"(${bench_player['Price'].values[0]:,})")
-    print("Current Players Remaining (rnd 4):", sum(sel_player_df_r4[sel_player_df_r4['Is_Bench'] == 0]["In_Team"]))
+    print("Current Players Remaining (rnd 4):", sum(sel_player_df_r4["In_Team"]))
     
     # Round 5
     sel_player_df_r5 = player_df_r5.iloc[selected_r5].copy()
     sel_bench_df_r5 = player_df_r5.iloc[benched_r5].copy() if benched_r5 else pd.DataFrame()
     sel_captain_df_r5 = player_df_r5.iloc[captained_r5]
-    # In Team Flag  
-    sel_names_r4 = player_df_r4.iloc[selected_r4]['Name'].astype(str).tolist() if selected_r4 else []
+    # In Team Flag
+    sel_names_r4 = player_df_r4.iloc[all_selected_r4]['Name'].astype(str).tolist() if all_selected_r4 else []
     sel_player_df_r5['In_Team'] = sel_player_df_r5['Name'].astype(str).isin(sel_names_r4).astype(int)
     # Add bench flag
     sel_player_df_r5['Is_Bench'] = 0
@@ -662,14 +662,14 @@ def optimise_fn_efp(
     if not sel_bench_df_r5.empty:
         bench_player = sel_player_df_r5[sel_player_df_r5['Is_Bench'] == 1]
         print("Bench Player (rnd 5):", bench_player["Name"].values[0], f"(${bench_player['Price'].values[0]:,})")
-    print("Current Players Remaining (rnd 5):", sum(sel_player_df_r5[sel_player_df_r5['Is_Bench'] == 0]["In_Team"]))
+    print("Current Players Remaining (rnd 5):", sum(sel_player_df_r5["In_Team"]))
     
     # Round 6
     sel_player_df_r6 = player_df_r6.iloc[selected_r6].copy()
     sel_bench_df_r6 = player_df_r6.iloc[benched_r6].copy() if benched_r6 else pd.DataFrame()
     sel_captain_df_r6 = player_df_r6.iloc[captained_r6]
     # In Team Flag
-    sel_names_r5 = player_df_r5.iloc[selected_r5]['Name'].astype(str).tolist() if selected_r5 else []
+    sel_names_r5 = player_df_r5.iloc[all_selected_r5]['Name'].astype(str).tolist() if all_selected_r5 else []
     sel_player_df_r6['In_Team'] = sel_player_df_r6['Name'].astype(str).isin(sel_names_r5).astype(int)
     # Add bench flag
     sel_player_df_r6['Is_Bench'] = 0
@@ -685,14 +685,14 @@ def optimise_fn_efp(
     if not sel_bench_df_r6.empty:
         bench_player = sel_player_df_r6[sel_player_df_r6['Is_Bench'] == 1]
         print("Bench Player (rnd 6):", bench_player["Name"].values[0], f"(${bench_player['Price'].values[0]:,})")
-    print("Current Players Remaining (rnd 6):", sum(sel_player_df_r6[sel_player_df_r6['Is_Bench'] == 0]["In_Team"]))
+    print("Current Players Remaining (rnd 6):", sum(sel_player_df_r6["In_Team"]))
     
     # Round 7
     sel_player_df_r7 = player_df_r7.iloc[selected_r7].copy()
     sel_bench_df_r7 = player_df_r7.iloc[benched_r7].copy() if benched_r7 else pd.DataFrame()
     sel_captain_df_r7 = player_df_r7.iloc[captained_r7]
     # In Team Flag
-    sel_names_r6 = player_df_r6.iloc[selected_r6]['Name'].astype(str).tolist() if selected_r6 else []
+    sel_names_r6 = player_df_r6.iloc[all_selected_r6]['Name'].astype(str).tolist() if all_selected_r6 else []
     sel_player_df_r7['In_Team'] = sel_player_df_r7['Name'].astype(str).isin(sel_names_r6).astype(int)
     # Add bench flag
     sel_player_df_r7['Is_Bench'] = 0
@@ -708,14 +708,14 @@ def optimise_fn_efp(
     if not sel_bench_df_r7.empty:
         bench_player = sel_player_df_r7[sel_player_df_r7['Is_Bench'] == 1]
         print("Bench Player (rnd 7):", bench_player["Name"].values[0], f"(${bench_player['Price'].values[0]:,})")
-    print("Current Players Remaining (rnd 7):", sum(sel_player_df_r7[sel_player_df_r7['Is_Bench'] == 0]["In_Team"]))
+    print("Current Players Remaining (rnd 7):", sum(sel_player_df_r7["In_Team"]))
     
     # Round 8
     sel_player_df_r8 = player_df_r8.iloc[selected_r8].copy()
     sel_bench_df_r8 = player_df_r8.iloc[benched_r8].copy() if benched_r8 else pd.DataFrame()
     sel_captain_df_r8 = player_df_r8.iloc[captained_r8]
     # In Team Flag
-    sel_names_r7 = player_df_r7.iloc[selected_r7]['Name'].astype(str).tolist() if selected_r7 else []
+    sel_names_r7 = player_df_r7.iloc[all_selected_r7]['Name'].astype(str).tolist() if all_selected_r7 else []
     sel_player_df_r8['In_Team'] = sel_player_df_r8['Name'].astype(str).isin(sel_names_r7).astype(int)
     # Add bench flag
     sel_player_df_r8['Is_Bench'] = 0
@@ -731,14 +731,14 @@ def optimise_fn_efp(
     if not sel_bench_df_r8.empty:
         bench_player = sel_player_df_r8[sel_player_df_r8['Is_Bench'] == 1]
         print("Bench Player (rnd 8):", bench_player["Name"].values[0], f"(${bench_player['Price'].values[0]:,})")
-    print("Current Players Remaining (rnd 8):", sum(sel_player_df_r8[sel_player_df_r8['Is_Bench'] == 0]["In_Team"]))
+    print("Current Players Remaining (rnd 8):", sum(sel_player_df_r8["In_Team"]))
 
     # Round 9  
     sel_player_df_r9 = player_df_r9.iloc[selected_r9].copy()
     sel_bench_df_r9 = player_df_r9.iloc[benched_r9].copy() if benched_r9 else pd.DataFrame()
     sel_captain_df_r9 = player_df_r9.iloc[captained_r9]
     # In Team Flag
-    sel_names_r8 = player_df_r8.iloc[selected_r8]['Name'].astype(str).tolist() if selected_r8 else []
+    sel_names_r8 = player_df_r8.iloc[all_selected_r8]['Name'].astype(str).tolist() if all_selected_r8 else []
     sel_player_df_r9['In_Team'] = sel_player_df_r9['Name'].astype(str).isin(sel_names_r8).astype(int)
     # Add bench flag
     sel_player_df_r9['Is_Bench'] = 0
@@ -754,7 +754,7 @@ def optimise_fn_efp(
     if not sel_bench_df_r9.empty:
         bench_player = sel_player_df_r9[sel_player_df_r9['Is_Bench'] == 1]
         print("Bench Player (rnd 9):", bench_player["Name"].values[0], f"(${bench_player['Price'].values[0]:,})")
-    print("Current Players Remaining (rnd 9):", sum(sel_player_df_r9[sel_player_df_r9['Is_Bench'] == 0]["In_Team"]))
+    print("Current Players Remaining (rnd 9):", sum(sel_player_df_r9["In_Team"]))
 
     # Combine Selected Player DataFrames
     sel_player_df = pd.concat([sel_player_df_r1, sel_player_df_r2, sel_player_df_r3, sel_player_df_r4,
@@ -806,7 +806,7 @@ def _run_single_sfp_sim(sim_id, conf_int, lower_z_thresh, upper_z_thresh, curren
     wk_cnt_r1, total_wk_r1 = 1, range(len(price_r1))
     bat_cnt_r1, total_bat_r1 = 6, range(len(price_r1))
     bowl_cnt_r1, total_bowl_r1 = 5, range(len(price_r1))
-    budget_r1, total_budget_r1 = 1783500, range(len(price_r1))
+    budget_r1, total_budget_r1 = 1802500, range(len(price_r1))
 
     # Round 2
     points_r2 = player_df_r2["exp_rnd_points"]
@@ -821,8 +821,8 @@ def _run_single_sfp_sim(sim_id, conf_int, lower_z_thresh, upper_z_thresh, curren
     wk_cnt_r2, total_wk_r2 = 1, range(len(price_r2))
     bat_cnt_r2, total_bat_r2 = 6, range(len(price_r2))
     bowl_cnt_r2, total_bowl_r2 = 5, range(len(price_r2))
-    budget_r2, total_budget_r2 = 1783500, range(len(price_r2))
-    team_play_cnt_r2, total_team_player_r2 = 9, range(len(price_r2))
+    budget_r2, total_budget_r2 = 1802500, range(len(price_r2))
+    team_play_cnt_r2, total_team_player_r2 = 10, range(len(price_r2))
 
     # Round 3
     points_r3 = player_df_r3["exp_rnd_points"]
@@ -837,8 +837,8 @@ def _run_single_sfp_sim(sim_id, conf_int, lower_z_thresh, upper_z_thresh, curren
     wk_cnt_r3, total_wk_r3 = 1, range(len(price_r3))
     bat_cnt_r3, total_bat_r3 = 6, range(len(price_r3))
     bowl_cnt_r3, total_bowl_r3 = 5, range(len(price_r3))
-    budget_r3, total_budget_r3 = 1783500, range(len(price_r3))
-    team_play_cnt_r3, total_team_player_r3 = 9, range(len(price_r3))
+    budget_r3, total_budget_r3 = 1802500, range(len(price_r3))
+    team_play_cnt_r3, total_team_player_r3 = 10, range(len(price_r3))
 
     # Round 4
     points_r4 = player_df_r4["exp_rnd_points"]
@@ -853,8 +853,8 @@ def _run_single_sfp_sim(sim_id, conf_int, lower_z_thresh, upper_z_thresh, curren
     wk_cnt_r4, total_wk_r4 = 1, range(len(price_r4))
     bat_cnt_r4, total_bat_r4 = 6, range(len(price_r4))
     bowl_cnt_r4, total_bowl_r4 = 5, range(len(price_r4))
-    budget_r4, total_budget_r4 = 1783500, range(len(price_r4))
-    team_play_cnt_r4, total_team_player_r4 = 9, range(len(price_r4))
+    budget_r4, total_budget_r4 = 1802500, range(len(price_r4))
+    team_play_cnt_r4, total_team_player_r4 = 10, range(len(price_r4))
 
     # Round 5
     points_r5 = player_df_r5["exp_rnd_points"]
@@ -869,8 +869,8 @@ def _run_single_sfp_sim(sim_id, conf_int, lower_z_thresh, upper_z_thresh, curren
     wk_cnt_r5, total_wk_r5 = 1, range(len(price_r5))
     bat_cnt_r5, total_bat_r5 = 6, range(len(price_r5))
     bowl_cnt_r5, total_bowl_r5 = 5, range(len(price_r5))
-    budget_r5, total_budget_r5 = 1783500, range(len(price_r5))
-    team_play_cnt_r5, total_team_player_r5 = 9, range(len(price_r5))
+    budget_r5, total_budget_r5 = 1802500, range(len(price_r5))
+    team_play_cnt_r5, total_team_player_r5 = 10, range(len(price_r5))
 
     # Round 6
     points_r6 = player_df_r6["exp_rnd_points"]
@@ -885,8 +885,8 @@ def _run_single_sfp_sim(sim_id, conf_int, lower_z_thresh, upper_z_thresh, curren
     wk_cnt_r6, total_wk_r6 = 1, range(len(price_r6))
     bat_cnt_r6, total_bat_r6 = 6, range(len(price_r6))
     bowl_cnt_r6, total_bowl_r6 = 5, range(len(price_r6))
-    budget_r6, total_budget_r6 = 1783500, range(len(price_r6))
-    team_play_cnt_r6, total_team_player_r6 = 9, range(len(price_r6))
+    budget_r6, total_budget_r6 = 1802500, range(len(price_r6))
+    team_play_cnt_r6, total_team_player_r6 = 10, range(len(price_r6))
 
     # Round 7
     points_r7 = player_df_r7["exp_rnd_points"]
@@ -901,8 +901,8 @@ def _run_single_sfp_sim(sim_id, conf_int, lower_z_thresh, upper_z_thresh, curren
     wk_cnt_r7, total_wk_r7 = 1, range(len(price_r7))
     bat_cnt_r7, total_bat_r7 = 6, range(len(price_r7))
     bowl_cnt_r7, total_bowl_r7 = 5, range(len(price_r7))
-    budget_r7, total_budget_r7 = 1783500, range(len(price_r7))
-    team_play_cnt_r7, total_team_player_r7 = 9, range(len(price_r7))
+    budget_r7, total_budget_r7 = 1802500, range(len(price_r7))
+    team_play_cnt_r7, total_team_player_r7 = 10, range(len(price_r7))
 
     # Round 8
     points_r8 = player_df_r8["exp_rnd_points"]
@@ -917,8 +917,8 @@ def _run_single_sfp_sim(sim_id, conf_int, lower_z_thresh, upper_z_thresh, curren
     wk_cnt_r8, total_wk_r8 = 1, range(len(price_r8))
     bat_cnt_r8, total_bat_r8 = 6, range(len(price_r8))
     bowl_cnt_r8, total_bowl_r8 = 5, range(len(price_r8))
-    budget_r8, total_budget_r8 = 1783500, range(len(price_r8))
-    team_play_cnt_r8, total_team_player_r8 = 9, range(len(price_r8))
+    budget_r8, total_budget_r8 = 1802500, range(len(price_r8))
+    team_play_cnt_r8, total_team_player_r8 = 10, range(len(price_r8))
 
     # Round 9
     points_r9 = player_df_r9["exp_rnd_points"]
@@ -933,8 +933,8 @@ def _run_single_sfp_sim(sim_id, conf_int, lower_z_thresh, upper_z_thresh, curren
     wk_cnt_r9, total_wk_r9 = 1, range(len(price_r9))
     bat_cnt_r9, total_bat_r9 = 6, range(len(price_r9))
     bowl_cnt_r9, total_bowl_r9 = 5, range(len(price_r9))
-    budget_r9, total_budget_r9 = 1783500, range(len(price_r9))
-    team_play_cnt_r9, total_team_player_r9 = 9, range(len(price_r9))
+    budget_r9, total_budget_r9 = 1802500, range(len(price_r9))
+    team_play_cnt_r9, total_team_player_r9 = 10, range(len(price_r9))
 
     # b. Run optimization
     sel_player_df, sel_player_df_r1, sel_player_df_r2, sel_player_df_r3, sel_player_df_r4, sel_player_df_r5, sel_player_df_r6, sel_player_df_r7,sel_player_df_r8, sel_player_df_r9 = optimise_fn_efp(
