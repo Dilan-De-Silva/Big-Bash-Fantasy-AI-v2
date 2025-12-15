@@ -160,39 +160,39 @@ def optimise_fn_efp(
         # Round 1
         points_r1, price_r1, weight_r1, in_team_r1, available_r1, wk_weight_r1, bat_weight_r1, bowl_weight_r1,
         play_cnt_r1, total_player_r1, wk_cnt_r1, total_wk_r1, bat_cnt_r1, total_bat_r1, bowl_cnt_r1, total_bowl_r1,
-        budget_r1, total_budget_r1, player_df_r1,
+        budget_r1, total_budget_r1, player_df_r1, cnt_r1, max_player_r1,  
         # Round 2
         points_r2, price_r2, weight_r2, in_team_r2, available_r2, wk_weight_r2, bat_weight_r2, bowl_weight_r2,
         play_cnt_r2, total_player_r2, wk_cnt_r2, total_wk_r2, bat_cnt_r2, total_bat_r2, bowl_cnt_r2, total_bowl_r2,
-        budget_r2, total_budget_r2, team_play_cnt_r2, total_team_player_r2, player_df_r2,
+        budget_r2, total_budget_r2, team_play_cnt_r2, total_team_player_r2, player_df_r2, cnt_r2, max_player_r2,
         # Round 3
         points_r3, price_r3, weight_r3, in_team_r3, available_r3, wk_weight_r3, bat_weight_r3, bowl_weight_r3,
         play_cnt_r3, total_player_r3, wk_cnt_r3, total_wk_r3, bat_cnt_r3, total_bat_r3, bowl_cnt_r3, total_bowl_r3,
-        budget_r3, total_budget_r3, team_play_cnt_r3, total_team_player_r3, player_df_r3,
+        budget_r3, total_budget_r3, team_play_cnt_r3, total_team_player_r3, player_df_r3, cnt_r3, max_player_r3,
         # Round 4
         points_r4, price_r4, weight_r4, in_team_r4, available_r4, wk_weight_r4, bat_weight_r4, bowl_weight_r4,
         play_cnt_r4, total_player_r4, wk_cnt_r4, total_wk_r4, bat_cnt_r4, total_bat_r4, bowl_cnt_r4, total_bowl_r4,
-        budget_r4, total_budget_r4, team_play_cnt_r4, total_team_player_r4, player_df_r4,
+        budget_r4, total_budget_r4, team_play_cnt_r4, total_team_player_r4, player_df_r4, cnt_r4, max_player_r4,
         # Round 5
         points_r5, price_r5, weight_r5, in_team_r5, available_r5, wk_weight_r5, bat_weight_r5, bowl_weight_r5,
         play_cnt_r5, total_player_r5, wk_cnt_r5, total_wk_r5, bat_cnt_r5, total_bat_r5, bowl_cnt_r5, total_bowl_r5,
-        budget_r5, total_budget_r5, team_play_cnt_r5, total_team_player_r5, player_df_r5,
+        budget_r5, total_budget_r5, team_play_cnt_r5, total_team_player_r5, player_df_r5, cnt_r5, max_player_r5,
         # Round 6
         points_r6, price_r6, weight_r6, in_team_r6, available_r6, wk_weight_r6, bat_weight_r6, bowl_weight_r6,
         play_cnt_r6, total_player_r6, wk_cnt_r6, total_wk_r6, bat_cnt_r6, total_bat_r6, bowl_cnt_r6, total_bowl_r6,
-        budget_r6, total_budget_r6, team_play_cnt_r6, total_team_player_r6, player_df_r6,
+        budget_r6, total_budget_r6, team_play_cnt_r6, total_team_player_r6, player_df_r6, cnt_r6, max_player_r6,
         # Round 7
         points_r7, price_r7, weight_r7, in_team_r7, available_r7, wk_weight_r7, bat_weight_r7, bowl_weight_r7,
         play_cnt_r7, total_player_r7, wk_cnt_r7, total_wk_r7, bat_cnt_r7, total_bat_r7, bowl_cnt_r7, total_bowl_r7,
-        budget_r7, total_budget_r7, team_play_cnt_r7, total_team_player_r7, player_df_r7,
+        budget_r7, total_budget_r7, team_play_cnt_r7, total_team_player_r7, player_df_r7, cnt_r7, max_player_r7,
         # Round 8
         points_r8, price_r8, weight_r8, in_team_r8, available_r8, wk_weight_r8, bat_weight_r8, bowl_weight_r8,
         play_cnt_r8, total_player_r8, wk_cnt_r8, total_wk_r8, bat_cnt_r8, total_bat_r8, bowl_cnt_r8, total_bowl_r8,
-        budget_r8, total_budget_r8, team_play_cnt_r8, total_team_player_r8, player_df_r8,
+        budget_r8, total_budget_r8, team_play_cnt_r8, total_team_player_r8, player_df_r8, cnt_r8, max_player_r8,
         # Round 9
         points_r9, price_r9, weight_r9, in_team_r9, available_r9, wk_weight_r9, bat_weight_r9, bowl_weight_r9,
         play_cnt_r9, total_player_r9, wk_cnt_r9, total_wk_r9, bat_cnt_r9, total_bat_r9, bowl_cnt_r9, total_bowl_r9,
-        budget_r9, total_budget_r9, team_play_cnt_r9, total_team_player_r9, player_df_r9):
+        budget_r9, total_budget_r9, team_play_cnt_r9, total_team_player_r9, player_df_r9, cnt_r9, max_player_r9):
     
     # Imports
     from mip import Model, xsum, maximize, BINARY
@@ -310,39 +310,39 @@ def optimise_fn_efp(
     # Bench player is automatically x=1, p=0 (the 13th selected player not playing)
     
     # Round 1
-    m += xsum(x_r1[i] for i in total_player_r1) == 13  # 13 selected players
+    m += xsum(x_r1[i] for i in total_player_r1) == cnt_r1  # total squad players
     m += xsum(weight_r1[i] * p_r1[i] for i in total_player_r1) == play_cnt_r1  # 12 playing players
     m += xsum(y_r1[i] for i in total_player_r1) == 1  # Only one captain
     # Round 2
-    m += xsum(x_r2[i] for i in total_player_r2) == 13
+    m += xsum(x_r2[i] for i in total_player_r2) == cnt_r2
     m += xsum(weight_r2[i] * p_r2[i] for i in total_player_r2) == play_cnt_r2
     m += xsum(y_r2[i] for i in total_player_r2) == 1
     # Round 3
-    m += xsum(x_r3[i] for i in total_player_r3) == 13
+    m += xsum(x_r3[i] for i in total_player_r3) == cnt_r3
     m += xsum(weight_r3[i] * p_r3[i] for i in total_player_r3) == play_cnt_r3
     m += xsum(y_r3[i] for i in total_player_r3) == 1
     # Round 4
-    m += xsum(x_r4[i] for i in total_player_r4) == 13
+    m += xsum(x_r4[i] for i in total_player_r4) == cnt_r4
     m += xsum(weight_r4[i] * p_r4[i] for i in total_player_r4) == play_cnt_r4
     m += xsum(y_r4[i] for i in total_player_r4) == 1
     # Round 5
-    m += xsum(x_r5[i] for i in total_player_r5) == 13
+    m += xsum(x_r5[i] for i in total_player_r5) == cnt_r5
     m += xsum(weight_r5[i] * p_r5[i] for i in total_player_r5) == play_cnt_r5
     m += xsum(y_r5[i] for i in total_player_r5) == 1
     # Round 6
-    m += xsum(x_r6[i] for i in total_player_r6) == 13
+    m += xsum(x_r6[i] for i in total_player_r6) == cnt_r6
     m += xsum(weight_r6[i] * p_r6[i] for i in total_player_r6) == play_cnt_r6
     m += xsum(y_r6[i] for i in total_player_r6) == 1
     # Round 7
-    m += xsum(x_r7[i] for i in total_player_r7) == 13
+    m += xsum(x_r7[i] for i in total_player_r7) == cnt_r7
     m += xsum(weight_r7[i] * p_r7[i] for i in total_player_r7) == play_cnt_r7
     m += xsum(y_r7[i] for i in total_player_r7) == 1
     # Round 8
-    m += xsum(x_r8[i] for i in total_player_r8) == 13
+    m += xsum(x_r8[i] for i in total_player_r8) == cnt_r8
     m += xsum(weight_r8[i] * p_r8[i] for i in total_player_r8) == play_cnt_r8
     m += xsum(y_r8[i] for i in total_player_r8) == 1
     # Round 9
-    m += xsum(x_r9[i] for i in total_player_r9) == 13
+    m += xsum(x_r9[i] for i in total_player_r9) == cnt_r9
     m += xsum(weight_r9[i] * p_r9[i] for i in total_player_r9) == play_cnt_r9
     m += xsum(y_r9[i] for i in total_player_r9) == 1
 
@@ -381,13 +381,13 @@ def optimise_fn_efp(
     m += xsum(bat_weight_r1[i] * p_r1[i] for i in total_bat_r1) >= bat_cnt_r1
     m += xsum(bowl_weight_r1[i] * p_r1[i] for i in total_bowl_r1) >= bowl_cnt_r1
     m += xsum(available_r1[i] * p_r1[i] for i in total_player_r1) == play_cnt_r1
-    m += xsum(price_r1[i] * x_r1[i] for i in total_budget_r1) - 39500 <= budget_r1  # 13 selected players with 39500 discount
+    m += xsum(price_r1[i] * x_r1[i] for i in total_budget_r1) - 39500*(cnt_r1 - play_cnt_r1) <= budget_r1  # 13 selected players with 39500 discount
     # Round 2  
     m += xsum(wk_weight_r2[i] * p_r2[i] for i in total_wk_r2) >= wk_cnt_r2
     m += xsum(bat_weight_r2[i] * p_r2[i] for i in total_bat_r2) >= bat_cnt_r2
     m += xsum(bowl_weight_r2[i] * p_r2[i] for i in total_bowl_r2) >= bowl_cnt_r2
     m += xsum(available_r2[i] * p_r2[i] for i in total_player_r2) == play_cnt_r2
-    m += xsum(price_r2[i] * x_r2[i] for i in total_budget_r2) - 39500 <= (
+    m += xsum(price_r2[i] * x_r2[i] for i in total_budget_r2) - 39500*(cnt_r2 - play_cnt_r2) <= (
         budget_r1 + xsum((price_r2[i] - price_r1[i]) * x_r1[i] for i in total_player_r1)
     )
      # Round 3
@@ -395,7 +395,7 @@ def optimise_fn_efp(
     m += xsum(bat_weight_r3[i] * p_r3[i] for i in total_bat_r3) >= bat_cnt_r3
     m += xsum(bowl_weight_r3[i] * p_r3[i] for i in total_bowl_r3) >= bowl_cnt_r3
     m += xsum(available_r3[i] * p_r3[i] for i in total_player_r3) == play_cnt_r3
-    m += xsum(price_r3[i] * x_r3[i] for i in total_budget_r3) - 39500 <= (
+    m += xsum(price_r3[i] * x_r3[i] for i in total_budget_r3) - 39500*(cnt_r3 - play_cnt_r3) <= (
         budget_r1
         + xsum((price_r2[i] - price_r1[i]) * x_r1[i] for i in total_player_r1)
         + xsum((price_r3[i] - price_r2[i]) * x_r2[i] for i in total_player_r2)
@@ -405,7 +405,7 @@ def optimise_fn_efp(
     m += xsum(bat_weight_r4[i] * p_r4[i] for i in total_bat_r4) >= bat_cnt_r4
     m += xsum(bowl_weight_r4[i] * p_r4[i] for i in total_bowl_r4) >= bowl_cnt_r4
     m += xsum(available_r4[i] * p_r4[i] for i in total_player_r4) == play_cnt_r4
-    m += xsum(price_r4[i] * x_r4[i] for i in total_budget_r4) - 39500 <= (
+    m += xsum(price_r4[i] * x_r4[i] for i in total_budget_r4) - 39500*(cnt_r4 - play_cnt_r4) <= (
         budget_r1
         + xsum((price_r2[i] - price_r1[i]) * x_r1[i] for i in total_player_r1)
         + xsum((price_r3[i] - price_r2[i]) * x_r2[i] for i in total_player_r2)
@@ -416,7 +416,7 @@ def optimise_fn_efp(
     m += xsum(bat_weight_r5[i] * p_r5[i] for i in total_bat_r5) >= bat_cnt_r5
     m += xsum(bowl_weight_r5[i] * p_r5[i] for i in total_bowl_r5) >= bowl_cnt_r5
     m += xsum(available_r5[i] * p_r5[i] for i in total_player_r5) == play_cnt_r5
-    m += xsum(price_r5[i] * x_r5[i] for i in total_budget_r5) - 39500 <= (
+    m += xsum(price_r5[i] * x_r5[i] for i in total_budget_r5) - 39500*(cnt_r5 - play_cnt_r5) <= (
         budget_r1
         + xsum((price_r2[i] - price_r1[i]) * x_r1[i] for i in total_player_r1)
         + xsum((price_r3[i] - price_r2[i]) * x_r2[i] for i in total_player_r2)
@@ -428,7 +428,7 @@ def optimise_fn_efp(
     m += xsum(bat_weight_r6[i] * p_r6[i] for i in total_bat_r6) >= bat_cnt_r6
     m += xsum(bowl_weight_r6[i] * p_r6[i] for i in total_bowl_r6) >= bowl_cnt_r6
     m += xsum(available_r6[i] * p_r6[i] for i in total_player_r6) == play_cnt_r6
-    m += xsum(price_r6[i] * x_r6[i] for i in total_budget_r6) - 39500 <= (
+    m += xsum(price_r6[i] * x_r6[i] for i in total_budget_r6) - 39500*(cnt_r6 - play_cnt_r6) <= (
         budget_r1
         + xsum((price_r2[i] - price_r1[i]) * x_r1[i] for i in total_player_r1)
         + xsum((price_r3[i] - price_r2[i]) * x_r2[i] for i in total_player_r2)
@@ -441,7 +441,7 @@ def optimise_fn_efp(
     m += xsum(bat_weight_r7[i] * p_r7[i] for i in total_bat_r7) >= bat_cnt_r7
     m += xsum(bowl_weight_r7[i] * p_r7[i] for i in total_bowl_r7) >= bowl_cnt_r7
     m += xsum(available_r7[i] * p_r7[i] for i in total_player_r7) == play_cnt_r7
-    m += xsum(price_r7[i] * x_r7[i] for i in total_budget_r7) - 39500 <= (
+    m += xsum(price_r7[i] * x_r7[i] for i in total_budget_r7) - 39500*(cnt_r7 - play_cnt_r7) <= (
         budget_r1
         + xsum((price_r2[i] - price_r1[i]) * x_r1[i] for i in total_player_r1)
         + xsum((price_r3[i] - price_r2[i]) * x_r2[i] for i in total_player_r2)
@@ -455,7 +455,7 @@ def optimise_fn_efp(
     m += xsum(bat_weight_r8[i] * p_r8[i] for i in total_bat_r8) >= bat_cnt_r8
     m += xsum(bowl_weight_r8[i] * p_r8[i] for i in total_bowl_r8) >= bowl_cnt_r8
     m += xsum(available_r8[i] * p_r8[i] for i in total_player_r8) == play_cnt_r8
-    m += xsum(price_r8[i] * x_r8[i] for i in total_budget_r8) - 39500 <= (
+    m += xsum(price_r8[i] * x_r8[i] for i in total_budget_r8) - 39500*(cnt_r8 - play_cnt_r8) <= (
         budget_r1
         + xsum((price_r2[i] - price_r1[i]) * x_r1[i] for i in total_player_r1)
         + xsum((price_r3[i] - price_r2[i]) * x_r2[i] for i in total_player_r2)
@@ -470,7 +470,7 @@ def optimise_fn_efp(
     m += xsum(bat_weight_r9[i] * p_r9[i] for i in total_bat_r9) >= bat_cnt_r9
     m += xsum(bowl_weight_r9[i] * p_r9[i] for i in total_bowl_r9) >= bowl_cnt_r9
     m += xsum(available_r9[i] * p_r9[i] for i in total_player_r9) == play_cnt_r9
-    m += xsum(price_r9[i] * x_r9[i] for i in total_budget_r9) - 39500 <= (
+    m += xsum(price_r9[i] * x_r9[i] for i in total_budget_r9) - 39500*(cnt_r9 - play_cnt_r9) <= (
         budget_r1
         + xsum((price_r2[i] - price_r1[i]) * x_r1[i] for i in total_player_r1)
         + xsum((price_r3[i] - price_r2[i]) * x_r2[i] for i in total_player_r2)
@@ -484,7 +484,7 @@ def optimise_fn_efp(
 
     # d. solve optimisation
     # Performance settings
-    m.threads = -1  # Use all available CPU cores
+    # m.threads = -1  # Use all available CPU cores
     # m.max_gap = 0.01  # Stop when within 1% of optimal (faster)
     m.optimize()
     # Round 1 - Extract selected (x=1), playing (p=1), benched (x=1 but p=0)
@@ -773,7 +773,7 @@ def optimise_fn_efp(
     
     return sel_player_df, sel_player_df_r1, sel_player_df_r2, sel_player_df_r3, sel_player_df_r4, sel_player_df_r5, sel_player_df_r6, sel_player_df_r7,sel_player_df_r8, sel_player_df_r9
 
-def _run_single_sfp_sim(sim_id, conf_int, lower_z_thresh, upper_z_thresh, current_rnd, player_df_raw, price_df, price_model_obj_1, price_model_obj_2, price_model_obj_3, optimise_fn_efp):
+def _run_single_sfp_sim(sim_id, conf_int, lower_z_thresh, upper_z_thresh, current_rnd, player_df_raw, price_df, price_model_obj_1, price_model_obj_2, price_model_obj_3,squad_players, optimise_fn_efp):
     """
     Helper function to run a single simulation.
     Returns: (sim_id, selected_players_df)
@@ -792,7 +792,7 @@ def _run_single_sfp_sim(sim_id, conf_int, lower_z_thresh, upper_z_thresh, curren
     player_df_r1, player_df_r2, player_df_r3, player_df_r4, player_df_r5, player_df_r6, player_df_r7, player_df_r8, player_df_r9 = roll_rnd_price_fn(player_df_init, price_df, current_rnd, price_model_obj_1, price_model_obj_2, price_model_obj_3)
 
     # 2. Run Optimisation
-    # a. Sim Optimisation Variables Setup
+    # a. EFP Optimisation Variables Setup
     # Round 1
     points_r1 = player_df_r1["exp_rnd_points"]
     price_r1 = player_df_r1["Price"]
@@ -802,6 +802,7 @@ def _run_single_sfp_sim(sim_id, conf_int, lower_z_thresh, upper_z_thresh, curren
     wk_weight_r1 = player_df_r1["Wk_f"]
     bat_weight_r1 = player_df_r1["Bat_f"]
     bowl_weight_r1 = player_df_r1["Bowl_f"]
+    cnt_r1, max_player_r1 = squad_players, range(len(price_r1))
     play_cnt_r1, total_player_r1 = 12, range(len(price_r1))
     wk_cnt_r1, total_wk_r1 = 1, range(len(price_r1))
     bat_cnt_r1, total_bat_r1 = 6, range(len(price_r1))
@@ -813,16 +814,17 @@ def _run_single_sfp_sim(sim_id, conf_int, lower_z_thresh, upper_z_thresh, curren
     price_r2 = player_df_r2["Price"]
     weight_r2 = player_df_r2["weight"]
     in_team_r2 = player_df_r2["In_Team"]
-    available_r2 = player_df_r2["Available"]
+    available_r2 = player_df_r2["Available"] 
     wk_weight_r2 = player_df_r2["Wk_f"]
     bat_weight_r2 = player_df_r2["Bat_f"]
     bowl_weight_r2 = player_df_r2["Bowl_f"]
+    cnt_r2, max_player_r2 = squad_players, range(len(price_r2))
     play_cnt_r2, total_player_r2 = 12, range(len(price_r2))
     wk_cnt_r2, total_wk_r2 = 1, range(len(price_r2))
     bat_cnt_r2, total_bat_r2 = 6, range(len(price_r2))
     bowl_cnt_r2, total_bowl_r2 = 5, range(len(price_r2))
     budget_r2, total_budget_r2 = 1802500, range(len(price_r2))
-    team_play_cnt_r2, total_team_player_r2 = 10, range(len(price_r2))
+    team_play_cnt_r2, total_team_player_r2 = (squad_players - 3), range(len(price_r2)) # At least 10 players from round 1 to be in round 2 team
 
     # Round 3
     points_r3 = player_df_r3["exp_rnd_points"]
@@ -833,12 +835,13 @@ def _run_single_sfp_sim(sim_id, conf_int, lower_z_thresh, upper_z_thresh, curren
     wk_weight_r3 = player_df_r3["Wk_f"]
     bat_weight_r3 = player_df_r3["Bat_f"]
     bowl_weight_r3 = player_df_r3["Bowl_f"]
+    cnt_r3, max_player_r3 = squad_players, range(len(price_r3))
     play_cnt_r3, total_player_r3 = 12, range(len(price_r3))
     wk_cnt_r3, total_wk_r3 = 1, range(len(price_r3))
     bat_cnt_r3, total_bat_r3 = 6, range(len(price_r3))
     bowl_cnt_r3, total_bowl_r3 = 5, range(len(price_r3))
     budget_r3, total_budget_r3 = 1802500, range(len(price_r3))
-    team_play_cnt_r3, total_team_player_r3 = 10, range(len(price_r3))
+    team_play_cnt_r3, total_team_player_r3 = (squad_players - 3), range(len(price_r3)) # At least 10 players from round 2 to be in round 3 team
 
     # Round 4
     points_r4 = player_df_r4["exp_rnd_points"]
@@ -849,12 +852,13 @@ def _run_single_sfp_sim(sim_id, conf_int, lower_z_thresh, upper_z_thresh, curren
     wk_weight_r4 = player_df_r4["Wk_f"]
     bat_weight_r4 = player_df_r4["Bat_f"]
     bowl_weight_r4 = player_df_r4["Bowl_f"]
+    cnt_r4, max_player_r4 = squad_players, range(len(price_r4))
     play_cnt_r4, total_player_r4 = 12, range(len(price_r4))
     wk_cnt_r4, total_wk_r4 = 1, range(len(price_r4))
     bat_cnt_r4, total_bat_r4 = 6, range(len(price_r4))
     bowl_cnt_r4, total_bowl_r4 = 5, range(len(price_r4))
     budget_r4, total_budget_r4 = 1802500, range(len(price_r4))
-    team_play_cnt_r4, total_team_player_r4 = 10, range(len(price_r4))
+    team_play_cnt_r4, total_team_player_r4 = (squad_players - 3), range(len(price_r4)) # At least 10 players from round 3 to be in round 4 team
 
     # Round 5
     points_r5 = player_df_r5["exp_rnd_points"]
@@ -865,12 +869,13 @@ def _run_single_sfp_sim(sim_id, conf_int, lower_z_thresh, upper_z_thresh, curren
     wk_weight_r5 = player_df_r5["Wk_f"]
     bat_weight_r5 = player_df_r5["Bat_f"]
     bowl_weight_r5 = player_df_r5["Bowl_f"]
+    cnt_r5, max_player_r5 = squad_players, range(len(price_r5))
     play_cnt_r5, total_player_r5 = 12, range(len(price_r5))
     wk_cnt_r5, total_wk_r5 = 1, range(len(price_r5))
     bat_cnt_r5, total_bat_r5 = 6, range(len(price_r5))
     bowl_cnt_r5, total_bowl_r5 = 5, range(len(price_r5))
     budget_r5, total_budget_r5 = 1802500, range(len(price_r5))
-    team_play_cnt_r5, total_team_player_r5 = 10, range(len(price_r5))
+    team_play_cnt_r5, total_team_player_r5 = (squad_players - 3), range(len(price_r5)) # At least 10 players from round 4 to be in round 5 team
 
     # Round 6
     points_r6 = player_df_r6["exp_rnd_points"]
@@ -881,12 +886,13 @@ def _run_single_sfp_sim(sim_id, conf_int, lower_z_thresh, upper_z_thresh, curren
     wk_weight_r6 = player_df_r6["Wk_f"]
     bat_weight_r6 = player_df_r6["Bat_f"]
     bowl_weight_r6 = player_df_r6["Bowl_f"]
+    cnt_r6, max_player_r6 = squad_players, range(len(price_r6))
     play_cnt_r6, total_player_r6 = 12, range(len(price_r6))
     wk_cnt_r6, total_wk_r6 = 1, range(len(price_r6))
     bat_cnt_r6, total_bat_r6 = 6, range(len(price_r6))
     bowl_cnt_r6, total_bowl_r6 = 5, range(len(price_r6))
-    budget_r6, total_budget_r6 = 1802500, range(len(price_r6))
-    team_play_cnt_r6, total_team_player_r6 = 10, range(len(price_r6))
+    budget_r6, total_budget_r6 = 1783500, range(len(price_r6))
+    team_play_cnt_r6, total_team_player_r6 = (squad_players - 3), range(len(price_r6)) # At least 10 players from round 5 to be in round 6 team
 
     # Round 7
     points_r7 = player_df_r7["exp_rnd_points"]
@@ -897,12 +903,13 @@ def _run_single_sfp_sim(sim_id, conf_int, lower_z_thresh, upper_z_thresh, curren
     wk_weight_r7 = player_df_r7["Wk_f"]
     bat_weight_r7 = player_df_r7["Bat_f"]
     bowl_weight_r7 = player_df_r7["Bowl_f"]
+    cnt_r7, max_player_r7 = squad_players, range(len(price_r7))
     play_cnt_r7, total_player_r7 = 12, range(len(price_r7))
     wk_cnt_r7, total_wk_r7 = 1, range(len(price_r7))
     bat_cnt_r7, total_bat_r7 = 6, range(len(price_r7))
     bowl_cnt_r7, total_bowl_r7 = 5, range(len(price_r7))
     budget_r7, total_budget_r7 = 1802500, range(len(price_r7))
-    team_play_cnt_r7, total_team_player_r7 = 10, range(len(price_r7))
+    team_play_cnt_r7, total_team_player_r7 = (squad_players - 3), range(len(price_r7)) # At least 10 players from round 6 to be in round 7 team
 
     # Round 8
     points_r8 = player_df_r8["exp_rnd_points"]
@@ -913,12 +920,13 @@ def _run_single_sfp_sim(sim_id, conf_int, lower_z_thresh, upper_z_thresh, curren
     wk_weight_r8 = player_df_r8["Wk_f"]
     bat_weight_r8 = player_df_r8["Bat_f"]
     bowl_weight_r8 = player_df_r8["Bowl_f"]
+    cnt_r8, max_player_r8 = squad_players, range(len(price_r8))
     play_cnt_r8, total_player_r8 = 12, range(len(price_r8))
     wk_cnt_r8, total_wk_r8 = 1, range(len(price_r8))
     bat_cnt_r8, total_bat_r8 = 6, range(len(price_r8))
     bowl_cnt_r8, total_bowl_r8 = 5, range(len(price_r8))
     budget_r8, total_budget_r8 = 1802500, range(len(price_r8))
-    team_play_cnt_r8, total_team_player_r8 = 10, range(len(price_r8))
+    team_play_cnt_r8, total_team_player_r8 = (squad_players - 3), range(len(price_r8)) # At least 10 players from round 7 to be in round 8 team
 
     # Round 9
     points_r9 = player_df_r9["exp_rnd_points"]
@@ -929,42 +937,52 @@ def _run_single_sfp_sim(sim_id, conf_int, lower_z_thresh, upper_z_thresh, curren
     wk_weight_r9 = player_df_r9["Wk_f"]
     bat_weight_r9 = player_df_r9["Bat_f"]
     bowl_weight_r9 = player_df_r9["Bowl_f"]
+    cnt_r9, max_player_r9 = squad_players, range(len(price_r9))
     play_cnt_r9, total_player_r9 = 12, range(len(price_r9))
     wk_cnt_r9, total_wk_r9 = 1, range(len(price_r9))
     bat_cnt_r9, total_bat_r9 = 6, range(len(price_r9))
     bowl_cnt_r9, total_bowl_r9 = 5, range(len(price_r9))
     budget_r9, total_budget_r9 = 1802500, range(len(price_r9))
-    team_play_cnt_r9, total_team_player_r9 = 10, range(len(price_r9))
+    team_play_cnt_r9, total_team_player_r9 = (squad_players - 3), range(len(price_r9)) # At least 10 players from round 8 to be in round 9 team
 
     # b. Run optimization
     sel_player_df, sel_player_df_r1, sel_player_df_r2, sel_player_df_r3, sel_player_df_r4, sel_player_df_r5, sel_player_df_r6, sel_player_df_r7,sel_player_df_r8, sel_player_df_r9 = optimise_fn_efp(
+        # Round 1
         points_r1, price_r1, weight_r1, in_team_r1, available_r1, wk_weight_r1, bat_weight_r1, bowl_weight_r1,
         play_cnt_r1, total_player_r1, wk_cnt_r1, total_wk_r1, bat_cnt_r1, total_bat_r1, bowl_cnt_r1, total_bowl_r1,
-        budget_r1, total_budget_r1, player_df_r1,
+        budget_r1, total_budget_r1, player_df_r1, cnt_r1, max_player_r1,
+        # Round 2
         points_r2, price_r2, weight_r2, in_team_r2, available_r2, wk_weight_r2, bat_weight_r2, bowl_weight_r2,
         play_cnt_r2, total_player_r2, wk_cnt_r2, total_wk_r2, bat_cnt_r2, total_bat_r2, bowl_cnt_r2, total_bowl_r2,
-        budget_r2, total_budget_r2, team_play_cnt_r2, total_team_player_r2, player_df_r2,
+        budget_r2, total_budget_r2, team_play_cnt_r2, total_team_player_r2, player_df_r2, cnt_r2, max_player_r2,
+        # Round 3
         points_r3, price_r3, weight_r3, in_team_r3, available_r3, wk_weight_r3, bat_weight_r3, bowl_weight_r3,
         play_cnt_r3, total_player_r3, wk_cnt_r3, total_wk_r3, bat_cnt_r3, total_bat_r3, bowl_cnt_r3, total_bowl_r3,
-        budget_r3, total_budget_r3, team_play_cnt_r3, total_team_player_r3, player_df_r3,
+        budget_r3, total_budget_r3, team_play_cnt_r3, total_team_player_r3, player_df_r3, cnt_r3, max_player_r3,
+        # Round 4
         points_r4, price_r4, weight_r4, in_team_r4, available_r4, wk_weight_r4, bat_weight_r4, bowl_weight_r4,
         play_cnt_r4, total_player_r4, wk_cnt_r4, total_wk_r4, bat_cnt_r4, total_bat_r4, bowl_cnt_r4, total_bowl_r4,
-        budget_r4, total_budget_r4, team_play_cnt_r4, total_team_player_r4, player_df_r4,
+        budget_r4, total_budget_r4, team_play_cnt_r4, total_team_player_r4, player_df_r4, cnt_r4, max_player_r4,
+        # Round 5
         points_r5, price_r5, weight_r5, in_team_r5, available_r5, wk_weight_r5, bat_weight_r5, bowl_weight_r5,
         play_cnt_r5, total_player_r5, wk_cnt_r5, total_wk_r5, bat_cnt_r5, total_bat_r5, bowl_cnt_r5, total_bowl_r5,
-        budget_r5, total_budget_r5, team_play_cnt_r5, total_team_player_r5, player_df_r5,
+        budget_r5, total_budget_r5, team_play_cnt_r5, total_team_player_r5, player_df_r5, cnt_r5, max_player_r5,
+        # Round 6
         points_r6, price_r6, weight_r6, in_team_r6, available_r6, wk_weight_r6, bat_weight_r6, bowl_weight_r6,
         play_cnt_r6, total_player_r6, wk_cnt_r6, total_wk_r6, bat_cnt_r6, total_bat_r6, bowl_cnt_r6, total_bowl_r6,
-        budget_r6, total_budget_r6, team_play_cnt_r6, total_team_player_r6, player_df_r6,
+        budget_r6, total_budget_r6, team_play_cnt_r6, total_team_player_r6, player_df_r6, cnt_r6, max_player_r6,
+        # Round 7
         points_r7, price_r7, weight_r7, in_team_r7, available_r7, wk_weight_r7, bat_weight_r7, bowl_weight_r7,
         play_cnt_r7, total_player_r7, wk_cnt_r7, total_wk_r7, bat_cnt_r7, total_bat_r7, bowl_cnt_r7, total_bowl_r7,
-        budget_r7, total_budget_r7, team_play_cnt_r7, total_team_player_r7, player_df_r7,
+        budget_r7, total_budget_r7, team_play_cnt_r7, total_team_player_r7, player_df_r7, cnt_r7, max_player_r7,
+        # Round 8
         points_r8, price_r8, weight_r8, in_team_r8, available_r8, wk_weight_r8, bat_weight_r8, bowl_weight_r8,
         play_cnt_r8, total_player_r8, wk_cnt_r8, total_wk_r8, bat_cnt_r8, total_bat_r8, bowl_cnt_r8, total_bowl_r8,
-        budget_r8, total_budget_r8, team_play_cnt_r8, total_team_player_r8, player_df_r8,
+        budget_r8, total_budget_r8, team_play_cnt_r8, total_team_player_r8, player_df_r8, cnt_r8, max_player_r8,
+        # Round 9
         points_r9, price_r9, weight_r9, in_team_r9, available_r9, wk_weight_r9, bat_weight_r9, bowl_weight_r9,
         play_cnt_r9, total_player_r9, wk_cnt_r9, total_wk_r9, bat_cnt_r9, total_bat_r9, bowl_cnt_r9, total_bowl_r9,
-        budget_r9, total_budget_r9, team_play_cnt_r9, total_team_player_r9, player_df_r9,
+        budget_r9, total_budget_r9, team_play_cnt_r9, total_team_player_r9, player_df_r9, cnt_r9, max_player_r9
     )
 
     # 3. Store Simulation Results
@@ -994,7 +1012,7 @@ def _run_single_sfp_sim(sim_id, conf_int, lower_z_thresh, upper_z_thresh, curren
     return sim_sel_players
 
 
-def optimise_fn_sim_fp(conf_int, sim_num, current_rnd, player_df_raw, price_df, price_model_obj_1, price_model_obj_2, price_model_obj_3, use_parallel=True):
+def optimise_fn_sim_fp(conf_int, sim_num, current_rnd, player_df_raw, price_df, price_model_obj_1, price_model_obj_2, price_model_obj_3, squad_players, use_parallel=True):
     # Run Optimisation Process for Specified Number of Simulations
     # Import Packages
     from scipy.stats import norm
@@ -1023,14 +1041,14 @@ def optimise_fn_sim_fp(conf_int, sim_num, current_rnd, player_df_raw, price_df, 
 
     if use_parallel:
         # Run simulations in parallel
-        max_workers = min(6, sim_num)  # Reduced from 15 to avoid memory issues
+        max_workers = min(10, sim_num)  # Reduced from 15 to avoid memory issues
         with ProcessPoolExecutor(max_workers=max_workers) as executor:
             futures = [
                 executor.submit(
                     _run_single_sfp_sim,
                     i, conf_int, lower_z_thresh, upper_z_thresh, current_rnd, 
                     player_df_raw, price_df, price_model_obj_1, price_model_obj_2, 
-                    price_model_obj_3, optimise_fn_efp
+                    price_model_obj_3,squad_players, optimise_fn_efp
                 )
                 for i in range(sim_num)
             ]
@@ -1040,6 +1058,9 @@ def optimise_fn_sim_fp(conf_int, sim_num, current_rnd, player_df_raw, price_df, 
                 try:
                     sim_result = future.result()
                     all_sim_sel_players = pd.concat([all_sim_sel_players, sim_result], ignore_index=True)
+                    # Print progress every 10 simulations
+                    if (i + 1) % 10 == 0:
+                        print(f"Completed {i + 1}/{sim_num} simulations")
                 except Exception as e:
                     print(f"Simulation {i+1} failed with error: {e}")
                     import traceback
@@ -1051,9 +1072,12 @@ def optimise_fn_sim_fp(conf_int, sim_num, current_rnd, player_df_raw, price_df, 
             sim_result = _run_single_sfp_sim(
                 i, conf_int, lower_z_thresh, upper_z_thresh, current_rnd,
                 player_df_raw, price_df, price_model_obj_1, price_model_obj_2,
-                price_model_obj_3, optimise_fn_efp
+                price_model_obj_3,squad_players, optimise_fn_efp
             )
             all_sim_sel_players = pd.concat([all_sim_sel_players, sim_result], ignore_index=True)
+            # Print progress every 10 simulations
+            if (i + 1) % 10 == 0:
+                print(f"Completed {i + 1}/{sim_num} simulations")
     
     # Return all simulation selected players
     return all_sim_sel_players
