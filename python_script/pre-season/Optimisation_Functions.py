@@ -153,7 +153,191 @@ def roll_rnd_price_fn(player_df_init, price_df, current_rnd,
 
     # Return player dfs for each round
     return player_df_r1, player_df_r2, player_df_r3, player_df_r4, player_df_r5, player_df_r6, player_df_r7, player_df_r8, player_df_r9
-    
+
+# Optimisation Setup Function
+def optimise_setup_fn(
+        player_df_r1, player_df_r2, player_df_r3, player_df_r4, player_df_r5, player_df_r6, player_df_r7, player_df_r8, player_df_r9,squad_players
+): 
+    # Round 1
+    points_r1 = player_df_r1["exp_rnd_points"]
+    price_r1 = player_df_r1["Price"]
+    weight_r1 = player_df_r1["weight"]
+    in_team_r1 = player_df_r1["In_Team"]
+    available_r1 = player_df_r1["Available"]
+    wk_weight_r1 = player_df_r1["Wk_f"]
+    bat_weight_r1 = player_df_r1["Bat_f"]
+    bowl_weight_r1 = player_df_r1["Bowl_f"]
+    cnt_r1, max_player_r1 = squad_players, range(len(price_r1))
+    play_cnt_r1, total_player_r1 = 12, range(len(price_r1))
+    wk_cnt_r1, total_wk_r1 = 1, range(len(price_r1))
+    bat_cnt_r1, total_bat_r1 = 6, range(len(price_r1))
+    bowl_cnt_r1, total_bowl_r1 = 5, range(len(price_r1))
+    budget_r1, total_budget_r1 = 1802500, range(len(price_r1))
+
+    # Round 2
+    points_r2 = player_df_r2["exp_rnd_points"]
+    price_r2 = player_df_r2["Price"]
+    weight_r2 = player_df_r2["weight"]
+    in_team_r2 = player_df_r2["In_Team"]
+    available_r2 = player_df_r2["Available"] 
+    wk_weight_r2 = player_df_r2["Wk_f"]
+    bat_weight_r2 = player_df_r2["Bat_f"]
+    bowl_weight_r2 = player_df_r2["Bowl_f"]
+    cnt_r2, max_player_r2 = squad_players, range(len(price_r2))
+    play_cnt_r2, total_player_r2 = 12, range(len(price_r2))
+    wk_cnt_r2, total_wk_r2 = 1, range(len(price_r2))
+    bat_cnt_r2, total_bat_r2 = 6, range(len(price_r2))
+    bowl_cnt_r2, total_bowl_r2 = 5, range(len(price_r2))
+    budget_r2, total_budget_r2 = 1802500, range(len(price_r2))
+    team_play_cnt_r2, total_team_player_r2 = (squad_players - 3), range(len(price_r2)) # At least 10 players from round 1 to be in round 2 team
+
+    # Round 3
+    points_r3 = player_df_r3["exp_rnd_points"]
+    price_r3 = player_df_r3["Price"]
+    weight_r3 = player_df_r3["weight"]
+    in_team_r3 = player_df_r3["In_Team"]
+    available_r3 = player_df_r3["Available"]
+    wk_weight_r3 = player_df_r3["Wk_f"]
+    bat_weight_r3 = player_df_r3["Bat_f"]
+    bowl_weight_r3 = player_df_r3["Bowl_f"]
+    cnt_r3, max_player_r3 = squad_players, range(len(price_r3))
+    play_cnt_r3, total_player_r3 = 12, range(len(price_r3))
+    wk_cnt_r3, total_wk_r3 = 1, range(len(price_r3))
+    bat_cnt_r3, total_bat_r3 = 6, range(len(price_r3))
+    bowl_cnt_r3, total_bowl_r3 = 5, range(len(price_r3))
+    budget_r3, total_budget_r3 = 1802500, range(len(price_r3))
+    team_play_cnt_r3, total_team_player_r3 = (squad_players - 3), range(len(price_r3)) # At least 10 players from round 2 to be in round 3 team
+
+    # Round 4
+    points_r4 = player_df_r4["exp_rnd_points"]
+    price_r4 = player_df_r4["Price"]
+    weight_r4 = player_df_r4["weight"]
+    in_team_r4 = player_df_r4["In_Team"]
+    available_r4 = player_df_r4["Available"]
+    wk_weight_r4 = player_df_r4["Wk_f"]
+    bat_weight_r4 = player_df_r4["Bat_f"]
+    bowl_weight_r4 = player_df_r4["Bowl_f"]
+    cnt_r4, max_player_r4 = squad_players, range(len(price_r4))
+    play_cnt_r4, total_player_r4 = 12, range(len(price_r4))
+    wk_cnt_r4, total_wk_r4 = 1, range(len(price_r4))
+    bat_cnt_r4, total_bat_r4 = 6, range(len(price_r4))
+    bowl_cnt_r4, total_bowl_r4 = 5, range(len(price_r4))
+    budget_r4, total_budget_r4 = 1802500, range(len(price_r4))
+    team_play_cnt_r4, total_team_player_r4 = (squad_players - 3), range(len(price_r4)) # At least 10 players from round 3 to be in round 4 team
+
+    # Round 5
+    points_r5 = player_df_r5["exp_rnd_points"]
+    price_r5 = player_df_r5["Price"]
+    weight_r5 = player_df_r5["weight"]
+    in_team_r5 = player_df_r5["In_Team"]
+    available_r5 = player_df_r5["Available"]
+    wk_weight_r5 = player_df_r5["Wk_f"]
+    bat_weight_r5 = player_df_r5["Bat_f"]
+    bowl_weight_r5 = player_df_r5["Bowl_f"]
+    cnt_r5, max_player_r5 = squad_players, range(len(price_r5))
+    play_cnt_r5, total_player_r5 = 12, range(len(price_r5))
+    wk_cnt_r5, total_wk_r5 = 1, range(len(price_r5))
+    bat_cnt_r5, total_bat_r5 = 6, range(len(price_r5))
+    bowl_cnt_r5, total_bowl_r5 = 5, range(len(price_r5))
+    budget_r5, total_budget_r5 = 1802500, range(len(price_r5))
+    team_play_cnt_r5, total_team_player_r5 = (squad_players - 3), range(len(price_r5)) # At least 10 players from round 4 to be in round 5 team
+
+    # Round 6
+    points_r6 = player_df_r6["exp_rnd_points"]
+    price_r6 = player_df_r6["Price"]
+    weight_r6 = player_df_r6["weight"]
+    in_team_r6 = player_df_r6["In_Team"]
+    available_r6 = player_df_r6["Available"]
+    wk_weight_r6 = player_df_r6["Wk_f"]
+    bat_weight_r6 = player_df_r6["Bat_f"]
+    bowl_weight_r6 = player_df_r6["Bowl_f"]
+    cnt_r6, max_player_r6 = squad_players, range(len(price_r6))
+    play_cnt_r6, total_player_r6 = 12, range(len(price_r6))
+    wk_cnt_r6, total_wk_r6 = 1, range(len(price_r6))
+    bat_cnt_r6, total_bat_r6 = 6, range(len(price_r6))
+    bowl_cnt_r6, total_bowl_r6 = 5, range(len(price_r6))
+    budget_r6, total_budget_r6 = 1783500, range(len(price_r6))
+    team_play_cnt_r6, total_team_player_r6 = (squad_players - 3), range(len(price_r6)) # At least 10 players from round 5 to be in round 6 team
+
+    # Round 7
+    points_r7 = player_df_r7["exp_rnd_points"]
+    price_r7 = player_df_r7["Price"]
+    weight_r7 = player_df_r7["weight"]
+    in_team_r7 = player_df_r7["In_Team"]
+    available_r7 = player_df_r7["Available"]
+    wk_weight_r7 = player_df_r7["Wk_f"]
+    bat_weight_r7 = player_df_r7["Bat_f"]
+    bowl_weight_r7 = player_df_r7["Bowl_f"]
+    cnt_r7, max_player_r7 = squad_players, range(len(price_r7))
+    play_cnt_r7, total_player_r7 = 12, range(len(price_r7))
+    wk_cnt_r7, total_wk_r7 = 1, range(len(price_r7))
+    bat_cnt_r7, total_bat_r7 = 6, range(len(price_r7))
+    bowl_cnt_r7, total_bowl_r7 = 5, range(len(price_r7))
+    budget_r7, total_budget_r7 = 1802500, range(len(price_r7))
+    team_play_cnt_r7, total_team_player_r7 = (squad_players - 3), range(len(price_r7)) # At least 10 players from round 6 to be in round 7 team
+
+    # Round 8
+    points_r8 = player_df_r8["exp_rnd_points"]
+    price_r8 = player_df_r8["Price"]
+    weight_r8 = player_df_r8["weight"]
+    in_team_r8 = player_df_r8["In_Team"]
+    available_r8 = player_df_r8["Available"]
+    wk_weight_r8 = player_df_r8["Wk_f"]
+    bat_weight_r8 = player_df_r8["Bat_f"]
+    bowl_weight_r8 = player_df_r8["Bowl_f"]
+    cnt_r8, max_player_r8 = squad_players, range(len(price_r8))
+    play_cnt_r8, total_player_r8 = 12, range(len(price_r8))
+    wk_cnt_r8, total_wk_r8 = 1, range(len(price_r8))
+    bat_cnt_r8, total_bat_r8 = 6, range(len(price_r8))
+    bowl_cnt_r8, total_bowl_r8 = 5, range(len(price_r8))
+    budget_r8, total_budget_r8 = 1802500, range(len(price_r8))
+    team_play_cnt_r8, total_team_player_r8 = (squad_players - 3), range(len(price_r8)) # At least 10 players from round 7 to be in round 8 team
+
+    # Round 9
+    points_r9 = player_df_r9["exp_rnd_points"]
+    price_r9 = player_df_r9["Price"]
+    weight_r9 = player_df_r9["weight"]
+    in_team_r9 = player_df_r9["In_Team"]
+    available_r9 = player_df_r9["Available"]
+    wk_weight_r9 = player_df_r9["Wk_f"]
+    bat_weight_r9 = player_df_r9["Bat_f"]
+    bowl_weight_r9 = player_df_r9["Bowl_f"]
+    cnt_r9, max_player_r9 = squad_players, range(len(price_r9))
+    play_cnt_r9, total_player_r9 = 12, range(len(price_r9))
+    wk_cnt_r9, total_wk_r9 = 1, range(len(price_r9))
+    bat_cnt_r9, total_bat_r9 = 6, range(len(price_r9))
+    bowl_cnt_r9, total_bowl_r9 = 5, range(len(price_r9))
+    budget_r9, total_budget_r9 = 1802500, range(len(price_r9))
+    team_play_cnt_r9, total_team_player_r9 = (squad_players - 3), range(len(price_r9)) # At least 10 players from round 8 to be in round 9 team
+
+    # Return created dataframes and variables
+    return points_r1, price_r1, weight_r1, in_team_r1, available_r1, wk_weight_r1, bat_weight_r1, bowl_weight_r1, \
+        play_cnt_r1, total_player_r1, wk_cnt_r1, total_wk_r1, bat_cnt_r1, total_bat_r1, bowl_cnt_r1, total_bowl_r1, \
+        budget_r1, total_budget_r1, player_df_r1, cnt_r1, max_player_r1, \
+        points_r2, price_r2, weight_r2, in_team_r2, available_r2, wk_weight_r2, bat_weight_r2, bowl_weight_r2, \
+        play_cnt_r2, total_player_r2, wk_cnt_r2, total_wk_r2, bat_cnt_r2, total_bat_r2, bowl_cnt_r2, total_bowl_r2, \
+        budget_r2, total_budget_r2, team_play_cnt_r2, total_team_player_r2, player_df_r2, cnt_r2, max_player_r2, \
+        points_r3, price_r3, weight_r3, in_team_r3, available_r3, wk_weight_r3, bat_weight_r3, bowl_weight_r3, \
+        play_cnt_r3, total_player_r3, wk_cnt_r3, total_wk_r3, bat_cnt_r3, total_bat_r3, bowl_cnt_r3, total_bowl_r3, \
+        budget_r3, total_budget_r3, team_play_cnt_r3, total_team_player_r3, player_df_r3, cnt_r3, max_player_r3, \
+        points_r4, price_r4, weight_r4, in_team_r4, available_r4, wk_weight_r4, bat_weight_r4, bowl_weight_r4, \
+        play_cnt_r4, total_player_r4, wk_cnt_r4, total_wk_r4, bat_cnt_r4, total_bat_r4, bowl_cnt_r4, total_bowl_r4, \
+        budget_r4, total_budget_r4, team_play_cnt_r4, total_team_player_r4, player_df_r4, cnt_r4, max_player_r4, \
+        points_r5, price_r5, weight_r5, in_team_r5, available_r5, wk_weight_r5, bat_weight_r5, bowl_weight_r5, \
+        play_cnt_r5, total_player_r5, wk_cnt_r5, total_wk_r5, bat_cnt_r5, total_bat_r5, bowl_cnt_r5, total_bowl_r5, \
+        budget_r5, total_budget_r5, team_play_cnt_r5, total_team_player_r5, player_df_r5, cnt_r5, max_player_r5, \
+        points_r6, price_r6, weight_r6, in_team_r6, available_r6, wk_weight_r6, bat_weight_r6, bowl_weight_r6, \
+        play_cnt_r6, total_player_r6, wk_cnt_r6, total_wk_r6, bat_cnt_r6, total_bat_r6, bowl_cnt_r6, total_bowl_r6, \
+        budget_r6, total_budget_r6, team_play_cnt_r6, total_team_player_r6, player_df_r6, cnt_r6, max_player_r6, \
+        points_r7, price_r7, weight_r7, in_team_r7, available_r7, wk_weight_r7, bat_weight_r7, bowl_weight_r7, \
+        play_cnt_r7, total_player_r7, wk_cnt_r7, total_wk_r7, bat_cnt_r7, total_bat_r7, bowl_cnt_r7, total_bowl_r7, \
+        budget_r7, total_budget_r7, team_play_cnt_r7, total_team_player_r7, player_df_r7, cnt_r7, max_player_r7, \
+        points_r8, price_r8, weight_r8, in_team_r8, available_r8, wk_weight_r8, bat_weight_r8, bowl_weight_r8, \
+        play_cnt_r8, total_player_r8, wk_cnt_r8, total_wk_r8, bat_cnt_r8, total_bat_r8, bowl_cnt_r8, total_bowl_r8, \
+        budget_r8, total_budget_r8, team_play_cnt_r8, total_team_player_r8, player_df_r8, cnt_r8, max_player_r8, \
+        points_r9, price_r9, weight_r9, in_team_r9, available_r9, wk_weight_r9, bat_weight_r9, bowl_weight_r9, \
+        play_cnt_r9, total_player_r9, wk_cnt_r9, total_wk_r9, bat_cnt_r9, total_bat_r9, bowl_cnt_r9, total_bowl_r9, \
+        budget_r9, total_budget_r9, team_play_cnt_r9, total_team_player_r9, player_df_r9, cnt_r9, max_player_r9
 
 # EFP Optimisation Function
 def optimise_fn_efp(
@@ -792,159 +976,36 @@ def _run_single_sfp_sim(sim_id, conf_int, lower_z_thresh, upper_z_thresh, curren
     player_df_r1, player_df_r2, player_df_r3, player_df_r4, player_df_r5, player_df_r6, player_df_r7, player_df_r8, player_df_r9 = roll_rnd_price_fn(player_df_init, price_df, current_rnd, price_model_obj_1, price_model_obj_2, price_model_obj_3)
 
     # 2. Run Optimisation
-    # a. EFP Optimisation Variables Setup
-    # Round 1
-    points_r1 = player_df_r1["exp_rnd_points"]
-    price_r1 = player_df_r1["Price"]
-    weight_r1 = player_df_r1["weight"]
-    in_team_r1 = player_df_r1["In_Team"]
-    available_r1 = player_df_r1["Available"]
-    wk_weight_r1 = player_df_r1["Wk_f"]
-    bat_weight_r1 = player_df_r1["Bat_f"]
-    bowl_weight_r1 = player_df_r1["Bowl_f"]
-    cnt_r1, max_player_r1 = squad_players, range(len(price_r1))
-    play_cnt_r1, total_player_r1 = 12, range(len(price_r1))
-    wk_cnt_r1, total_wk_r1 = 1, range(len(price_r1))
-    bat_cnt_r1, total_bat_r1 = 6, range(len(price_r1))
-    bowl_cnt_r1, total_bowl_r1 = 5, range(len(price_r1))
-    budget_r1, total_budget_r1 = 1802500, range(len(price_r1))
-
-    # Round 2
-    points_r2 = player_df_r2["exp_rnd_points"]
-    price_r2 = player_df_r2["Price"]
-    weight_r2 = player_df_r2["weight"]
-    in_team_r2 = player_df_r2["In_Team"]
-    available_r2 = player_df_r2["Available"] 
-    wk_weight_r2 = player_df_r2["Wk_f"]
-    bat_weight_r2 = player_df_r2["Bat_f"]
-    bowl_weight_r2 = player_df_r2["Bowl_f"]
-    cnt_r2, max_player_r2 = squad_players, range(len(price_r2))
-    play_cnt_r2, total_player_r2 = 12, range(len(price_r2))
-    wk_cnt_r2, total_wk_r2 = 1, range(len(price_r2))
-    bat_cnt_r2, total_bat_r2 = 6, range(len(price_r2))
-    bowl_cnt_r2, total_bowl_r2 = 5, range(len(price_r2))
-    budget_r2, total_budget_r2 = 1802500, range(len(price_r2))
-    team_play_cnt_r2, total_team_player_r2 = (squad_players - 3), range(len(price_r2)) # At least 10 players from round 1 to be in round 2 team
-
-    # Round 3
-    points_r3 = player_df_r3["exp_rnd_points"]
-    price_r3 = player_df_r3["Price"]
-    weight_r3 = player_df_r3["weight"]
-    in_team_r3 = player_df_r3["In_Team"]
-    available_r3 = player_df_r3["Available"]
-    wk_weight_r3 = player_df_r3["Wk_f"]
-    bat_weight_r3 = player_df_r3["Bat_f"]
-    bowl_weight_r3 = player_df_r3["Bowl_f"]
-    cnt_r3, max_player_r3 = squad_players, range(len(price_r3))
-    play_cnt_r3, total_player_r3 = 12, range(len(price_r3))
-    wk_cnt_r3, total_wk_r3 = 1, range(len(price_r3))
-    bat_cnt_r3, total_bat_r3 = 6, range(len(price_r3))
-    bowl_cnt_r3, total_bowl_r3 = 5, range(len(price_r3))
-    budget_r3, total_budget_r3 = 1802500, range(len(price_r3))
-    team_play_cnt_r3, total_team_player_r3 = (squad_players - 3), range(len(price_r3)) # At least 10 players from round 2 to be in round 3 team
-
-    # Round 4
-    points_r4 = player_df_r4["exp_rnd_points"]
-    price_r4 = player_df_r4["Price"]
-    weight_r4 = player_df_r4["weight"]
-    in_team_r4 = player_df_r4["In_Team"]
-    available_r4 = player_df_r4["Available"]
-    wk_weight_r4 = player_df_r4["Wk_f"]
-    bat_weight_r4 = player_df_r4["Bat_f"]
-    bowl_weight_r4 = player_df_r4["Bowl_f"]
-    cnt_r4, max_player_r4 = squad_players, range(len(price_r4))
-    play_cnt_r4, total_player_r4 = 12, range(len(price_r4))
-    wk_cnt_r4, total_wk_r4 = 1, range(len(price_r4))
-    bat_cnt_r4, total_bat_r4 = 6, range(len(price_r4))
-    bowl_cnt_r4, total_bowl_r4 = 5, range(len(price_r4))
-    budget_r4, total_budget_r4 = 1802500, range(len(price_r4))
-    team_play_cnt_r4, total_team_player_r4 = (squad_players - 3), range(len(price_r4)) # At least 10 players from round 3 to be in round 4 team
-
-    # Round 5
-    points_r5 = player_df_r5["exp_rnd_points"]
-    price_r5 = player_df_r5["Price"]
-    weight_r5 = player_df_r5["weight"]
-    in_team_r5 = player_df_r5["In_Team"]
-    available_r5 = player_df_r5["Available"]
-    wk_weight_r5 = player_df_r5["Wk_f"]
-    bat_weight_r5 = player_df_r5["Bat_f"]
-    bowl_weight_r5 = player_df_r5["Bowl_f"]
-    cnt_r5, max_player_r5 = squad_players, range(len(price_r5))
-    play_cnt_r5, total_player_r5 = 12, range(len(price_r5))
-    wk_cnt_r5, total_wk_r5 = 1, range(len(price_r5))
-    bat_cnt_r5, total_bat_r5 = 6, range(len(price_r5))
-    bowl_cnt_r5, total_bowl_r5 = 5, range(len(price_r5))
-    budget_r5, total_budget_r5 = 1802500, range(len(price_r5))
-    team_play_cnt_r5, total_team_player_r5 = (squad_players - 3), range(len(price_r5)) # At least 10 players from round 4 to be in round 5 team
-
-    # Round 6
-    points_r6 = player_df_r6["exp_rnd_points"]
-    price_r6 = player_df_r6["Price"]
-    weight_r6 = player_df_r6["weight"]
-    in_team_r6 = player_df_r6["In_Team"]
-    available_r6 = player_df_r6["Available"]
-    wk_weight_r6 = player_df_r6["Wk_f"]
-    bat_weight_r6 = player_df_r6["Bat_f"]
-    bowl_weight_r6 = player_df_r6["Bowl_f"]
-    cnt_r6, max_player_r6 = squad_players, range(len(price_r6))
-    play_cnt_r6, total_player_r6 = 12, range(len(price_r6))
-    wk_cnt_r6, total_wk_r6 = 1, range(len(price_r6))
-    bat_cnt_r6, total_bat_r6 = 6, range(len(price_r6))
-    bowl_cnt_r6, total_bowl_r6 = 5, range(len(price_r6))
-    budget_r6, total_budget_r6 = 1783500, range(len(price_r6))
-    team_play_cnt_r6, total_team_player_r6 = (squad_players - 3), range(len(price_r6)) # At least 10 players from round 5 to be in round 6 team
-
-    # Round 7
-    points_r7 = player_df_r7["exp_rnd_points"]
-    price_r7 = player_df_r7["Price"]
-    weight_r7 = player_df_r7["weight"]
-    in_team_r7 = player_df_r7["In_Team"]
-    available_r7 = player_df_r7["Available"]
-    wk_weight_r7 = player_df_r7["Wk_f"]
-    bat_weight_r7 = player_df_r7["Bat_f"]
-    bowl_weight_r7 = player_df_r7["Bowl_f"]
-    cnt_r7, max_player_r7 = squad_players, range(len(price_r7))
-    play_cnt_r7, total_player_r7 = 12, range(len(price_r7))
-    wk_cnt_r7, total_wk_r7 = 1, range(len(price_r7))
-    bat_cnt_r7, total_bat_r7 = 6, range(len(price_r7))
-    bowl_cnt_r7, total_bowl_r7 = 5, range(len(price_r7))
-    budget_r7, total_budget_r7 = 1802500, range(len(price_r7))
-    team_play_cnt_r7, total_team_player_r7 = (squad_players - 3), range(len(price_r7)) # At least 10 players from round 6 to be in round 7 team
-
-    # Round 8
-    points_r8 = player_df_r8["exp_rnd_points"]
-    price_r8 = player_df_r8["Price"]
-    weight_r8 = player_df_r8["weight"]
-    in_team_r8 = player_df_r8["In_Team"]
-    available_r8 = player_df_r8["Available"]
-    wk_weight_r8 = player_df_r8["Wk_f"]
-    bat_weight_r8 = player_df_r8["Bat_f"]
-    bowl_weight_r8 = player_df_r8["Bowl_f"]
-    cnt_r8, max_player_r8 = squad_players, range(len(price_r8))
-    play_cnt_r8, total_player_r8 = 12, range(len(price_r8))
-    wk_cnt_r8, total_wk_r8 = 1, range(len(price_r8))
-    bat_cnt_r8, total_bat_r8 = 6, range(len(price_r8))
-    bowl_cnt_r8, total_bowl_r8 = 5, range(len(price_r8))
-    budget_r8, total_budget_r8 = 1802500, range(len(price_r8))
-    team_play_cnt_r8, total_team_player_r8 = (squad_players - 3), range(len(price_r8)) # At least 10 players from round 7 to be in round 8 team
-
-    # Round 9
-    points_r9 = player_df_r9["exp_rnd_points"]
-    price_r9 = player_df_r9["Price"]
-    weight_r9 = player_df_r9["weight"]
-    in_team_r9 = player_df_r9["In_Team"]
-    available_r9 = player_df_r9["Available"]
-    wk_weight_r9 = player_df_r9["Wk_f"]
-    bat_weight_r9 = player_df_r9["Bat_f"]
-    bowl_weight_r9 = player_df_r9["Bowl_f"]
-    cnt_r9, max_player_r9 = squad_players, range(len(price_r9))
-    play_cnt_r9, total_player_r9 = 12, range(len(price_r9))
-    wk_cnt_r9, total_wk_r9 = 1, range(len(price_r9))
-    bat_cnt_r9, total_bat_r9 = 6, range(len(price_r9))
-    bowl_cnt_r9, total_bowl_r9 = 5, range(len(price_r9))
-    budget_r9, total_budget_r9 = 1802500, range(len(price_r9))
-    team_play_cnt_r9, total_team_player_r9 = (squad_players - 3), range(len(price_r9)) # At least 10 players from round 8 to be in round 9 team
-
+        # a. Optimisation Variables Setup
+    points_r1, price_r1, weight_r1, in_team_r1, available_r1, wk_weight_r1, bat_weight_r1, bowl_weight_r1, \
+    play_cnt_r1, total_player_r1, wk_cnt_r1, total_wk_r1, bat_cnt_r1, total_bat_r1, bowl_cnt_r1, total_bowl_r1, \
+    budget_r1, total_budget_r1, player_df_r1, cnt_r1, max_player_r1, \
+    points_r2, price_r2, weight_r2, in_team_r2, available_r2, wk_weight_r2, bat_weight_r2, bowl_weight_r2, \
+    play_cnt_r2, total_player_r2, wk_cnt_r2, total_wk_r2, bat_cnt_r2, total_bat_r2, bowl_cnt_r2, total_bowl_r2, \
+    budget_r2, total_budget_r2, team_play_cnt_r2, total_team_player_r2, player_df_r2, cnt_r2, max_player_r2, \
+    points_r3, price_r3, weight_r3, in_team_r3, available_r3, wk_weight_r3, bat_weight_r3, bowl_weight_r3, \
+    play_cnt_r3, total_player_r3, wk_cnt_r3, total_wk_r3, bat_cnt_r3, total_bat_r3, bowl_cnt_r3, total_bowl_r3, \
+    budget_r3, total_budget_r3, team_play_cnt_r3, total_team_player_r3, player_df_r3, cnt_r3, max_player_r3, \
+    points_r4, price_r4, weight_r4, in_team_r4, available_r4, wk_weight_r4, bat_weight_r4, bowl_weight_r4, \
+    play_cnt_r4, total_player_r4, wk_cnt_r4, total_wk_r4, bat_cnt_r4, total_bat_r4, bowl_cnt_r4, total_bowl_r4, \
+    budget_r4, total_budget_r4, team_play_cnt_r4, total_team_player_r4, player_df_r4, cnt_r4, max_player_r4, \
+    points_r5, price_r5, weight_r5, in_team_r5, available_r5, wk_weight_r5, bat_weight_r5, bowl_weight_r5, \
+    play_cnt_r5, total_player_r5, wk_cnt_r5, total_wk_r5, bat_cnt_r5, total_bat_r5, bowl_cnt_r5, total_bowl_r5, \
+    budget_r5, total_budget_r5, team_play_cnt_r5, total_team_player_r5, player_df_r5, cnt_r5, max_player_r5, \
+    points_r6, price_r6, weight_r6, in_team_r6, available_r6, wk_weight_r6, bat_weight_r6, bowl_weight_r6, \
+    play_cnt_r6, total_player_r6, wk_cnt_r6, total_wk_r6, bat_cnt_r6, total_bat_r6, bowl_cnt_r6, total_bowl_r6, \
+    budget_r6, total_budget_r6, team_play_cnt_r6, total_team_player_r6, player_df_r6, cnt_r6, max_player_r6, \
+    points_r7, price_r7, weight_r7, in_team_r7, available_r7, wk_weight_r7, bat_weight_r7, bowl_weight_r7, \
+    play_cnt_r7, total_player_r7, wk_cnt_r7, total_wk_r7, bat_cnt_r7, total_bat_r7, bowl_cnt_r7, total_bowl_r7, \
+    budget_r7, total_budget_r7, team_play_cnt_r7, total_team_player_r7, player_df_r7, cnt_r7, max_player_r7, \
+    points_r8, price_r8, weight_r8, in_team_r8, available_r8, wk_weight_r8, bat_weight_r8, bowl_weight_r8, \
+    play_cnt_r8, total_player_r8, wk_cnt_r8, total_wk_r8, bat_cnt_r8, total_bat_r8, bowl_cnt_r8, total_bowl_r8, \
+    budget_r8, total_budget_r8, team_play_cnt_r8, total_team_player_r8, player_df_r8, cnt_r8, max_player_r8, \
+    points_r9, price_r9, weight_r9, in_team_r9, available_r9, wk_weight_r9, bat_weight_r9, bowl_weight_r9, \
+    play_cnt_r9, total_player_r9, wk_cnt_r9, total_wk_r9, bat_cnt_r9, total_bat_r9, bowl_cnt_r9, total_bowl_r9, \
+    budget_r9, total_budget_r9, team_play_cnt_r9, total_team_player_r9, player_df_r9, cnt_r9, max_player_r9 =  optimise_setup_fn(
+        player_df_r1, player_df_r2, player_df_r3, player_df_r4, player_df_r5, player_df_r6, player_df_r7, player_df_r8, player_df_r9,squad_players)
+    
     # b. Run optimization
     sel_player_df, sel_player_df_r1, sel_player_df_r2, sel_player_df_r3, sel_player_df_r4, sel_player_df_r5, sel_player_df_r6, sel_player_df_r7,sel_player_df_r8, sel_player_df_r9 = optimise_fn_efp(
         # Round 1
