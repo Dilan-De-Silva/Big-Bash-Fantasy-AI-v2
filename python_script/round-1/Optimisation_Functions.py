@@ -24,10 +24,10 @@ def roll_rnd_price_fn(player_df_init, price_df, current_rnd,
 
     # Create game_num variable
     pts_per_game = player_df_init_2[['Name', 'game_num', 'exp_points']].sort_values(['Name', 'game_num'])
-    
+
     # Vectorized feature calculation using groupby and transform
     grouped = pts_per_game.groupby('Name')['exp_points']
-    
+
     # Calculate all rolling features at once
     pts_per_game['curr_game_pts'] = pts_per_game['exp_points']
     pts_per_game['prev_game_pts'] = grouped.shift(1)
@@ -35,14 +35,14 @@ def roll_rnd_price_fn(player_df_init, price_df, current_rnd,
     pts_per_game['last_2_games_ma_pts'] = grouped.transform(lambda x: x.rolling(2, min_periods=1).mean())
     pts_per_game['last_3_games_ma_pts'] = grouped.transform(lambda x: x.rolling(3, min_periods=1).mean())
     pts_per_game['seas_avg_games_pts'] = grouped.transform(lambda x: x.expanding().mean())
-    
+
     # Drop the original exp_points column and keep calculated features
     bbl15_game_pts_table_pre = pts_per_game.drop('exp_points', axis=1)
 
     # Add team and round info
     player_team = player_df_init_2[['Name', 'Team']].drop_duplicates()
     game_rnd_team_df = player_df_init_2[['Team','Round','game_num']].drop_duplicates()
-    
+
     bbl15_game_pts_table = bbl15_game_pts_table_pre.merge(player_team, on='Name').merge(game_rnd_team_df, on=['Team', 'game_num']).drop('Team', axis=1)
 
     # For player double gameweek rounds, only return the second game row
@@ -58,35 +58,49 @@ def roll_rnd_price_fn(player_df_init, price_df, current_rnd,
     bbl15_game_pts_table = pd.merge(bbl15_game_pts_table, price_df[['Name', 'Price']], on = 'Name', how = 'left').rename(columns={"Price":"price_pre"})
 
     # Price prediction - OPTIMIZED with bulk predictions
-    player_df_lags = bbl15_game_pts_table[['Name', 'Round', 'game_num', 'price_pre', 'seas_avg_games_pts', 'last_2_games_ma_pts', 'last_3_games_ma_pts']]
-    
+    # player_df_lags = bbl15_game_pts_table[['Name', 'Round', 'game_num', 'price_pre', 'seas_avg_games_pts', 'last_2_games_ma_pts', 'last_3_games_ma_pts']]
+
+    player_df_lags = bbl15_game_pts_table[['Name', 'Round', 'game_num', 'price_pre', 'seas_avg_games_pts', 'last_2_games_ma_pts', 'last_3_games_ma_pts']].copy()
+
+    # Drop previous rounds as only required for feature calculation
+    player_df_lags = player_df_lags[player_df_lags['Round'] >= current_rnd]
+
     # Pre-compute all predictions in bulk
     player_df_lags['Price_Pred'] = np.nan
-    
-    # Game 1 predictions
-    mask_g1 = player_df_lags['game_num'] == 1
-    if mask_g1.any():
-        player_df_lags.loc[mask_g1, 'Price_Pred'] = price_model_obj_1.predict(
-            player_df_lags.loc[mask_g1, ['price_pre', 'seas_avg_games_pts']]
-        )
-    
-    # Game 2 predictions
-    mask_g2 = player_df_lags['game_num'] == 2
-    if mask_g2.any():
-        player_df_lags.loc[mask_g2, 'Price_Pred'] = price_model_obj_2.predict(
-            player_df_lags.loc[mask_g2, ['price_pre', 'last_2_games_ma_pts']]
-        )
-    
-    # Game 3+ predictions
-    mask_g3 = player_df_lags['game_num'] >= 3
-    if mask_g3.any():
-        player_df_lags.loc[mask_g3, 'Price_Pred'] = price_model_obj_3.predict(
-            player_df_lags.loc[mask_g3, ['price_pre', 'last_3_games_ma_pts']]
-        )
-    
+
+    # Loop per player in order of game_num, updating next game's price_pre with the prediction
+    for name, grp in player_df_lags.groupby('Name'):
+        grp_sorted = grp.sort_values('game_num')
+        if grp_sorted.empty:
+            continue
+        for i, idx in enumerate(grp_sorted.index):
+            row = player_df_lags.loc[idx]
+            gnum = int(row['game_num']) if not pd.isna(row['game_num']) else 1
+
+            try:
+                if gnum == 1:
+                    X = np.array([[row['price_pre'], row['seas_avg_games_pts']]])
+                    pred = price_model_obj_1.predict(X)[0]
+                elif gnum == 2:
+                    X = np.array([[row['price_pre'], row['last_2_games_ma_pts']]])
+                    pred = price_model_obj_2.predict(X)[0]
+                else:
+                    X = np.array([[row['price_pre'], row['last_3_games_ma_pts']]])
+                    pred = price_model_obj_3.predict(X)[0]
+            except Exception:
+                # Fallback: if model prediction fails, keep original price_pre
+                pred = row['price_pre']
+
+            player_df_lags.at[idx, 'Price_Pred'] = pred
+
+            # If there is a next game for this player, set its price_pre to this prediction
+            if i + 1 < len(grp_sorted):
+                next_idx = grp_sorted.index[i + 1]
+                player_df_lags.at[next_idx, 'price_pre'] = pred
+                
     # b. Build price dataframe with rolling predictions
     player_df_new_list = []
-    
+
     for player in player_df['Name'].unique():
         player_lags = player_df_lags[player_df_lags['Name'] == player].sort_values('Round')
         player_rounds = player_lags['Round'].values
@@ -118,9 +132,10 @@ def roll_rnd_price_fn(player_df_init, price_df, current_rnd,
                     # Player was not available - keep last known price (no change)
                     future_data['Price'] = last_known_price
                 player_df_new_list.append(future_data)
-    
+
     if player_df_new_list:
         player_df = pd.concat(player_df_new_list, ignore_index=True)
+
     else:
         player_df = pd.DataFrame()
 
