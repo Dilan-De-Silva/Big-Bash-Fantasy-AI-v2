@@ -171,23 +171,23 @@ def roll_rnd_price_fn(player_df_init, price_df, current_rnd,
 
 # Optimisation Setup Function
 def optimise_setup_fn(
-        player_df_r1, player_df_r2, player_df_r3, player_df_r4, player_df_r5, player_df_r6, player_df_r7, player_df_r8, player_df_r9,squad_players
+        player_df_r2, player_df_r3, player_df_r4, player_df_r5, player_df_r6, player_df_r7, player_df_r8, player_df_r9
 ): 
     # Round 1
-    points_r1 = player_df_r1["exp_rnd_points"]
-    price_r1 = player_df_r1["Price"]
-    weight_r1 = player_df_r1["weight"]
-    in_team_r1 = player_df_r1["In_Team"]
-    available_r1 = player_df_r1["Available"]
-    wk_weight_r1 = player_df_r1["Wk_f"]
-    bat_weight_r1 = player_df_r1["Bat_f"]
-    bowl_weight_r1 = player_df_r1["Bowl_f"]
-    cnt_r1, max_player_r1 = squad_players, range(len(price_r1))
-    play_cnt_r1, total_player_r1 = 12, range(len(price_r1))
-    wk_cnt_r1, total_wk_r1 = 1, range(len(price_r1))
-    bat_cnt_r1, total_bat_r1 = 6, range(len(price_r1))
-    bowl_cnt_r1, total_bowl_r1 = 5, range(len(price_r1))
-    budget_r1, total_budget_r1 = 1802500, range(len(price_r1))
+    # points_r1 = player_df_r1["exp_rnd_points"]
+    # price_r1 = player_df_r1["Price"]
+    # weight_r1 = player_df_r1["weight"]
+    # in_team_r1 = player_df_r1["In_Team"]
+    # available_r1 = player_df_r1["Available"]
+    # wk_weight_r1 = player_df_r1["Wk_f"]
+    # bat_weight_r1 = player_df_r1["Bat_f"]
+    # bowl_weight_r1 = player_df_r1["Bowl_f"]
+    # cnt_r1, max_player_r1 = squad_players, range(len(price_r1))
+    # play_cnt_r1, total_player_r1 = 12, range(len(price_r1))
+    # wk_cnt_r1, total_wk_r1 = 1, range(len(price_r1))
+    # bat_cnt_r1, total_bat_r1 = 6, range(len(price_r1))
+    # bowl_cnt_r1, total_bowl_r1 = 5, range(len(price_r1))
+    # budget_r1, total_budget_r1 = 1802500, range(len(price_r1))
 
     # Round 2
     points_r2 = player_df_r2["exp_rnd_points"]
@@ -198,13 +198,13 @@ def optimise_setup_fn(
     wk_weight_r2 = player_df_r2["Wk_f"]
     bat_weight_r2 = player_df_r2["Bat_f"]
     bowl_weight_r2 = player_df_r2["Bowl_f"]
-    cnt_r2, max_player_r2 = squad_players, range(len(price_r2))
+    cnt_r2, max_player_r2 = 15, range(len(price_r2)) # Hard code as strategy set to 15 players
     play_cnt_r2, total_player_r2 = 12, range(len(price_r2))
     wk_cnt_r2, total_wk_r2 = 1, range(len(price_r2))
     bat_cnt_r2, total_bat_r2 = 6, range(len(price_r2))
     bowl_cnt_r2, total_bowl_r2 = 5, range(len(price_r2))
     budget_r2, total_budget_r2 = 1802500, range(len(price_r2))
-    team_play_cnt_r2, total_team_player_r2 = (squad_players - 3), range(len(price_r2)) # At least 10 players from round 1 to be in round 2 team
+    team_play_cnt_r2, total_team_player_r2 = 12, range(len(price_r2)) # At least 12 players from round 1 to be in round 2 team
 
     # Round 3
     points_r3 = player_df_r3["exp_rnd_points"]
@@ -215,13 +215,13 @@ def optimise_setup_fn(
     wk_weight_r3 = player_df_r3["Wk_f"]
     bat_weight_r3 = player_df_r3["Bat_f"]
     bowl_weight_r3 = player_df_r3["Bowl_f"]
-    cnt_r3, max_player_r3 = squad_players, range(len(price_r3))
+    cnt_r3, max_player_r3 = 15, range(len(price_r3)) # Hard code as strategy set to 15 players
     play_cnt_r3, total_player_r3 = 12, range(len(price_r3))
     wk_cnt_r3, total_wk_r3 = 1, range(len(price_r3))
     bat_cnt_r3, total_bat_r3 = 6, range(len(price_r3))
     bowl_cnt_r3, total_bowl_r3 = 5, range(len(price_r3))
     budget_r3, total_budget_r3 = 1802500, range(len(price_r3))
-    team_play_cnt_r3, total_team_player_r3 = (squad_players - 3), range(len(price_r3)) # At least 10 players from round 2 to be in round 3 team
+    team_play_cnt_r3, total_team_player_r3 = 12, range(len(price_r3)) # At least 10 players from round 2 to be in round 3 team
 
     # Round 4
     points_r4 = player_df_r4["exp_rnd_points"]
@@ -232,13 +232,13 @@ def optimise_setup_fn(
     wk_weight_r4 = player_df_r4["Wk_f"]
     bat_weight_r4 = player_df_r4["Bat_f"]
     bowl_weight_r4 = player_df_r4["Bowl_f"]
-    cnt_r4, max_player_r4 = squad_players, range(len(price_r4))
+    cnt_r4, max_player_r4 = 15, range(len(price_r4)) # Hard code as strategy set to 15 players
     play_cnt_r4, total_player_r4 = 12, range(len(price_r4))
     wk_cnt_r4, total_wk_r4 = 1, range(len(price_r4))
     bat_cnt_r4, total_bat_r4 = 6, range(len(price_r4))
     bowl_cnt_r4, total_bowl_r4 = 5, range(len(price_r4))
     budget_r4, total_budget_r4 = 1802500, range(len(price_r4))
-    team_play_cnt_r4, total_team_player_r4 = (squad_players - 3), range(len(price_r4)) # At least 10 players from round 3 to be in round 4 team
+    team_play_cnt_r4, total_team_player_r4 = 12, range(len(price_r4)) # At least 12 players from round 3 to be in round 4 team
 
     # Round 5
     points_r5 = player_df_r5["exp_rnd_points"]
@@ -249,13 +249,13 @@ def optimise_setup_fn(
     wk_weight_r5 = player_df_r5["Wk_f"]
     bat_weight_r5 = player_df_r5["Bat_f"]
     bowl_weight_r5 = player_df_r5["Bowl_f"]
-    cnt_r5, max_player_r5 = squad_players, range(len(price_r5))
+    cnt_r5, max_player_r5 = 15, range(len(price_r5)) # Hard code as strategy set to 15 players
     play_cnt_r5, total_player_r5 = 12, range(len(price_r5))
     wk_cnt_r5, total_wk_r5 = 1, range(len(price_r5))
     bat_cnt_r5, total_bat_r5 = 6, range(len(price_r5))
     bowl_cnt_r5, total_bowl_r5 = 5, range(len(price_r5))
     budget_r5, total_budget_r5 = 1802500, range(len(price_r5))
-    team_play_cnt_r5, total_team_player_r5 = (squad_players - 3), range(len(price_r5)) # At least 10 players from round 4 to be in round 5 team
+    team_play_cnt_r5, total_team_player_r5 = 12, range(len(price_r5)) # At least 12 players from round 4 to be in round 5 team
 
     # Round 6
     points_r6 = player_df_r6["exp_rnd_points"]
@@ -266,13 +266,13 @@ def optimise_setup_fn(
     wk_weight_r6 = player_df_r6["Wk_f"]
     bat_weight_r6 = player_df_r6["Bat_f"]
     bowl_weight_r6 = player_df_r6["Bowl_f"]
-    cnt_r6, max_player_r6 = squad_players, range(len(price_r6))
+    cnt_r6, max_player_r6 = 15, range(len(price_r6)) # Hard code as strategy set to 15 players
     play_cnt_r6, total_player_r6 = 12, range(len(price_r6))
     wk_cnt_r6, total_wk_r6 = 1, range(len(price_r6))
     bat_cnt_r6, total_bat_r6 = 6, range(len(price_r6))
     bowl_cnt_r6, total_bowl_r6 = 5, range(len(price_r6))
     budget_r6, total_budget_r6 = 1783500, range(len(price_r6))
-    team_play_cnt_r6, total_team_player_r6 = (squad_players - 3), range(len(price_r6)) # At least 10 players from round 5 to be in round 6 team
+    team_play_cnt_r6, total_team_player_r6 = 12, range(len(price_r6)) # At least 12 players from round 5 to be in round 6 team
 
     # Round 7
     points_r7 = player_df_r7["exp_rnd_points"]
@@ -283,13 +283,13 @@ def optimise_setup_fn(
     wk_weight_r7 = player_df_r7["Wk_f"]
     bat_weight_r7 = player_df_r7["Bat_f"]
     bowl_weight_r7 = player_df_r7["Bowl_f"]
-    cnt_r7, max_player_r7 = squad_players, range(len(price_r7))
+    cnt_r7, max_player_r7 = 15, range(len(price_r7)) # Hard code as strategy set to 15 players
     play_cnt_r7, total_player_r7 = 12, range(len(price_r7))
     wk_cnt_r7, total_wk_r7 = 1, range(len(price_r7))
     bat_cnt_r7, total_bat_r7 = 6, range(len(price_r7))
     bowl_cnt_r7, total_bowl_r7 = 5, range(len(price_r7))
     budget_r7, total_budget_r7 = 1802500, range(len(price_r7))
-    team_play_cnt_r7, total_team_player_r7 = (squad_players - 3), range(len(price_r7)) # At least 10 players from round 6 to be in round 7 team
+    team_play_cnt_r7, total_team_player_r7 = 12, range(len(price_r7)) # At least 12 players from round 6 to be in round 7 team
 
     # Round 8
     points_r8 = player_df_r8["exp_rnd_points"]
@@ -300,13 +300,13 @@ def optimise_setup_fn(
     wk_weight_r8 = player_df_r8["Wk_f"]
     bat_weight_r8 = player_df_r8["Bat_f"]
     bowl_weight_r8 = player_df_r8["Bowl_f"]
-    cnt_r8, max_player_r8 = squad_players, range(len(price_r8))
+    cnt_r8, max_player_r8 = 15, range(len(price_r8)) # Hard code as strategy set to 15 players
     play_cnt_r8, total_player_r8 = 12, range(len(price_r8))
     wk_cnt_r8, total_wk_r8 = 1, range(len(price_r8))
     bat_cnt_r8, total_bat_r8 = 6, range(len(price_r8))
     bowl_cnt_r8, total_bowl_r8 = 5, range(len(price_r8))
     budget_r8, total_budget_r8 = 1802500, range(len(price_r8))
-    team_play_cnt_r8, total_team_player_r8 = (squad_players - 3), range(len(price_r8)) # At least 10 players from round 7 to be in round 8 team
+    team_play_cnt_r8, total_team_player_r8 = 12, range(len(price_r8)) # At least 12 players from round 7 to be in round 8 team
 
     # Round 9
     points_r9 = player_df_r9["exp_rnd_points"]
@@ -317,19 +317,19 @@ def optimise_setup_fn(
     wk_weight_r9 = player_df_r9["Wk_f"]
     bat_weight_r9 = player_df_r9["Bat_f"]
     bowl_weight_r9 = player_df_r9["Bowl_f"]
-    cnt_r9, max_player_r9 = squad_players, range(len(price_r9))
+    cnt_r9, max_player_r9 = 15, range(len(price_r9)) # Hard code as strategy set to 15 players
     play_cnt_r9, total_player_r9 = 12, range(len(price_r9))
     wk_cnt_r9, total_wk_r9 = 1, range(len(price_r9))
     bat_cnt_r9, total_bat_r9 = 6, range(len(price_r9))
     bowl_cnt_r9, total_bowl_r9 = 5, range(len(price_r9))
     budget_r9, total_budget_r9 = 1802500, range(len(price_r9))
-    team_play_cnt_r9, total_team_player_r9 = (squad_players - 3), range(len(price_r9)) # At least 10 players from round 8 to be in round 9 team
+    team_play_cnt_r9, total_team_player_r9 = 12, range(len(price_r9)) # At least 12 players from round 8 to be in round 9 team
 
     # Return created dataframes and variables
-    return points_r1, price_r1, weight_r1, in_team_r1, available_r1, wk_weight_r1, bat_weight_r1, bowl_weight_r1, \
-        play_cnt_r1, total_player_r1, wk_cnt_r1, total_wk_r1, bat_cnt_r1, total_bat_r1, bowl_cnt_r1, total_bowl_r1, \
-        budget_r1, total_budget_r1, player_df_r1, cnt_r1, max_player_r1, \
-        points_r2, price_r2, weight_r2, in_team_r2, available_r2, wk_weight_r2, bat_weight_r2, bowl_weight_r2, \
+    # # return points_r1, price_r1, weight_r1, in_team_r1, available_r1, wk_weight_r1, bat_weight_r1, bowl_weight_r1, \
+    #     play_cnt_r1, total_player_r1, wk_cnt_r1, total_wk_r1, bat_cnt_r1, total_bat_r1, bowl_cnt_r1, total_bowl_r1, \
+    #     budget_r1, total_budget_r1, player_df_r1, cnt_r1, max_player_r1, \
+    return points_r2, price_r2, weight_r2, in_team_r2, available_r2, wk_weight_r2, bat_weight_r2, bowl_weight_r2, \
         play_cnt_r2, total_player_r2, wk_cnt_r2, total_wk_r2, bat_cnt_r2, total_bat_r2, bowl_cnt_r2, total_bowl_r2, \
         budget_r2, total_budget_r2, team_play_cnt_r2, total_team_player_r2, player_df_r2, cnt_r2, max_player_r2, \
         points_r3, price_r3, weight_r3, in_team_r3, available_r3, wk_weight_r3, bat_weight_r3, bowl_weight_r3, \
@@ -357,9 +357,9 @@ def optimise_setup_fn(
 # EFP Optimisation Function
 def optimise_fn_efp(
         # Round 1
-        points_r1, price_r1, weight_r1, in_team_r1, available_r1, wk_weight_r1, bat_weight_r1, bowl_weight_r1,
-        play_cnt_r1, total_player_r1, wk_cnt_r1, total_wk_r1, bat_cnt_r1, total_bat_r1, bowl_cnt_r1, total_bowl_r1,
-        budget_r1, total_budget_r1, player_df_r1, cnt_r1, max_player_r1,  
+        # points_r1, price_r1, weight_r1, in_team_r1, available_r1, wk_weight_r1, bat_weight_r1, bowl_weight_r1,
+        # play_cnt_r1, total_player_r1, wk_cnt_r1, total_wk_r1, bat_cnt_r1, total_bat_r1, bowl_cnt_r1, total_bowl_r1,
+        # budget_r1, total_budget_r1, player_df_r1, cnt_r1, max_player_r1,  
         # Round 2
         points_r2, price_r2, weight_r2, in_team_r2, available_r2, wk_weight_r2, bat_weight_r2, bowl_weight_r2,
         play_cnt_r2, total_player_r2, wk_cnt_r2, total_wk_r2, bat_cnt_r2, total_bat_r2, bowl_cnt_r2, total_bowl_r2,
@@ -398,62 +398,56 @@ def optimise_fn_efp(
 
     # a. initialize optimisation parameters
     m = Model("knapsack")  # Using HiGHS solver for better performance
-    # x[i] = 1 if player i is selected in roster (13 total)
+    # x[i] = 1 if player i is selected in roster (15 total)
     # p[i] = 1 if player i is playing (12 total, subset of x)
     # y[i] = 1 if player i is captain (1 total, subset of p)
     # Bench player = x[i]=1 but p[i]=0 (automatically the lowest value among selected)
     
-    # Round 1
-    x_r1 = [m.add_var(var_type=BINARY) for i in total_player_r1]  # Selected (13)
-    p_r1 = [m.add_var(var_type=BINARY) for i in total_player_r1]  # Playing (12)
-    y_r1 = [m.add_var(var_type=BINARY) for i in total_player_r1]  # Captain (1)
+    # Round 1 - (Previous Round)
+    x_r1 = [m.add_var(var_type=BINARY) for i in total_player_r2]  # Selected (15)
+    for i in total_player_r2:
+        m += x_r1[i] == int(in_team_r2.iloc[i])
+    # p_r1 = [m.add_var(var_type=BINARY) for i in total_player_r1]  # Playing (12)
+    # y_r1 = [m.add_var(var_type=BINARY) for i in total_player_r1]  # Captain (1)
     # Round 2
-    x_r2 = [m.add_var(var_type=BINARY) for i in total_player_r2]
-    p_r2 = [m.add_var(var_type=BINARY) for i in total_player_r2]
-    y_r2 = [m.add_var(var_type=BINARY) for i in total_player_r2]
+    x_r2 = [m.add_var(var_type=BINARY) for i in total_player_r2] # Selected (15)
+    p_r2 = [m.add_var(var_type=BINARY) for i in total_player_r2] # Playing (12)
+    y_r2 = [m.add_var(var_type=BINARY) for i in total_player_r2] # Captain (1)
     # Round 3
-    x_r3 = [m.add_var(var_type=BINARY) for i in total_player_r3]
-    p_r3 = [m.add_var(var_type=BINARY) for i in total_player_r3]
-    y_r3 = [m.add_var(var_type=BINARY) for i in total_player_r3]
+    x_r3 = [m.add_var(var_type=BINARY) for i in total_player_r3] # Selected (15)
+    p_r3 = [m.add_var(var_type=BINARY) for i in total_player_r3] # Playing (12)
+    y_r3 = [m.add_var(var_type=BINARY) for i in total_player_r3] # Captain (1)
     # Round 4
-    x_r4 = [m.add_var(var_type=BINARY) for i in total_player_r4]
-    p_r4 = [m.add_var(var_type=BINARY) for i in total_player_r4]
-    y_r4 = [m.add_var(var_type=BINARY) for i in total_player_r4]
+    x_r4 = [m.add_var(var_type=BINARY) for i in total_player_r4] # Selected (15)
+    p_r4 = [m.add_var(var_type=BINARY) for i in total_player_r4] # Playing (12)
+    y_r4 = [m.add_var(var_type=BINARY) for i in total_player_r4] # Captain (1)
     # Round 5
-    x_r5 = [m.add_var(var_type=BINARY) for i in total_player_r5]
-    p_r5 = [m.add_var(var_type=BINARY) for i in total_player_r5]
-    y_r5 = [m.add_var(var_type=BINARY) for i in total_player_r5]
+    x_r5 = [m.add_var(var_type=BINARY) for i in total_player_r5] # Selected (15)
+    p_r5 = [m.add_var(var_type=BINARY) for i in total_player_r5] # Playing (12)
+    y_r5 = [m.add_var(var_type=BINARY) for i in total_player_r5] # Captain (1)
     # Round 6
-    x_r6 = [m.add_var(var_type=BINARY) for i in total_player_r6]
-    p_r6 = [m.add_var(var_type=BINARY) for i in total_player_r6]
-    y_r6 = [m.add_var(var_type=BINARY) for i in total_player_r6]
+    x_r6 = [m.add_var(var_type=BINARY) for i in total_player_r6] # Selected (15)
+    p_r6 = [m.add_var(var_type=BINARY) for i in total_player_r6] # Playing (12)
+    y_r6 = [m.add_var(var_type=BINARY) for i in total_player_r6] # Captain (1)
     # Round 7
-    x_r7 = [m.add_var(var_type=BINARY) for i in total_player_r7]
-    p_r7 = [m.add_var(var_type=BINARY) for i in total_player_r7]
-    y_r7 = [m.add_var(var_type=BINARY) for i in total_player_r7]
+    x_r7 = [m.add_var(var_type=BINARY) for i in total_player_r7] # Selected (15)
+    p_r7 = [m.add_var(var_type=BINARY) for i in total_player_r7] # Playing (12)
+    y_r7 = [m.add_var(var_type=BINARY) for i in total_player_r7] # Captain (1)
     # Round 8
-    x_r8 = [m.add_var(var_type=BINARY) for i in total_player_r8]
-    p_r8 = [m.add_var(var_type=BINARY) for i in total_player_r8]
-    y_r8 = [m.add_var(var_type=BINARY) for i in total_player_r8]
+    x_r8 = [m.add_var(var_type=BINARY) for i in total_player_r8] # Selected (15)
+    p_r8 = [m.add_var(var_type=BINARY) for i in total_player_r8] # Playing (12)
+    y_r8 = [m.add_var(var_type=BINARY) for i in total_player_r8] # Captain (1)
     # Round 9
-    x_r9 = [m.add_var(var_type=BINARY) for i in total_player_r9]
-    p_r9 = [m.add_var(var_type=BINARY) for i in total_player_r9]
-    y_r9 = [m.add_var(var_type=BINARY) for i in total_player_r9]
+    x_r9 = [m.add_var(var_type=BINARY) for i in total_player_r9] # Selected (15)
+    p_r9 = [m.add_var(var_type=BINARY) for i in total_player_r9] # Playing (12)
+    y_r9 = [m.add_var(var_type=BINARY) for i in total_player_r9] # Captain (1)
 
     # linking constraints between consecutive rounds
-    # Initialise z_shared for round 1 to round 2 linking
-    name_to_idx_r1 = {name: idx for idx, name in enumerate(player_df_r1['Name'].astype(str))}
-    z_shared = {}
-    for j, name in enumerate(player_df_r2['Name'].astype(str)):
-        if name in name_to_idx_r1:
-            i = name_to_idx_r1[name]
-            z_shared[(i, j)] = m.add_var(var_type=BINARY)
-    
     # Initialise Trade Boost Variable
     extra_trade_vars = []
-            
+
     rounds_data = [
-        (player_df_r1, player_df_r2, x_r1, x_r2, z_shared, team_play_cnt_r2, "r1_r2"),
+        (player_df_r2, player_df_r2, x_r1, x_r2, {}, team_play_cnt_r2, "r1_r2"), #Same DFs as current round 
         (player_df_r2, player_df_r3, x_r2, x_r3, {}, team_play_cnt_r3, "r2_r3"),
         (player_df_r3, player_df_r4, x_r3, x_r4, {}, team_play_cnt_r4, "r3_r4"),
         (player_df_r4, player_df_r5, x_r4, x_r5, {}, team_play_cnt_r5, "r4_r5"),
@@ -479,11 +473,11 @@ def optimise_fn_efp(
                 m += z_rnd[(i, j)] <= next_x[j]
                 m += z_rnd[(i, j)] >= curr_x[i] + next_x[j] - 1
 
-            # Trade Boost Constraint (4 Trades Allowed for 2 Rounds (Only 9 In Team Players Required))
+            # Trade Boost Constraint (4 Trades Allowed for 2 Rounds (Only 11 In Team Players Required))
             extra_trade = m.add_var(var_type=BINARY)
             extra_trade_vars.append(extra_trade)
 
-            # If Trade Boost is used, allow 9 players from previous round, else allow 10
+            # If Trade Boost is used, allow 11 players from previous round, else allow 12
             m += xsum(z_rnd[(i, j)] for (i, j) in z_rnd.keys()) >= team_min - extra_trade
 
     # Only Two Trade Boosts Allowed in season
@@ -491,7 +485,7 @@ def optimise_fn_efp(
 
     # b. define objective function
     # Only playing players (p) contribute points; bench player (x=1, p=0) contributes 0 automatically
-    obj_r1 = xsum(points_r1[i]*p_r1[i] + points_r1[i]*y_r1[i] for i in total_player_r1)
+    # obj_r1 = xsum(points_r1[i]*p_r1[i] + points_r1[i]*y_r1[i] for i in total_player_r1)
     obj_r2 = xsum(points_r2[i]*p_r2[i] + points_r2[i]*y_r2[i] for i in total_player_r2)
     obj_r3 = xsum(points_r3[i]*p_r3[i] + points_r3[i]*y_r3[i] for i in total_player_r3)
     obj_r4 = xsum(points_r4[i]*p_r4[i] + points_r4[i]*y_r4[i] for i in total_player_r4)
@@ -501,7 +495,7 @@ def optimise_fn_efp(
     obj_r8 = xsum(points_r8[i]*p_r8[i] + points_r8[i]*y_r8[i] for i in total_player_r8)
     obj_r9 = xsum(points_r9[i]*p_r9[i] + points_r9[i]*y_r9[i] for i in total_player_r9)
 
-    m.objective = maximize(obj_r1 + obj_r2 + obj_r3 + obj_r4 + obj_r5 + obj_r6 + obj_r7 + obj_r8 + obj_r9)
+    m.objective = maximize(obj_r2 + obj_r3 + obj_r4 + obj_r5 + obj_r6 + obj_r7 + obj_r8 + obj_r9)
     
     # c. define constraints
         # Player selection constraints
@@ -509,46 +503,46 @@ def optimise_fn_efp(
     # Bench player is automatically x=1, p=0 (the 13th selected player not playing)
     
     # Round 1
-    m += xsum(x_r1[i] for i in total_player_r1) == cnt_r1  # total squad players
-    m += xsum(weight_r1[i] * p_r1[i] for i in total_player_r1) == play_cnt_r1  # 12 playing players
-    m += xsum(y_r1[i] for i in total_player_r1) == 1  # Only one captain
+    # m += xsum(x_r1[i] for i in total_player_r1) == cnt_r1  # total squad players
+    # m += xsum(weight_r1[i] * p_r1[i] for i in total_player_r1) == play_cnt_r1  # 12 playing players
+    # m += xsum(y_r1[i] for i in total_player_r1) == 1  # Only one captain
     # Round 2
-    m += xsum(x_r2[i] for i in total_player_r2) == cnt_r2
-    m += xsum(weight_r2[i] * p_r2[i] for i in total_player_r2) == play_cnt_r2
-    m += xsum(y_r2[i] for i in total_player_r2) == 1
+    m += xsum(x_r2[i] for i in total_player_r2) == cnt_r2 # total squad players
+    m += xsum(weight_r2[i] * p_r2[i] for i in total_player_r2) == play_cnt_r2 # 12 playing players
+    m += xsum(y_r2[i] for i in total_player_r2) == 1 # Only one captain
     # Round 3
-    m += xsum(x_r3[i] for i in total_player_r3) == cnt_r3
-    m += xsum(weight_r3[i] * p_r3[i] for i in total_player_r3) == play_cnt_r3
-    m += xsum(y_r3[i] for i in total_player_r3) == 1
+    m += xsum(x_r3[i] for i in total_player_r3) == cnt_r3 # total squad players
+    m += xsum(weight_r3[i] * p_r3[i] for i in total_player_r3) == play_cnt_r3 # 12 playing players
+    m += xsum(y_r3[i] for i in total_player_r3) == 1 # Only one captain
     # Round 4
-    m += xsum(x_r4[i] for i in total_player_r4) == cnt_r4
-    m += xsum(weight_r4[i] * p_r4[i] for i in total_player_r4) == play_cnt_r4
-    m += xsum(y_r4[i] for i in total_player_r4) == 1
+    m += xsum(x_r4[i] for i in total_player_r4) == cnt_r4 # total squad players
+    m += xsum(weight_r4[i] * p_r4[i] for i in total_player_r4) == play_cnt_r4 # 12 playing players
+    m += xsum(y_r4[i] for i in total_player_r4) == 1 # Only one captain
     # Round 5
     m += xsum(x_r5[i] for i in total_player_r5) == cnt_r5
-    m += xsum(weight_r5[i] * p_r5[i] for i in total_player_r5) == play_cnt_r5
-    m += xsum(y_r5[i] for i in total_player_r5) == 1
+    m += xsum(weight_r5[i] * p_r5[i] for i in total_player_r5) == play_cnt_r5 # 12 playing players
+    m += xsum(y_r5[i] for i in total_player_r5) == 1 # Only one captain
     # Round 6
     m += xsum(x_r6[i] for i in total_player_r6) == cnt_r6
-    m += xsum(weight_r6[i] * p_r6[i] for i in total_player_r6) == play_cnt_r6
-    m += xsum(y_r6[i] for i in total_player_r6) == 1
+    m += xsum(weight_r6[i] * p_r6[i] for i in total_player_r6) == play_cnt_r6 # 12 playing players
+    m += xsum(y_r6[i] for i in total_player_r6) == 1 # Only one captain
     # Round 7
     m += xsum(x_r7[i] for i in total_player_r7) == cnt_r7
-    m += xsum(weight_r7[i] * p_r7[i] for i in total_player_r7) == play_cnt_r7
-    m += xsum(y_r7[i] for i in total_player_r7) == 1
+    m += xsum(weight_r7[i] * p_r7[i] for i in total_player_r7) == play_cnt_r7 # 12 playing players
+    m += xsum(y_r7[i] for i in total_player_r7) == 1 # Only one captain
     # Round 8
     m += xsum(x_r8[i] for i in total_player_r8) == cnt_r8
-    m += xsum(weight_r8[i] * p_r8[i] for i in total_player_r8) == play_cnt_r8
-    m += xsum(y_r8[i] for i in total_player_r8) == 1
+    m += xsum(weight_r8[i] * p_r8[i] for i in total_player_r8) == play_cnt_r8 # 12 playing players
+    m += xsum(y_r8[i] for i in total_player_r8) == 1 # Only one captain
     # Round 9
     m += xsum(x_r9[i] for i in total_player_r9) == cnt_r9
-    m += xsum(weight_r9[i] * p_r9[i] for i in total_player_r9) == play_cnt_r9
-    m += xsum(y_r9[i] for i in total_player_r9) == 1
+    m += xsum(weight_r9[i] * p_r9[i] for i in total_player_r9) == play_cnt_r9 # 12 playing players
+    m += xsum(y_r9[i] for i in total_player_r9) == 1 # Only one captain
 
     # Hierarchy constraints: p <= x (can only play if selected), y <= p (captain must be playing)
-    for i in total_player_r1:
-        m += p_r1[i] <= x_r1[i]
-        m += y_r1[i] <= p_r1[i]
+    # for i in total_player_r1:
+    #     m += p_r1[i] <= x_r1[i]
+    #     m += y_r1[i] <= p_r1[i]
     for i in total_player_r2:
         m += p_r2[i] <= x_r2[i]
         m += y_r2[i] <= p_r2[i]
@@ -576,27 +570,24 @@ def optimise_fn_efp(
 
         # Team composition constraints (apply to playing players p, not all selected x)
     # Round 1  
-    m += xsum(wk_weight_r1[i] * p_r1[i] for i in total_wk_r1) >= wk_cnt_r1
-    m += xsum(bat_weight_r1[i] * p_r1[i] for i in total_bat_r1) >= bat_cnt_r1
-    m += xsum(bowl_weight_r1[i] * p_r1[i] for i in total_bowl_r1) >= bowl_cnt_r1
-    m += xsum(available_r1[i] * p_r1[i] for i in total_player_r1) == play_cnt_r1
-    m += xsum(price_r1[i] * x_r1[i] for i in total_budget_r1) - 39500*(cnt_r1 - play_cnt_r1) <= budget_r1  # 13 selected players with 39500 discount
+    # m += xsum(wk_weight_r1[i] * p_r1[i] for i in total_wk_r1) >= wk_cnt_r1
+    # m += xsum(bat_weight_r1[i] * p_r1[i] for i in total_bat_r1) >= bat_cnt_r1
+    # m += xsum(bowl_weight_r1[i] * p_r1[i] for i in total_bowl_r1) >= bowl_cnt_r1
+    # m += xsum(available_r1[i] * p_r1[i] for i in total_player_r1) == play_cnt_r1
+    # m += xsum(price_r1[i] * x_r1[i] for i in total_budget_r1) - 39500*(cnt_r1 - play_cnt_r1) <= budget_r1  # 13 selected players with 39500 discount
     # Round 2  
     m += xsum(wk_weight_r2[i] * p_r2[i] for i in total_wk_r2) >= wk_cnt_r2
     m += xsum(bat_weight_r2[i] * p_r2[i] for i in total_bat_r2) >= bat_cnt_r2
     m += xsum(bowl_weight_r2[i] * p_r2[i] for i in total_bowl_r2) >= bowl_cnt_r2
     m += xsum(available_r2[i] * p_r2[i] for i in total_player_r2) == play_cnt_r2
-    m += xsum(price_r2[i] * x_r2[i] for i in total_budget_r2) - 39500*(cnt_r2 - play_cnt_r2) <= (
-        budget_r1 + xsum((price_r2[i] - price_r1[i]) * x_r1[i] for i in total_player_r1)
-    )
+    m += xsum(price_r2[i] * x_r2[i] for i in total_budget_r2) - 39500*(cnt_r2 - play_cnt_r2) <= budget_r2
      # Round 3
     m += xsum(wk_weight_r3[i] * p_r3[i] for i in total_wk_r3) >= wk_cnt_r3
     m += xsum(bat_weight_r3[i] * p_r3[i] for i in total_bat_r3) >= bat_cnt_r3
     m += xsum(bowl_weight_r3[i] * p_r3[i] for i in total_bowl_r3) >= bowl_cnt_r3
     m += xsum(available_r3[i] * p_r3[i] for i in total_player_r3) == play_cnt_r3
     m += xsum(price_r3[i] * x_r3[i] for i in total_budget_r3) - 39500*(cnt_r3 - play_cnt_r3) <= (
-        budget_r1
-        + xsum((price_r2[i] - price_r1[i]) * x_r1[i] for i in total_player_r1)
+        budget_r2
         + xsum((price_r3[i] - price_r2[i]) * x_r2[i] for i in total_player_r2)
     )
     # Round 4
@@ -605,8 +596,7 @@ def optimise_fn_efp(
     m += xsum(bowl_weight_r4[i] * p_r4[i] for i in total_bowl_r4) >= bowl_cnt_r4
     m += xsum(available_r4[i] * p_r4[i] for i in total_player_r4) == play_cnt_r4
     m += xsum(price_r4[i] * x_r4[i] for i in total_budget_r4) - 39500*(cnt_r4 - play_cnt_r4) <= (
-        budget_r1
-        + xsum((price_r2[i] - price_r1[i]) * x_r1[i] for i in total_player_r1)
+        budget_r2
         + xsum((price_r3[i] - price_r2[i]) * x_r2[i] for i in total_player_r2)
         + xsum((price_r4[i] - price_r3[i]) * x_r3[i] for i in total_player_r3)
     )
@@ -616,8 +606,7 @@ def optimise_fn_efp(
     m += xsum(bowl_weight_r5[i] * p_r5[i] for i in total_bowl_r5) >= bowl_cnt_r5
     m += xsum(available_r5[i] * p_r5[i] for i in total_player_r5) == play_cnt_r5
     m += xsum(price_r5[i] * x_r5[i] for i in total_budget_r5) - 39500*(cnt_r5 - play_cnt_r5) <= (
-        budget_r1
-        + xsum((price_r2[i] - price_r1[i]) * x_r1[i] for i in total_player_r1)
+        budget_r2
         + xsum((price_r3[i] - price_r2[i]) * x_r2[i] for i in total_player_r2)
         + xsum((price_r4[i] - price_r3[i]) * x_r3[i] for i in total_player_r3)
         + xsum((price_r5[i] - price_r4[i]) * x_r4[i] for i in total_player_r4)
@@ -628,8 +617,7 @@ def optimise_fn_efp(
     m += xsum(bowl_weight_r6[i] * p_r6[i] for i in total_bowl_r6) >= bowl_cnt_r6
     m += xsum(available_r6[i] * p_r6[i] for i in total_player_r6) == play_cnt_r6
     m += xsum(price_r6[i] * x_r6[i] for i in total_budget_r6) - 39500*(cnt_r6 - play_cnt_r6) <= (
-        budget_r1
-        + xsum((price_r2[i] - price_r1[i]) * x_r1[i] for i in total_player_r1)
+        budget_r2
         + xsum((price_r3[i] - price_r2[i]) * x_r2[i] for i in total_player_r2)
         + xsum((price_r4[i] - price_r3[i]) * x_r3[i] for i in total_player_r3)
         + xsum((price_r5[i] - price_r4[i]) * x_r4[i] for i in total_player_r4)
@@ -641,8 +629,7 @@ def optimise_fn_efp(
     m += xsum(bowl_weight_r7[i] * p_r7[i] for i in total_bowl_r7) >= bowl_cnt_r7
     m += xsum(available_r7[i] * p_r7[i] for i in total_player_r7) == play_cnt_r7
     m += xsum(price_r7[i] * x_r7[i] for i in total_budget_r7) - 39500*(cnt_r7 - play_cnt_r7) <= (
-        budget_r1
-        + xsum((price_r2[i] - price_r1[i]) * x_r1[i] for i in total_player_r1)
+        budget_r2
         + xsum((price_r3[i] - price_r2[i]) * x_r2[i] for i in total_player_r2)
         + xsum((price_r4[i] - price_r3[i]) * x_r3[i] for i in total_player_r3)
         + xsum((price_r5[i] - price_r4[i]) * x_r4[i] for i in total_player_r4)
@@ -655,8 +642,7 @@ def optimise_fn_efp(
     m += xsum(bowl_weight_r8[i] * p_r8[i] for i in total_bowl_r8) >= bowl_cnt_r8
     m += xsum(available_r8[i] * p_r8[i] for i in total_player_r8) == play_cnt_r8
     m += xsum(price_r8[i] * x_r8[i] for i in total_budget_r8) - 39500*(cnt_r8 - play_cnt_r8) <= (
-        budget_r1
-        + xsum((price_r2[i] - price_r1[i]) * x_r1[i] for i in total_player_r1)
+        budget_r2
         + xsum((price_r3[i] - price_r2[i]) * x_r2[i] for i in total_player_r2)
         + xsum((price_r4[i] - price_r3[i]) * x_r3[i] for i in total_player_r3)
         + xsum((price_r5[i] - price_r4[i]) * x_r4[i] for i in total_player_r4)
@@ -670,8 +656,7 @@ def optimise_fn_efp(
     m += xsum(bowl_weight_r9[i] * p_r9[i] for i in total_bowl_r9) >= bowl_cnt_r9
     m += xsum(available_r9[i] * p_r9[i] for i in total_player_r9) == play_cnt_r9
     m += xsum(price_r9[i] * x_r9[i] for i in total_budget_r9) - 39500*(cnt_r9 - play_cnt_r9) <= (
-        budget_r1
-        + xsum((price_r2[i] - price_r1[i]) * x_r1[i] for i in total_player_r1)
+        budget_r2
         + xsum((price_r3[i] - price_r2[i]) * x_r2[i] for i in total_player_r2)
         + xsum((price_r4[i] - price_r3[i]) * x_r3[i] for i in total_player_r3)
         + xsum((price_r5[i] - price_r4[i]) * x_r4[i] for i in total_player_r4)
@@ -687,62 +672,62 @@ def optimise_fn_efp(
     # m.max_gap = 0.01  # Stop when within 1% of optimal (faster)
     m.optimize()
     # Round 1 - Extract selected (x=1), playing (p=1), benched (x=1 but p=0)
-    all_selected_r1 = [i for i in total_player_r1 if x_r1[i].x >= 0.99]
-    playing_r1 = [i for i in total_player_r1 if p_r1[i].x >= 0.99]
-    benched_r1 = [i for i in all_selected_r1 if i not in playing_r1]
-    captained_r1 = [i for i in total_player_r1 if y_r1[i].x >= 0.99]
-    selected_r1 = playing_r1  # For backward compatibility with output
+    # all_selected_r1 = [i for i in total_player_r1 if x_r1[i].x >= 0.99]
+    # playing_r1 = [i for i in total_player_r1 if p_r1[i].x >= 0.99]
+    # benched_r1 = [i for i in all_selected_r1 if i not in playing_r1]
+    # captained_r1 = [i for i in total_player_r1 if y_r1[i].x >= 0.99]
+    # selected_r1 = playing_r1  # For backward compatibility with output
 
-    # Round 2
+    # Round 2 - Extract selected (x=1), playing (p=1), benched (x=1 but p=0)
     all_selected_r2 = [i for i in total_player_r2 if x_r2[i].x >= 0.99]
     playing_r2 = [i for i in total_player_r2 if p_r2[i].x >= 0.99]
     benched_r2 = [i for i in all_selected_r2 if i not in playing_r2]
     captained_r2 = [i for i in total_player_r2 if y_r2[i].x >= 0.99]
     selected_r2 = playing_r2
 
-    # Round 3
+    # Round 3 - Extract selected (x=1), playing (p=1), benched (x=1 but p=0)
     all_selected_r3 = [i for i in total_player_r3 if x_r3[i].x >= 0.99]
     playing_r3 = [i for i in total_player_r3 if p_r3[i].x >= 0.99]
     benched_r3 = [i for i in all_selected_r3 if i not in playing_r3]
     captained_r3 = [i for i in total_player_r3 if y_r3[i].x >= 0.99]
     selected_r3 = playing_r3
 
-    # Round 4
+    # Round 4 - Extract selected (x=1), playing (p=1), benched (x=1 but p=0)
     all_selected_r4 = [i for i in total_player_r4 if x_r4[i].x >= 0.99]
     playing_r4 = [i for i in total_player_r4 if p_r4[i].x >= 0.99]
     benched_r4 = [i for i in all_selected_r4 if i not in playing_r4]
     captained_r4 = [i for i in total_player_r4 if y_r4[i].x >= 0.99]
     selected_r4 = playing_r4
 
-    # Round 5
+    # Round 5 - Extract selected (x=1), playing (p=1), benched (x=1 but p=0)
     all_selected_r5 = [i for i in total_player_r5 if x_r5[i].x >= 0.99]
     playing_r5 = [i for i in total_player_r5 if p_r5[i].x >= 0.99]
     benched_r5 = [i for i in all_selected_r5 if i not in playing_r5]
     captained_r5 = [i for i in total_player_r5 if y_r5[i].x >= 0.99]
     selected_r5 = playing_r5
 
-    # Round 6
+    # Round 6 - Extract selected (x=1), playing (p=1), benched (x=1 but p=0)
     all_selected_r6 = [i for i in total_player_r6 if x_r6[i].x >= 0.99]
     playing_r6 = [i for i in total_player_r6 if p_r6[i].x >= 0.99]
     benched_r6 = [i for i in all_selected_r6 if i not in playing_r6]
     captained_r6 = [i for i in total_player_r6 if y_r6[i].x >= 0.99]
     selected_r6 = playing_r6
   
-    # Round 7
+    # Round 7 - Extract selected (x=1), playing (p=1), benched (x=1 but p=0)
     all_selected_r7 = [i for i in total_player_r7 if x_r7[i].x >= 0.99]
     playing_r7 = [i for i in total_player_r7 if p_r7[i].x >= 0.99]
     benched_r7 = [i for i in all_selected_r7 if i not in playing_r7]
     captained_r7 = [i for i in total_player_r7 if y_r7[i].x >= 0.99]
     selected_r7 = playing_r7
 
-    # Round 8
+    # Round 8 - Extract selected (x=1), playing (p=1), benched (x=1 but p=0)
     all_selected_r8 = [i for i in total_player_r8 if x_r8[i].x >= 0.99]
     playing_r8 = [i for i in total_player_r8 if p_r8[i].x >= 0.99]
     benched_r8 = [i for i in all_selected_r8 if i not in playing_r8]
     captained_r8 = [i for i in total_player_r8 if y_r8[i].x >= 0.99]
     selected_r8 = playing_r8
 
-    # Round 9
+    # Round 9 - Extract selected (x=1), playing (p=1), benched (x=1 but p=0)
     all_selected_r9 = [i for i in total_player_r9 if x_r9[i].x >= 0.99]
     playing_r9 = [i for i in total_player_r9 if p_r9[i].x >= 0.99]
     benched_r9 = [i for i in all_selected_r9 if i not in playing_r9]
@@ -752,36 +737,36 @@ def optimise_fn_efp(
     # Optimal Team Output
     print("----- Optimal Team Selection Summary -----")
     
-    # Round 1
-    sel_player_df_r1 = player_df_r1.iloc[selected_r1].copy()
-    sel_bench_df_r1 = player_df_r1.iloc[benched_r1].copy() if benched_r1 else pd.DataFrame()
-    sel_captain_df_r1 = player_df_r1.iloc[captained_r1]
-    # Add bench flag
-    sel_player_df_r1['Is_Bench'] = 0
-    if not sel_bench_df_r1.empty:
-        sel_bench_df_r1['Is_Bench'] = 1
-        sel_player_df_r1 = pd.concat([sel_player_df_r1, sel_bench_df_r1], ignore_index=True)
-    total_cost_r1 = sum(sel_player_df_r1[sel_player_df_r1['Is_Bench'] == 0]["Price"]) + sum(sel_player_df_r1[sel_player_df_r1['Is_Bench'] == 1]["Price"])
-    print("----- Round 1 -----")
-    print("Total Expected Points (rnd 1):", sum(sel_player_df_r1[sel_player_df_r1['Is_Bench'] == 0]["exp_rnd_points"]) + sum(sel_captain_df_r1["exp_rnd_points"]))
-    print("Total Team Cost (rnd 1):", total_cost_r1)
-    print("Captain (rnd 1):", sel_captain_df_r1["Name"].values[0])
-    if not sel_bench_df_r1.empty:
-        bench_player = sel_player_df_r1[sel_player_df_r1['Is_Bench'] == 1]
-        print("Bench Player (rnd 1):", bench_player["Name"].values[0], f"(${bench_player['Price'].values[0]:,})")
-    print("Current Players Remaining (rnd 1):", sum(sel_player_df_r1["In_Team"]))
+    # # Round 1
+    # sel_player_df_r1 = player_df_r1.iloc[selected_r1].copy()
+    # sel_bench_df_r1 = player_df_r1.iloc[benched_r1].copy() if benched_r1 else pd.DataFrame()
+    # sel_captain_df_r1 = player_df_r1.iloc[captained_r1]
+    # # Add bench flag
+    # sel_player_df_r1['Is_Bench'] = 0
+    # if not sel_bench_df_r1.empty:
+    #     sel_bench_df_r1['Is_Bench'] = 1
+    #     sel_player_df_r1 = pd.concat([sel_player_df_r1, sel_bench_df_r1], ignore_index=True)
+    # total_cost_r1 = sum(sel_player_df_r1[sel_player_df_r1['Is_Bench'] == 0]["Price"]) + sum(sel_player_df_r1[sel_player_df_r1['Is_Bench'] == 1]["Price"])
+    # print("----- Round 1 -----")
+    # print("Total Expected Points (rnd 1):", sum(sel_player_df_r1[sel_player_df_r1['Is_Bench'] == 0]["exp_rnd_points"]) + sum(sel_captain_df_r1["exp_rnd_points"]))
+    # print("Total Team Cost (rnd 1):", total_cost_r1)
+    # print("Captain (rnd 1):", sel_captain_df_r1["Name"].values[0])
+    # if not sel_bench_df_r1.empty:
+    #     bench_player = sel_player_df_r1[sel_player_df_r1['Is_Bench'] == 1]
+    #     print("Bench Player (rnd 1):", bench_player["Name"].values[0], f"(${bench_player['Price'].values[0]:,})")
+    # print("Current Players Remaining (rnd 1):", sum(sel_player_df_r1["In_Team"]))
 
     # Round 2
     sel_player_df_r2 = player_df_r2.iloc[selected_r2].copy()
     sel_bench_df_r2 = player_df_r2.iloc[benched_r2].copy() if benched_r2 else pd.DataFrame()
     sel_captain_df_r2 = player_df_r2.iloc[captained_r2]
     # In Team Flag
-    sel_names_r1 = player_df_r1.iloc[all_selected_r1]['Name'].astype(str).tolist() if all_selected_r1 else []
-    sel_player_df_r2['In_Team'] = sel_player_df_r2['Name'].astype(str).isin(sel_names_r1).astype(int)
+    # sel_names_r1 = player_df_r1.iloc[all_selected_r1]['Name'].astype(str).tolist() if all_selected_r1 else []
+    # sel_player_df_r2['In_Team'] = sel_player_df_r2['Name'].astype(str).isin(sel_names_r1).astype(int)
     # Add bench flag
     sel_player_df_r2['Is_Bench'] = 0
     if not sel_bench_df_r2.empty:
-        sel_bench_df_r2['In_Team'] = sel_bench_df_r2['Name'].astype(str).isin(sel_names_r1).astype(int)
+        # sel_bench_df_r2['In_Team'] = sel_bench_df_r2['Name'].astype(str).isin(sel_names_r1).astype(int)
         sel_bench_df_r2['Is_Bench'] = 1
         sel_player_df_r2 = pd.concat([sel_player_df_r2, sel_bench_df_r2], ignore_index=True)
     total_cost_r2 = sum(sel_player_df_r2[sel_player_df_r2['Is_Bench'] == 0]["Price"]) + sum(sel_player_df_r2[sel_player_df_r2['Is_Bench'] == 1]["Price"])
@@ -956,11 +941,10 @@ def optimise_fn_efp(
     print("Current Players Remaining (rnd 9):", sum(sel_player_df_r9["In_Team"]))
 
     # Combine Selected Player DataFrames
-    sel_player_df = pd.concat([sel_player_df_r1, sel_player_df_r2, sel_player_df_r3, sel_player_df_r4,
+    sel_player_df = pd.concat([sel_player_df_r2, sel_player_df_r3, sel_player_df_r4,
                                sel_player_df_r5, sel_player_df_r6, sel_player_df_r7,sel_player_df_r8, sel_player_df_r9], ignore_index=True)
 
     print("Total Expected Points:", sum(sel_player_df["exp_rnd_points"]) + 
-                                    sum(sel_captain_df_r1["exp_rnd_points"]) + 
                                     sum(sel_captain_df_r2["exp_rnd_points"]) +
                                     sum(sel_captain_df_r3["exp_rnd_points"]) +
                                     sum(sel_captain_df_r4["exp_rnd_points"]) +
@@ -970,7 +954,7 @@ def optimise_fn_efp(
                                     sum(sel_captain_df_r8["exp_rnd_points"]) +
                                     sum(sel_captain_df_r9["exp_rnd_points"]))
     
-    return sel_player_df, sel_player_df_r1, sel_player_df_r2, sel_player_df_r3, sel_player_df_r4, sel_player_df_r5, sel_player_df_r6, sel_player_df_r7,sel_player_df_r8, sel_player_df_r9
+    return sel_player_df, sel_player_df_r2, sel_player_df_r3, sel_player_df_r4, sel_player_df_r5, sel_player_df_r6, sel_player_df_r7,sel_player_df_r8, sel_player_df_r9
 
 def _run_single_sfp_sim(sim_id, conf_int, lower_z_thresh, upper_z_thresh, current_rnd, player_df_raw, price_df, price_model_obj_1, price_model_obj_2, price_model_obj_3,squad_players, optimise_fn_efp):
     """
