@@ -956,7 +956,7 @@ def optimise_fn_efp(
     
     return sel_player_df, sel_player_df_r2, sel_player_df_r3, sel_player_df_r4, sel_player_df_r5, sel_player_df_r6, sel_player_df_r7,sel_player_df_r8, sel_player_df_r9
 
-def _run_single_sfp_sim(sim_id, conf_int, lower_z_thresh, upper_z_thresh, current_rnd, player_df_raw, price_df, price_model_obj_1, price_model_obj_2, price_model_obj_3,squad_players, optimise_fn_efp):
+def _run_single_sfp_sim(sim_id, conf_int, lower_z_thresh, upper_z_thresh, current_rnd, player_df_raw, price_df, price_model_obj_1, price_model_obj_2, price_model_obj_3, optimise_fn_efp):
     """
     Helper function to run a single simulation.
     Returns: (sim_id, selected_players_df)
@@ -976,9 +976,9 @@ def _run_single_sfp_sim(sim_id, conf_int, lower_z_thresh, upper_z_thresh, curren
 
     # 2. Run Optimisation
         # a. Optimisation Variables Setup
-    points_r1, price_r1, weight_r1, in_team_r1, available_r1, wk_weight_r1, bat_weight_r1, bowl_weight_r1, \
-    play_cnt_r1, total_player_r1, wk_cnt_r1, total_wk_r1, bat_cnt_r1, total_bat_r1, bowl_cnt_r1, total_bowl_r1, \
-    budget_r1, total_budget_r1, player_df_r1, cnt_r1, max_player_r1, \
+    # points_r1, price_r1, weight_r1, in_team_r1, available_r1, wk_weight_r1, bat_weight_r1, bowl_weight_r1, \
+    # play_cnt_r1, total_player_r1, wk_cnt_r1, total_wk_r1, bat_cnt_r1, total_bat_r1, bowl_cnt_r1, total_bowl_r1, \
+    # budget_r1, total_budget_r1, player_df_r1, cnt_r1, max_player_r1, \
     points_r2, price_r2, weight_r2, in_team_r2, available_r2, wk_weight_r2, bat_weight_r2, bowl_weight_r2, \
     play_cnt_r2, total_player_r2, wk_cnt_r2, total_wk_r2, bat_cnt_r2, total_bat_r2, bowl_cnt_r2, total_bowl_r2, \
     budget_r2, total_budget_r2, team_play_cnt_r2, total_team_player_r2, player_df_r2, cnt_r2, max_player_r2, \
@@ -1003,14 +1003,14 @@ def _run_single_sfp_sim(sim_id, conf_int, lower_z_thresh, upper_z_thresh, curren
     points_r9, price_r9, weight_r9, in_team_r9, available_r9, wk_weight_r9, bat_weight_r9, bowl_weight_r9, \
     play_cnt_r9, total_player_r9, wk_cnt_r9, total_wk_r9, bat_cnt_r9, total_bat_r9, bowl_cnt_r9, total_bowl_r9, \
     budget_r9, total_budget_r9, team_play_cnt_r9, total_team_player_r9, player_df_r9, cnt_r9, max_player_r9 =  optimise_setup_fn(
-        player_df_r1, player_df_r2, player_df_r3, player_df_r4, player_df_r5, player_df_r6, player_df_r7, player_df_r8, player_df_r9,squad_players)
+        player_df_r2, player_df_r3, player_df_r4, player_df_r5, player_df_r6, player_df_r7, player_df_r8, player_df_r9)
     
     # b. Run optimization
-    sel_player_df, sel_player_df_r1, sel_player_df_r2, sel_player_df_r3, sel_player_df_r4, sel_player_df_r5, sel_player_df_r6, sel_player_df_r7,sel_player_df_r8, sel_player_df_r9 = optimise_fn_efp(
+    sel_player_df, sel_player_df_r2, sel_player_df_r3, sel_player_df_r4, sel_player_df_r5, sel_player_df_r6, sel_player_df_r7,sel_player_df_r8, sel_player_df_r9 = optimise_fn_efp(
         # Round 1
-        points_r1, price_r1, weight_r1, in_team_r1, available_r1, wk_weight_r1, bat_weight_r1, bowl_weight_r1,
-        play_cnt_r1, total_player_r1, wk_cnt_r1, total_wk_r1, bat_cnt_r1, total_bat_r1, bowl_cnt_r1, total_bowl_r1,
-        budget_r1, total_budget_r1, player_df_r1, cnt_r1, max_player_r1,
+        # points_r1, price_r1, weight_r1, in_team_r1, available_r1, wk_weight_r1, bat_weight_r1, bowl_weight_r1,
+        # play_cnt_r1, total_player_r1, wk_cnt_r1, total_wk_r1, bat_cnt_r1, total_bat_r1, bowl_cnt_r1, total_bowl_r1,
+        # budget_r1, total_budget_r1, player_df_r1, cnt_r1, max_player_r1,
         # Round 2
         points_r2, price_r2, weight_r2, in_team_r2, available_r2, wk_weight_r2, bat_weight_r2, bowl_weight_r2,
         play_cnt_r2, total_player_r2, wk_cnt_r2, total_wk_r2, bat_cnt_r2, total_bat_r2, bowl_cnt_r2, total_bowl_r2,
@@ -1047,32 +1047,33 @@ def _run_single_sfp_sim(sim_id, conf_int, lower_z_thresh, upper_z_thresh, curren
 
     # 3. Store Simulation Results
     # Only store traded in players for storage efficiency
-    sim_sel_players = sel_player_df_r1[['Name']][sel_player_df_r1['In_Team'] == 0]
+    # sim_sel_players = sel_player_df_r2[['Name']][sel_player_df_r2['In_Team'] == 0]
+    sim_sel_players = sel_player_df_r2[['Name']]
     sim_sel_players['Simulation'] = sim_id + 1
 
     # Drop dataframes to free up memory
-    del player_df_init, sel_player_df_r1, sel_player_df_r2, sel_player_df_r3, sel_player_df_r4, sel_player_df_r5
+    del player_df_init, sel_player_df_r2, sel_player_df_r3, sel_player_df_r4, sel_player_df_r5
     del sel_player_df_r6, sel_player_df_r7, sel_player_df_r8, sel_player_df_r9, sel_player_df
-    del price_r1, price_r2, price_r3, price_r4, price_r5, price_r6, price_r7, price_r8, price_r9
-    del weight_r1, weight_r2, weight_r3, weight_r4, weight_r5, weight_r6, weight_r7, weight_r8, weight_r9
-    del in_team_r1, in_team_r2, in_team_r3, in_team_r4, in_team_r5, in_team_r6, in_team_r7, in_team_r8, in_team_r9
-    del available_r1, available_r2, available_r3, available_r4, available_r5, available_r6, available_r7, available_r8, available_r9
-    del wk_weight_r1, wk_weight_r2, wk_weight_r3, wk_weight_r4, wk_weight_r5, wk_weight_r6, wk_weight_r7, wk_weight_r8, wk_weight_r9
-    del bat_weight_r1, bat_weight_r2, bat_weight_r3, bat_weight_r4, bat_weight_r5, bat_weight_r6, bat_weight_r7, bat_weight_r8, bat_weight_r9
-    del bowl_weight_r1, bowl_weight_r2, bowl_weight_r3, bowl_weight_r4, bowl_weight_r5, bowl_weight_r6, bowl_weight_r7, bowl_weight_r8, bowl_weight_r9
-    del play_cnt_r1, play_cnt_r2, play_cnt_r3, play_cnt_r4, play_cnt_r5, play_cnt_r6, play_cnt_r7, play_cnt_r8, play_cnt_r9
-    del budget_r1, budget_r2, budget_r3, budget_r4, budget_r5, budget_r6, budget_r7, budget_r8, budget_r9
-    del total_player_r1, total_player_r2, total_player_r3, total_player_r4, total_player_r5, total_player_r6, total_player_r7, total_player_r8, total_player_r9
-    del total_budget_r1, total_budget_r2, total_budget_r3, total_budget_r4, total_budget_r5, total_budget_r6, total_budget_r7, total_budget_r8, total_budget_r9
+    del price_r2, price_r3, price_r4, price_r5, price_r6, price_r7, price_r8, price_r9
+    del weight_r2, weight_r3, weight_r4, weight_r5, weight_r6, weight_r7, weight_r8, weight_r9
+    del in_team_r2, in_team_r3, in_team_r4, in_team_r5, in_team_r6, in_team_r7, in_team_r8, in_team_r9
+    del available_r2, available_r3, available_r4, available_r5, available_r6, available_r7, available_r8, available_r9
+    del wk_weight_r2, wk_weight_r3, wk_weight_r4, wk_weight_r5, wk_weight_r6, wk_weight_r7, wk_weight_r8, wk_weight_r9
+    del bat_weight_r2, bat_weight_r3, bat_weight_r4, bat_weight_r5, bat_weight_r6, bat_weight_r7, bat_weight_r8, bat_weight_r9
+    del bowl_weight_r2, bowl_weight_r3, bowl_weight_r4, bowl_weight_r5, bowl_weight_r6, bowl_weight_r7, bowl_weight_r8, bowl_weight_r9
+    del play_cnt_r2, play_cnt_r3, play_cnt_r4, play_cnt_r5, play_cnt_r6, play_cnt_r7, play_cnt_r8, play_cnt_r9
+    del budget_r2, budget_r3, budget_r4, budget_r5, budget_r6, budget_r7, budget_r8, budget_r9
+    del total_player_r2, total_player_r3, total_player_r4, total_player_r5, total_player_r6, total_player_r7, total_player_r8, total_player_r9
+    del total_budget_r2, total_budget_r3, total_budget_r4, total_budget_r5, total_budget_r6, total_budget_r7, total_budget_r8, total_budget_r9
     del team_play_cnt_r2, team_play_cnt_r3, team_play_cnt_r4, team_play_cnt_r5, team_play_cnt_r6, team_play_cnt_r7, team_play_cnt_r8, team_play_cnt_r9
     del total_team_player_r2, total_team_player_r3, total_team_player_r4, total_team_player_r5, total_team_player_r6, total_team_player_r7, total_team_player_r8, total_team_player_r9
-    del points_r1, points_r2, points_r3, points_r4, points_r5, points_r6, points_r7, points_r8, points_r9
-    del player_df_r1, player_df_r2, player_df_r3, player_df_r4, player_df_r5, player_df_r6, player_df_r7, player_df_r8, player_df_r9
+    del points_r2, points_r3, points_r4, points_r5, points_r6, points_r7, points_r8, points_r9
+    del player_df_r2, player_df_r3, player_df_r4, player_df_r5, player_df_r6, player_df_r7, player_df_r8, player_df_r9
 
     return sim_sel_players
 
 
-def optimise_fn_sim_fp(conf_int, sim_num, current_rnd, player_df_raw, price_df, price_model_obj_1, price_model_obj_2, price_model_obj_3, squad_players, use_parallel=True):
+def optimise_fn_sim_fp(conf_int, sim_num, current_rnd, player_df_raw, price_df, price_model_obj_1, price_model_obj_2, price_model_obj_3, use_parallel=True):
     # Run Optimisation Process for Specified Number of Simulations
     # Import Packages
     from scipy.stats import norm
@@ -1108,7 +1109,7 @@ def optimise_fn_sim_fp(conf_int, sim_num, current_rnd, player_df_raw, price_df, 
                     _run_single_sfp_sim,
                     i, conf_int, lower_z_thresh, upper_z_thresh, current_rnd, 
                     player_df_raw, price_df, price_model_obj_1, price_model_obj_2, 
-                    price_model_obj_3,squad_players, optimise_fn_efp
+                    price_model_obj_3, optimise_fn_efp
                 )
                 for i in range(sim_num)
             ]
@@ -1132,7 +1133,7 @@ def optimise_fn_sim_fp(conf_int, sim_num, current_rnd, player_df_raw, price_df, 
             sim_result = _run_single_sfp_sim(
                 i, conf_int, lower_z_thresh, upper_z_thresh, current_rnd,
                 player_df_raw, price_df, price_model_obj_1, price_model_obj_2,
-                price_model_obj_3,squad_players, optimise_fn_efp
+                price_model_obj_3, optimise_fn_efp
             )
             all_sim_sel_players = pd.concat([all_sim_sel_players, sim_result], ignore_index=True)
             # Print progress every 10 simulations
