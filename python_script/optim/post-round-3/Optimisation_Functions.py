@@ -97,7 +97,17 @@ def roll_rnd_price_fn(player_df_init, price_df, current_rnd,
             if i + 1 < len(grp_sorted):
                 next_idx = grp_sorted.index[i + 1]
                 player_df_lags.at[next_idx, 'price_pre'] = pred
-                
+
+    # Drop intermediary columns
+    player_df_lags = player_df_lags[['Name', 'Round', 'Price_Pred']]
+
+    # Create additional rows for players who do not play in every round
+    all_rounds = list(range(int(current_rnd), int(player_df_lags['Round'].max()) + 1))
+    all_players = player_df_lags['Name'].unique()
+    full_index = pd.MultiIndex.from_product([all_players, all_rounds], names=['Name', 'Round'])
+    player_df_lags = player_df_lags.set_index(['Name', 'Round']).reindex(full_index).reset_index()
+    player_df_lags['Price_Pred'] = player_df_lags['Price_Pred'].ffill()
+
     # b. Build price dataframe with rolling predictions
     player_df_new_list = []
 
@@ -145,11 +155,26 @@ def roll_rnd_price_fn(player_df_init, price_df, current_rnd,
     all_players = player_df['Name'].unique()
     full_index = pd.MultiIndex.from_product([all_players, all_rounds], names=['Name', 'Round'])
     player_df = player_df.set_index(['Name', 'Round']).reindex(full_index).reset_index()
-    player_df['Price'] = player_df['Price'].ffill()
-    player_df['Team'] = player_df['Team'].ffill()
-    player_df['Wk_f'] = player_df['Wk_f'].ffill()
-    player_df['Bat_f'] = player_df['Bat_f'].ffill()
-    player_df['Bowl_f'] = player_df['Bowl_f'].ffill()
+
+    # For current round, fill missing Price and Team from player_df_init_2
+    curr_rnd_lookup = player_df_init_2[player_df_init_2['Round'] == 1][['Name', 'Team', 'Price','Wk_f','Bat_f','Bowl_f','Role','weight','In_Team']].drop_duplicates()
+    player_df = player_df.merge(curr_rnd_lookup, on='Name', how='left', suffixes=('', '_curr'))
+    player_df.loc[player_df['Round'] == current_rnd, 'Price'] = player_df.loc[player_df['Round'] == current_rnd, 'Price_curr'].fillna(player_df.loc[player_df['Round'] == current_rnd, 'Price'])
+    player_df.loc[player_df['Round'] == current_rnd, 'Team'] = player_df.loc[player_df['Round'] == current_rnd, 'Team_curr'].fillna(player_df.loc[player_df['Round'] == current_rnd, 'Team'])
+    player_df.loc[player_df['Round'] == current_rnd, 'Wk_f'] = player_df.loc[player_df['Round'] == current_rnd, 'Wk_f_curr'].fillna(player_df.loc[player_df['Round'] == current_rnd, 'Wk_f'])
+    player_df.loc[player_df['Round'] == current_rnd, 'Bat_f'] = player_df.loc[player_df['Round'] == current_rnd, 'Bat_f_curr'].fillna(player_df.loc[player_df['Round'] == current_rnd, 'Bat_f'])
+    player_df.loc[player_df['Round'] == current_rnd, 'Bowl_f'] = player_df.loc[player_df['Round'] == current_rnd, 'Bowl_f_curr'].fillna(player_df.loc[player_df['Round'] == current_rnd, 'Bowl_f'])
+    player_df.loc[player_df['Round'] == current_rnd, 'Role'] = player_df.loc[player_df['Round'] == current_rnd, 'Role_curr'].fillna(player_df.loc[player_df['Round'] == current_rnd, 'Role'])
+    player_df.loc[player_df['Round'] == current_rnd, 'weight'] = player_df.loc[player_df['Round'] == current_rnd, 'weight_curr'].fillna(player_df.loc[player_df['Round'] == current_rnd, 'weight'])
+    player_df.loc[player_df['Round'] == current_rnd, 'In_Team'] = player_df.loc[player_df['Round'] == current_rnd, 'In_Team_curr'].fillna(player_df.loc[player_df['Round'] == current_rnd, 'In_Team'])
+    player_df = player_df.drop(columns=['Price_curr', 'Team_curr', 'Wk_f_curr', 'Bat_f_curr', 'Bowl_f_curr', 'Role_curr', 'weight_curr', 'In_Team_curr'])
+
+    # Fill missing values within each player's data (not across players)
+    player_df['Price'] = player_df.groupby('Name')['Price'].ffill()
+    player_df['Team'] = player_df.groupby('Name')['Team'].ffill()
+    player_df['Wk_f'] = player_df.groupby('Name')['Wk_f'].ffill()
+    player_df['Bat_f'] = player_df.groupby('Name')['Bat_f'].ffill()
+    player_df['Bowl_f'] = player_df.groupby('Name')['Bowl_f'].ffill()
     player_df['Role'] = player_df['Role'].ffill()
     player_df['weight'] = player_df['weight'].ffill()
     player_df['exp_rnd_points'] = player_df['exp_rnd_points'].fillna(-100)
@@ -409,13 +434,13 @@ def optimise_fn_efp(
     #     m += x_r1[i] == int(in_team_r2.iloc[i])
     # p_r1 = [m.add_var(var_type=BINARY) for i in total_player_r1]  # Playing (12)
     # y_r1 = [m.add_var(var_type=BINARY) for i in total_player_r1]  # Captain (1)
-    # Round 2 - (Previous Round)
+    # Round 2 - (Round Completed)
     # x_r2 = [m.add_var(var_type=BINARY) for i in total_player_r3]  # Selected (15)
     # for i in total_player_r3:
     #     m += x_r2[i] == int(in_team_r3.iloc[i])
     # p_r2 = [m.add_var(var_type=BINARY) for i in total_player_r2] # Playing (12)
     # y_r2 = [m.add_var(var_type=BINARY) for i in total_player_r2] # Captain (1)
-    # Round 3
+    # Round 3 (Previous Round)
     x_r3 = [m.add_var(var_type=BINARY) for i in total_player_r4] # Selected (15)
     for i in total_player_r4:
         m += x_r3[i] == int(in_team_r4.iloc[i])
