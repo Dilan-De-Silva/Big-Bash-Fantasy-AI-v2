@@ -1101,7 +1101,7 @@ def optimise_fn_sim_fp(conf_int, sim_num, current_rnd, sim_budget, player_df_raw
 
     if use_parallel:
         # Run simulations in parallel
-        max_workers = min(10, sim_num)  # Reduced from 15 to avoid memory issues
+        max_workers = min(15, sim_num)  # Reduced from 15 to avoid memory issues
         with ProcessPoolExecutor(max_workers=max_workers) as executor:
             futures = [
                 executor.submit(
