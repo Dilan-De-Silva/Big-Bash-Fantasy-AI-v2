@@ -1013,7 +1013,7 @@ def _run_single_sfp_sim(sim_id, conf_int, lower_z_thresh, upper_z_thresh, curren
     points_r9, price_r9, weight_r9, in_team_r9, available_r9, wk_weight_r9, bat_weight_r9, bowl_weight_r9, \
     play_cnt_r9, total_player_r9, wk_cnt_r9, total_wk_r9, bat_cnt_r9, total_bat_r9, bowl_cnt_r9, total_bowl_r9, \
     budget_r9, total_budget_r9, team_play_cnt_r9, total_team_player_r9, player_df_r9, cnt_r9, max_player_r9 =  optimise_setup_fn(
-        player_df_r3, player_df_r4, player_df_r5, player_df_r6, player_df_r7, player_df_r8, player_df_r9, sim_budget)
+        player_df_r4, player_df_r5, player_df_r6, player_df_r7, player_df_r8, player_df_r9, sim_budget)
     
     # b. Run optimization
     sel_player_df, sel_player_df_r4, sel_player_df_r5, sel_player_df_r6, sel_player_df_r7,sel_player_df_r8, sel_player_df_r9 = optimise_fn_efp(
@@ -1080,7 +1080,6 @@ def _run_single_sfp_sim(sim_id, conf_int, lower_z_thresh, upper_z_thresh, curren
     del points_r4, points_r5, points_r6, points_r7, points_r8, points_r9
     del player_df_r4, player_df_r5, player_df_r6, player_df_r7, player_df_r8, player_df_r9
     return sim_sel_players
-
 
 def optimise_fn_sim_fp(conf_int, sim_num, current_rnd, sim_budget, player_df_raw, price_df, price_model_obj_1, price_model_obj_2, price_model_obj_3, use_parallel=True):
     # Run Optimisation Process for Specified Number of Simulations

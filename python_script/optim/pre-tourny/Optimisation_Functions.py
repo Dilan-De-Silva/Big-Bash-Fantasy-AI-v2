@@ -973,6 +973,7 @@ def _run_single_sfp_sim(sim_id, conf_int, lower_z_thresh, upper_z_thresh, curren
     player_df_init = player_df_init.rename(columns={"sim_points":"exp_points"})
     player_df_init = player_df_init.drop(columns=["mean", "std_dev", "z_score"])
 
+    # b. Calculate player prices for each round
     player_df_r1, player_df_r2, player_df_r3, player_df_r4, player_df_r5, player_df_r6, player_df_r7, player_df_r8, player_df_r9 = roll_rnd_price_fn(player_df_init, price_df, current_rnd, price_model_obj_1, price_model_obj_2, price_model_obj_3)
 
     # 2. Run Optimisation

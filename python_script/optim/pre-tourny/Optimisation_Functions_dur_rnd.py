@@ -1,4 +1,5 @@
-# Optimisation Functions
+# Optimisation Functions 
+# 10 Additional lines for During Round Specific Optimisation
 # Imports
 import pandas as pd
 import numpy as np
@@ -141,8 +142,8 @@ def roll_rnd_price_fn(player_df_init, price_df, current_rnd,
     player_df['games_in_round'] = player_df['games_in_round'].fillna(0)
     player_df['Available'] = np.where(player_df['exp_rnd_points'] == -100, 0, player_df['Available'])
     player_df['In_Team'] = player_df['In_Team'].ffill()
-    player_df['On_Bench'] = player_df['On_Bench'].ffill()
-
+    player_df['On_Bench'] = player_df['On_Bench'].ffill() # -------------- During Rnd Specific Change ---------------
+    
     # Split player df by round
     player_dfs = {i: player_df[player_df['Round'] == i].reset_index(drop=True) for i in range(1, 10)}
     player_df_r1, player_df_r2, player_df_r3 = player_dfs[1], player_dfs[2], player_dfs[3]
@@ -155,18 +156,16 @@ def roll_rnd_price_fn(player_df_init, price_df, current_rnd,
     # Return player dfs for each round
     return player_df_r1, player_df_r2, player_df_r3, player_df_r4, player_df_r5, player_df_r6, player_df_r7, player_df_r8, player_df_r9
     
-
 # Optimisation Setup Function
 def optimise_setup_fn(
         player_df_r1, player_df_r2, player_df_r3, player_df_r4, player_df_r5, player_df_r6, player_df_r7, player_df_r8, player_df_r9,squad_players
 ):
-        # a. EFP Optimisation Variables Setup
     # Round 1
     points_r1 = player_df_r1["exp_rnd_points"]
     price_r1 = player_df_r1["Price"]
     weight_r1 = player_df_r1["weight"]
-    in_team_r1 = player_df_r1["In_Team"]
-    on_bench_r1 = player_df_r1["On_Bench"]
+    in_team_r1 = player_df_r1["In_Team"] 
+    on_bench_r1 = player_df_r1["On_Bench"] # -------------- During Rnd Specific Change ---------------
     available_r1 = player_df_r1["Available"]
     wk_weight_r1 = player_df_r1["Wk_f"]
     bat_weight_r1 = player_df_r1["Bat_f"]
@@ -346,7 +345,8 @@ def optimise_setup_fn(
 # EFP Optimisation Function
 def optimise_fn_efp(
         # Round 1
-        points_r1, price_r1, weight_r1, in_team_r1, on_bench_r1, available_r1, wk_weight_r1, bat_weight_r1, bowl_weight_r1,
+        points_r1, price_r1, weight_r1, in_team_r1, on_bench_r1, # -------------- During Rnd Specific Change ---------------
+        available_r1, wk_weight_r1, bat_weight_r1, bowl_weight_r1,
         play_cnt_r1, total_player_r1, wk_cnt_r1, total_wk_r1, bat_cnt_r1, total_bat_r1, bowl_cnt_r1, total_bowl_r1,
         budget_r1, total_budget_r1, player_df_r1, cnt_r1, max_player_r1,  
         # Round 2
@@ -562,9 +562,9 @@ def optimise_fn_efp(
     for i in total_player_r9:
         m += p_r9[i] <= x_r9[i]
         m += y_r9[i] <= p_r9[i]
-
+    
     # Current team constraints - all in team players must be selected, bench players must be benched
-    for i in total_player_r1:
+    for i in total_player_r1: # -------------- During Rnd Specific Change ---------------
         if in_team_r1[i] == 1:
             m += x_r1[i] == 1  # All in-team players must be selected
         if on_bench_r1[i] == 1:
