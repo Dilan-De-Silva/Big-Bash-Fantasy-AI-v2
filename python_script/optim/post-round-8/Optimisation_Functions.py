@@ -509,8 +509,8 @@ def optimise_fn_efp(
             # If Trade Boost is used, allow 11 players from previous round, else allow 12
             m += xsum(z_rnd[(i, j)] for (i, j) in z_rnd.keys()) >= team_min - extra_trade
 
-    # Only One (One Used) Trade Boost Left in season
-    m += xsum(extra_trade_vars for extra_trade_vars in extra_trade_vars) <= 1 
+    # No (Two Used) Trade Boost Left in season
+    m += xsum(extra_trade_vars for extra_trade_vars in extra_trade_vars) == 0 
 
     # b. define objective function
     # Only playing players (p) contribute points; bench player (x=1, p=0) contributes 0 automatically
@@ -521,7 +521,7 @@ def optimise_fn_efp(
     # obj_r5 = xsum(points_r5[i]*p_r5[i] + points_r5[i]*y_r5[i] for i in total_player_r5)
     # obj_r6 = xsum(points_r6[i]*p_r6[i] + points_r6[i]*y_r6[i] for i in total_player_r6)
     # obj_r7 = xsum(points_r7[i]*p_r7[i] + points_r7[i]*y_r7[i] for i in total_player_r7)
-    obj_r8 = xsum(points_r8[i]*p_r8[i] + points_r8[i]*y_r8[i] for i in total_player_r8)
+    # obj_r8 = xsum(points_r8[i]*p_r8[i] + points_r8[i]*y_r8[i] for i in total_player_r8)
     obj_r9 = xsum(points_r9[i]*p_r9[i] + points_r9[i]*y_r9[i] for i in total_player_r9)
 
     m.objective = maximize(obj_r8 + obj_r9)
@@ -560,9 +560,9 @@ def optimise_fn_efp(
     # m += xsum(weight_r7[i] * p_r7[i] for i in total_player_r7) == play_cnt_r7 # 12 playing players
     # m += xsum(y_r7[i] for i in total_player_r7) == 1 # Only one captain
     # Round 8
-    m += xsum(x_r8[i] for i in total_player_r8) == cnt_r8
-    m += xsum(weight_r8[i] * p_r8[i] for i in total_player_r8) == play_cnt_r8 # 12 playing players
-    m += xsum(y_r8[i] for i in total_player_r8) == 1 # Only one captain
+    # m += xsum(x_r8[i] for i in total_player_r8) == cnt_r8
+    # m += xsum(weight_r8[i] * p_r8[i] for i in total_player_r8) == play_cnt_r8 # 12 playing players
+    # m += xsum(y_r8[i] for i in total_player_r8) == 1 # Only one captain
     # Round 9
     m += xsum(x_r9[i] for i in total_player_r9) == cnt_r9
     m += xsum(weight_r9[i] * p_r9[i] for i in total_player_r9) == play_cnt_r9 # 12 playing players
@@ -590,9 +590,9 @@ def optimise_fn_efp(
     # for i in total_player_r7:
     #     m += p_r7[i] <= x_r7[i]
     #     m += y_r7[i] <= p_r7[i]
-    for i in total_player_r8:
-        m += p_r8[i] <= x_r8[i]
-        m += y_r8[i] <= p_r8[i]
+    # for i in total_player_r8:
+    #     m += p_r8[i] <= x_r8[i]
+    #     m += y_r8[i] <= p_r8[i]
     for i in total_player_r9:
         m += p_r9[i] <= x_r9[i]
         m += y_r9[i] <= p_r9[i]

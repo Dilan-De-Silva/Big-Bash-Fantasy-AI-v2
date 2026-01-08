@@ -509,8 +509,8 @@ def optimise_fn_efp(
             # If Trade Boost is used, allow 11 players from previous round, else allow 12
             m += xsum(z_rnd[(i, j)] for (i, j) in z_rnd.keys()) >= team_min - extra_trade
 
-    # Only One (One Used) Trade Boost Left in season
-    m += xsum(extra_trade_vars for extra_trade_vars in extra_trade_vars) <= 1 
+    # No (Two Used) Trade Boost Left in season
+    m += xsum(extra_trade_vars for extra_trade_vars in extra_trade_vars) == 0 
 
     # b. define objective function
     # Only playing players (p) contribute points; bench player (x=1, p=0) contributes 0 automatically
