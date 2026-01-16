@@ -524,7 +524,7 @@ def optimise_fn_efp(
     # obj_r8 = xsum(points_r8[i]*p_r8[i] + points_r8[i]*y_r8[i] for i in total_player_r8)
     obj_r9 = xsum(points_r9[i]*p_r9[i] + points_r9[i]*y_r9[i] for i in total_player_r9)
 
-    m.objective = maximize(obj_r8 + obj_r9)
+    m.objective = maximize(obj_r9)
     
     # c. define constraints
         # Player selection constraints
@@ -960,7 +960,18 @@ def _run_single_sfp_sim(sim_id, conf_int, lower_z_thresh, upper_z_thresh, curren
     player_df_init = player_df_init.rename(columns={"sim_points":"exp_points"})
     player_df_init = player_df_init.drop(columns=["mean", "std_dev", "z_score"])
 
-    player_df_r1, player_df_r2, player_df_r3, player_df_r4, player_df_r5, player_df_r6, player_df_r7, player_df_r8, player_df_r9 = roll_rnd_price_fn(player_df_init, price_df, current_rnd, price_model_obj_1, price_model_obj_2, price_model_obj_3)
+    # Manual Adjustments for Round 9 (Hobart Hurricanes Bye in Round 8)
+    player_df_raw_r9 = player_df_init[(player_df_init["Round"] == 9) | ((player_df_init["Team"] == "Hobart Hurricanes") & (player_df_init["Round"] == 8))]
+    player_df_raw_r9["Round"] = np.where((player_df_raw_r9["Team"] == "Hobart Hurricanes") & (player_df_raw_r9["Round"] == 8), 9, player_df_raw_r9["Round"])
+    player_df_raw_r9["exp_points"] = np.where((player_df_raw_r9["Team"] == "Hobart Hurricanes") & (player_df_raw_r9["Round"] == 9), -100, player_df_raw_r9["exp_points"])
+    
+    player_df_raw_r9 = player_df_raw_r9[["Name", "Round", "Price", "Team", "Role", "Wk_f", "Bat_f", "Bowl_f", "Available", "In_Team", "exp_points", "weight"]]
+    player_df_r9 = player_df_raw_r9.groupby(["Name", "Round", "Price", "Team", "Role", "Wk_f", "Bat_f", "Bowl_f", "Available", "In_Team", "weight"]).agg(
+        exp_rnd_points = ("exp_points", "sum"),
+        games_in_round = ("Round", "count")).reset_index()
+
+    # Player price change not required as final round of tournament
+    # player_df_r1, player_df_r2, player_df_r3, player_df_r4, player_df_r5, player_df_r6, player_df_r7, player_df_r8, player_df_r9 = roll_rnd_price_fn(player_df_init, price_df, current_rnd, price_model_obj_1, price_model_obj_2, price_model_obj_3)
 
     # 2. Run Optimisation
         # a. Optimisation Variables Setup
