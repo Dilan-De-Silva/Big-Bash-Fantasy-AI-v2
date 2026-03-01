@@ -13,14 +13,17 @@ This is my project repository for my second iteration of my Big Bash League (BBL
 ![](strategy/Results/Overall/ChrisLynnTheorem/league_table.png)
 
 ## AI Team Build
+### Overall Decision Making System
+![](strategy/full_tourny_system.png)
 
+### Data Collection
+- **Raw Previous Season Data:** Extracted ball by ball BBL data from Cricsheet (https://cricsheet.org/downloads/) for each game in BBL01 to BBL13 which was stored in a single CSV file. Special thank you and shout out to Stephen Rushe of Cricsheet for creating this amazing dataset, which I have leveraged primarily for this project!
 
-### Data Collection & Manipulation
-- **Raw Data:** Extracted ball by ball BBL data from Cricsheet (https://cricsheet.org/downloads/) for each game in BBL01 to BBL13 which was stored in a single CSV file. Special thank you and shout out to Stephen Rushe of Cricsheet for creating this amazing dataset, which I have leveraged primarily for this project!
+- **Raw Current Season Data:** Collected by yours truly, every morning after the BBL game, I collected the data manually from the BBL Supercoach for player points and price data and from cricinfo for traditional batting and bowling data attributes.
 
-- **Venue Name Clean Up:** As the raw data includes over 13 seasons of BBL matches, the names of many venues have changed over the years. To build accurate venue trends, the collection of names for each venue was grouped and relabelled to a standard name.
+- **Null & Missing Data:** Many rows in the data had some of the columns missing values or nulls. This was mainly tackled by overriding these fields as 0, which is appropriate as most variables lower limit is 0.
 
-- **Null & Missing Data:** Many rows in the data had some of the columns missing values or nulls. This was mainly tackled by overriding these fields as 0, which is appropriate as most variables lower limit is 0. 
+- **Exclusion
 
 ### Response Variable and Explanatory Feature Creation
 - **Response Variable:** Number of Fantasy Points (Bowling + Batting) the player will get in the game. As the raw data did not include individual fielding statistics, these points were added separately in the optimisation.
