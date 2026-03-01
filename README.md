@@ -3,14 +3,21 @@
 ## Welcome
 This is my project repository for my second iteration of my Big Bash League (BBL) AI Fantasy Team. By leveraging the ball by ball data of each match from the previous ten BBL seasons, I created a sophisticated decision making AIML system which leverages a bespoke optimisation process and several ML forecasting models to select my initial 15 player squad prior to the start of the tournament and to identify the optimal player trades for each of the 9 rounds during the season.
 
+[
+Champion Model](#champion-model) | [Challenger Model](#challenger-model)
+
 ## AI Team Performance
-### Individual Performance
+### Champion Model
+#### Individual Performance
 ![](strategy/Results/Round-9/ChrisLynnTheorem/Team%20Summary.png)
 
 ![](strategy/Results/Overall/ChrisLynnTheorem/history_table.png)
 
-### League Performance
+#### League Performance
 ![](strategy/Results/Overall/ChrisLynnTheorem/league_table.png)
+
+### Challenger Model
+_Coming soon._
 
 ## AI Team Build
 ### Overall Decision Making System
