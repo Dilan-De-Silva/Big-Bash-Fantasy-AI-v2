@@ -1,16 +1,16 @@
-![](strategy/Results/readme/project%20banner.png)
+![](strategy/Results/readme/project-banner.png)
 
 ## Welcome
 This is my project repository for my second iteration of my Big Bash League (BBL) AI Fantasy Team. By leveraging the ball by ball data of each match from the previous ten BBL seasons, I created a sophisticated decision making AIML system which leverages a bespoke optimisation process and several ML forecasting models to select my initial 15 player squad prior to the start of the tournament and to identify the optimal player trades for each of the 9 rounds during the season.
 
 ## AI Team Performance
 ### Individual Performance
-![](strategy\Results\Round-9\ChrisLynnTheorem\Team Summary.png)
+![](strategy/Results/Round-9/ChrisLynnTheorem/Team%20Summary.png)
 
-![](strategy\Results\Overall\ChrisLynnTheorem\history_table.png)
+![](strategy/Results/Overall/ChrisLynnTheorem/history_table.png)
 
 ### League Performance
-![](strategy\Results\Overall\ChrisLynnTheorem\league_table.png)
+![](strategy/Results/Overall/ChrisLynnTheorem/league_table.png)
 
 ## AI Team Build
 
@@ -60,12 +60,12 @@ Team Rank
 ## Tournament Overview
 
 ### <ins>Round 1</ins>
-![](strategy\Results\Round-1\ChrisLynnTheorem\Team Summary.png)
+![](strategy/Results/Round-1/ChrisLynnTheorem/Team%20Summary.png)
 - AI Captain: Beau Webster (132 points - 17.93%)
 
 **Selected Team**
 
-![](strategy\Results\Round-1\ChrisLynnTheorem\Team Performance.png)
+![](strategy/Results/Round-1/ChrisLynnTheorem/Team%20Performance.png)
 
 **Champion vs Challenger vs Semi-Pro Result**
 
@@ -79,12 +79,12 @@ Team Rank
 | H.Thornton | 106            | B.Couch    |
 | P.Walter   | 44             | C.Lynn     |
 
-![](strategy\Results\Round-2\ChrisLynnTheorem\Team Summary.png)
+![](strategy/Results/Round-2/ChrisLynnTheorem/Team%20Summary.png)
 - AI Captain: Matt Short (230 points - 20.05%)
 
 **Selected Team**
 
-![](strategy\Results\Round-2\ChrisLynnTheorem\Team Performance.png)
+![](strategy/Results/Round-2/ChrisLynnTheorem/Team%20Performance.png)
 
 **Champion vs Challenger vs Semi-Pro Result**
 
@@ -98,12 +98,12 @@ Team Rank
 | H.Kerr     | 104            | H.Cartwright  |
 | M.Stoinis  | 51             | B.Webster     |
 
-![](strategy\Results\Round-3\ChrisLynnTheorem\Team Summary.png)
+![](strategy/Results/Round-3/ChrisLynnTheorem/Team%20Summary.png)
 - AI Captain: Jack Edwards (24 points - 2.93%)
 
 **Selected Team**
 
-![](strategy\Results\Round-3\ChrisLynnTheorem\Team Performance.png)
+![](strategy/Results/Round-3/ChrisLynnTheorem/Team%20Performance.png)
 
 **Champion vs Challenger vs Semi-Pro Result**
 
@@ -116,12 +116,12 @@ Team Rank
 | F.O'Niell    | 16             | M.Short    |
 | W.Sutherland | 66             | P.Walter   |
 
-![](strategy\Results\Round-4\ChrisLynnTheorem\Team Summary.png)
+![](strategy/Results/Round-4/ChrisLynnTheorem/Team%20Summary.png)
 - AI Captain: Jamie Overton (142 points - 18.56%)
 
 **Selected Team**
 
-![](strategy\Results\Round-4\ChrisLynnTheorem\Team Performance.png)
+![](strategy/Results/Round-4/ChrisLynnTheorem/Team%20Performance.png)
 
 **Champion vs Challenger vs Semi-Pro Result**
 
@@ -135,12 +135,12 @@ Team Rank
 | L.Ferguson | 8              | S.Konstas   |
 | *D.Sams*   | *15*           | *F.O'Niell* |
 
-![](strategy\Results\Round-5\ChrisLynnTheorem\Team Summary.png)
+![](strategy/Results/Round-5/ChrisLynnTheorem/Team%20Summary.png)
 - AI Captain: Henry Thornton (54 points - 14.83%)
 
 **Selected Team**
 
-![](strategy\Results\Round-5\ChrisLynnTheorem\Team Performance.png)
+![](strategy/Results/Round-5/ChrisLynnTheorem/Team%20Performance.png)
 
 **Champion vs Challenger vs Semi-Pro Result**
 
@@ -154,12 +154,12 @@ Team Rank
 | G.Sandhu   | 19             | D.Sams       |
 | *D.Warner* | *70*           | *H.Thornton* |
 
-![](strategy\Results\Round-6\ChrisLynnTheorem\Team Summary.png)
+![](strategy/Results/Round-6/ChrisLynnTheorem/Team%20Summary.png)
 - AI Captain: Wes Agar (48 points - 7.21%)
 
 **Selected Team**
 
-![](strategy\Results\Round-6\ChrisLynnTheorem\Team Performance.png)
+![](strategy/Results/Round-6/ChrisLynnTheorem/Team%20Performance.png)
 
 **Champion vs Challenger vs Semi-Pro Result**
 
@@ -172,12 +172,12 @@ Team Rank
 | C.Jordan    | 48             | G.Sandhu     |
 | B.McDermott | 0              | M.Stoinis    |
 
-![](strategy\Results\Round-7\ChrisLynnTheorem\Team Summary.png)
+![](strategy/Results/Round-7/ChrisLynnTheorem/Team%20Summary.png)
 - AI Captain: Will Sunderland (90 points - 16.89%)
 
 **Selected Team**
 
-![](strategy\Results\Round-7\ChrisLynnTheorem\Team Performance.png)
+![](strategy/Results/Round-7/ChrisLynnTheorem/Team%20Performance.png)
 
 **Champion vs Challenger vs Semi-Pro Result**
 
@@ -190,12 +190,12 @@ Team Rank
 | M.Owen     | 219            | G.McDermott  |
 | B.Stanlake | 13             | P.Siddle     |
 
-![](strategy\Results\Round-8\ChrisLynnTheorem\Team Summary.png)
+![](strategy/Results/Round-8/ChrisLynnTheorem/Team%20Summary.png)
 - AI Captain: Peter Hatzoglou (22 points - 2.74%)
 
 **Selected Team**
 
-![](strategy\Results\Round-8\ChrisLynnTheorem\Team Performance.png)
+![](strategy/Results/Round-8/ChrisLynnTheorem/Team%20Performance.png)
 
 **Champion vs Challenger vs Semi-Pro Result**
 
@@ -209,12 +209,12 @@ Team Rank
 | M.Neser    | 42             | B.Stanlake   |
 | T.Rogers   | 30             | D.Warner     |
 
-![](strategy\Results\Round-9\ChrisLynnTheorem\Team Summary.png)
+![](strategy/Results/Round-9/ChrisLynnTheorem/Team%20Summary.png)
 - AI Captain: Nathan Ellis (178 points - 27.22%)
 
 **Selected Team**
 
-![](strategy\Results\Round-9\ChrisLynnTheorem\Team Performance.png)
+![](strategy/Results/Round-9/ChrisLynnTheorem/Team%20Performance.png)
 
 **Champion vs Challenger vs Semi-Pro Result**
 
