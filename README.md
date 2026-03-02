@@ -24,7 +24,7 @@ Majority of the process will be the same for the Champion and Challenger strateg
 #### Champion System
 ![](strategy/full_tourny_system_champion.png)
 
-#### Champion System
+#### Challenger System
 ![](strategy/full_tourny_system_challenger.png)
 
 ### Data Collection
@@ -92,9 +92,10 @@ Majority of the process will be the same for the Champion and Challenger strateg
 - Before the start of the tournament, the AI team decided to select Will Sunderland the captain of the Melbourne Renegades in preparation for their double gameweek in round 8. The optimisation understood the difficulty of this round and decided to stock one additional player from the start!
 
 #### 2. Leveraging the Bench!
-- Before the start of the tournament, the AI team decided to select Will Sunderland the captain of the Melbourne Renegades in preparation for their double gameweek in round 8. The optimisation understood the difficulty of this round and decided to stock one additional player from the start!
+- Matthew Wade, a player selected by the AI team in round 2, was injured and unavailable for the next round. Usually the optimisation aims to remove unavailable players, but in this unique scenario, it decided to bench Wade instead as it required more money for the most optimal trades. This trade would not be possible it the old system and allowed the AI team to bring in a more expensive player for the upcoming round!
 
 #### 3. Leveraging current season data!
+- The Melbourne Stars had two double gameweeks this season (Round 3 & Round 5). At the point of the first double, only two games of data was available, and thus the AI leveraged more past season data to elect Glenn Maxwell as the captain. But during the second double, with four games of data availabe, the AI leverage more of the current season data electing to captain the more inform, Tom Curran, over Maxwell! This decision demonstrated the system's ability to learn as it gets more current season data!
 
 ## Tournament Overview
 
