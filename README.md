@@ -3,25 +3,29 @@
 ## Welcome
 This is my project repository for my second iteration of my Big Bash League (BBL) AI Fantasy Team. By leveraging the ball by ball data of each match from the previous ten BBL seasons, I created a sophisticated decision making AIML system which leverages a bespoke optimisation process and several ML forecasting models to select my initial 15 player squad prior to the start of the tournament and to identify the optimal player trades for each of the 9 rounds during the season.
 
-[
-Champion Model](#champion-model) | [Challenger Model](#challenger-model)
+For this Big Bash Season I trialled two stratgies:
+1. Champion Strategy (ChrisLynnTheorem): Decisions are based off the player's expected points.
+2. Challenger Strategy (MitchCarloSwepson): Decisions are based of the player's expected points and variability in points by leveraging simulations.
+3. Control/ Human Strategy (PassedTheEyeTest): My personal account which will be used for comparison.
+
+Majority of the process will be the same for the Champion and Challenger strategy, with the the Champion strategy being a subset (less complex version) of the Challenger strategy.
 
 ## AI Team Performance
-### Champion Model
-#### Individual Performance
+### Individual Performance
 ![](strategy/Results/Round-9/ChrisLynnTheorem/Team%20Summary.png)
 
 ![](strategy/Results/Overall/ChrisLynnTheorem/history_table.png)
 
-#### League Performance
+### League Performance
 ![](strategy/Results/Overall/ChrisLynnTheorem/league_table.png)
-
-### Challenger Model
-_Coming soon._
 
 ## AI Team Build
 ### Overall Decision Making System
-![](strategy/full_tourny_system.png)
+#### Champion System
+![](strategy/full_tourny_system_champion.png)
+
+#### Champion System
+![](strategy/full_tourny_system_challenger.png)
 
 ### Data Collection
 - **Raw Previous Season Data:** Extracted ball by ball BBL data from Cricsheet (https://cricsheet.org/downloads/) for each game in BBL01 to BBL13 which was stored in a single CSV file. Special thank you and shout out to Stephen Rushe of Cricsheet for creating this amazing dataset, which I have leveraged primarily for this project!
@@ -30,203 +34,241 @@ _Coming soon._
 
 - **Null & Missing Data:** Many rows in the data had some of the columns missing values or nulls. This was mainly tackled by overriding these fields as 0, which is appropriate as most variables lower limit is 0.
 
-- **Exclusion
+- **Exclusion:** Rain affected games were manually removed. Only the latest 10 seasons of data was used.
+
+- **Data/ Feature Imputation:** As the modelling data is built of past player performances, players who did not contribute will be incorrectly excluded from the dataset. Additional loop was added to include non scoring players woth default features. 
 
 ### Response Variable and Explanatory Feature Creation
 - **Response Variable:** Number of Fantasy Points (Bowling + Batting) the player will get in the game. As the raw data did not include individual fielding statistics, these points were added separately in the optimisation.
 - **Explanatory Features Considered:** 
 1. Player's previous season/s fantasy points summary statistics (up to 3 seasons prior)
-2. Venue of game
-3. Opposition team
-4. Venue x Opposition interaction
-5. Home Ground flag
-6. Player's current season fantasy points summary statistics   
-Team Rank
-7. Opposition team rank
-8. Player's overs bowled and batting position
+2. Player's previous season/s batting statistics (up to 3 seasons prior)
+3. Player's previous season/s bowling statistics (up to 3 seasons prior)
+4. Player's previous season/s batting role (up to 3 seasons prior)
+5. Player's previous season/s bowling role (up to 3 seasons prior)
+
+6. Player's current season fantasy points summary statistics
+7. Player's current season batting role
+8. Player's current season bowling role (incl power surge bowlers)
 
 ### Model Build
+#### Modelling Suite
+![](strategy/model_suite.png)
+
+#### Linear Regression Model Build
+- **Modelling Data Split:** No data split was used, as I used all the data in training to identify the exact relationship/ formula of the current player price.
+- **Assumed Formula:** Current Player Price =  a x player previous price + b x previous games(1 - 3) average points
+- **Model Performance Metrics:** MAE, MAPE, RMSE, R2 & Actual vs Expected plots to assess the overall model predictive power.
+- **Pricing Model Accuracy:** 1 Game Model: MAPE 0.68%, 2 Game Model: MAPE 0.56% & 3+ Game Model: MAPE 1.27%.
+
+#### XGB Model Build
 - **Modelling Data Split:** 80% of the data randomly allocated for training set and remaining 20% for testing set. 
 - **Model Pipeline:** Allows the user to select which variables to consider in the model, EDA between response variable and explanatory features, model builder loop and model performance metrics.
-- **Model objects considered:** Linear Regression, Decision Trees, Random Forest, Gradient Boosting Machine & Explainable Boosting Machine.
+- **Model objects considered:** Linear Regression, Decision Trees, Random Forest, Gradient Boosting Machine, Explainable Boosting Machine & Extreme Gradient Boosting Machine.
 - **Hyperparameter tuning:** For the machine learning model objects, unique hp grids were used to optimise the models, leveraging a 5 fold cross validation process on the training data to identify the best parameters. 
 - **Model Performance Metrics:** MAE, MAPE, RMSE, R2 & Actual vs Expected plots to assess the overall model predictive power. Variable feature importance was used to assess most impactful features.
+- **Pre Tournament Points Model Accuracy:** Expected Value Points Model: MAE (train/test) 10.8/12.9 points & Standard Deviation Points Model: MAE (train/test) 5.5/9.8 points.
+- **During Tournament Points Model Accuracy:** Expected Value Points Model - 1 Game: MAE (train/test) 10.7/12.0 points, 2 Games: MAE 9.7/11.4 points, 3 Games: MAE 9.3/12.8 points, 4 Games: MAE 9.6/13.3 points & 5 Games: MAE 8.9/12.9 points
 
 ### Model Scoring Process
-- **Overall process:** The scoring process first extracts the latest round's actual data for every player to rebuild the dataset used to create the model. Then the latest performance data is fed into the model to predict the expected fantasy points for every active player's remaining games. This process creates a final dataframe which has the 10 expected fantasy points predictions per player for each game in the season. 
+- **Overall process:** The scoring process first extracts the latest round's actual data for every player to rebuild the dataset used to create the model. Then the latest performance data is fed into the model to predict the expected fantasy points for every active player's remaining games. This process creates a final dataframe which has the expected fantasy points predictions per player. 
 
 ### Optimisation
-- **Optimisation set up:** Extract the final player scoring dataset and join additional fantasy features required for optimisation constraints e.g. player price. The dataset is then sliced and aggregated up to a player level, only considering the upcoming few rounds based on how many future rounds are selected. 
-- **Objective Function:** Maximise the amount of fantasy points
-- **Optimisation Constraints:** 
-1. Number of players in the team = 12
-2. Number of players from previous round team >= 9
-3. Number of available players = 12
-4. Number of wicketkeepers >= 1
-5. Number of batters >= 6
-6. Number of bowlers >= 5
-7. Team Budget < current round budget
+![](strategy/full_tourny_optimisation.png)
+
+- **Optimisation set up:** Extract the final player scoring dataset and join additional fantasy features required for optimisation constraints e.g. player price. The dataset is then sliced and aggregated up to a player level.
+
+- **Pre Tournament Optimisation Goal:** 
+1. Identify the optimal number of players in the squad
+2. Select the base squad (12 - 16 players) which will maximise the total season fantasy points.
+
+
+- **During Tournament Optimisation Goal:** 
+1. For the upcoming round, select the most optimal player trades which will maximise the remaining season fantasy points.
+2. Identify optimal round to use trade boost (additional 1 trade)
+
+### System Highlights
+#### 1. Planning for the entire season!
+- Before the start of the tournament, the AI team decided to select Will Sunderland the captain of the Melbourne Renegades in preparation for their double gameweek in round 8. The optimisation understood the difficulty of this round and decided to stock one additional player from the start!
+
+#### 2. Leveraging the Bench!
+- Before the start of the tournament, the AI team decided to select Will Sunderland the captain of the Melbourne Renegades in preparation for their double gameweek in round 8. The optimisation understood the difficulty of this round and decided to stock one additional player from the start!
+
+#### 3. Leveraging current season data!
 
 ## Tournament Overview
 
 ### <ins>Round 1</ins>
 ![](strategy/Results/Round-1/ChrisLynnTheorem/Team%20Summary.png)
-- AI Captain: Beau Webster (132 points - 17.93%)
 
 **Selected Team**
 
 ![](strategy/Results/Round-1/ChrisLynnTheorem/Team%20Performance.png)
 
 **Champion vs Challenger vs Semi-Pro Result**
-
+| Team       | Round Points   | Round Rank | Overall Rank |
+| :---       |     :---:      | :---:      | :---:        |
+| Champion   | 824            | 16256      | 16256        |
+| Challenger |             | B.Couch    |                 |
+| Control    |              | C.Lynn     |                |
 
 ### <ins>Round 2</ins>
 **AI Team Round Trades**
 
-| Traded In  | Fantasy Points | Traded Out |
-| :---       |     :---:      | :---       |
-| L.Pope     | 156            | J.Clarke   |
-| H.Thornton | 106            | B.Couch    |
-| P.Walter   | 44             | C.Lynn     |
+![](strategy/Results/Round-2/ChrisLynnTheorem/trades.png)
+
+**Round Summary**
 
 ![](strategy/Results/Round-2/ChrisLynnTheorem/Team%20Summary.png)
-- AI Captain: Matt Short (230 points - 20.05%)
 
 **Selected Team**
 
 ![](strategy/Results/Round-2/ChrisLynnTheorem/Team%20Performance.png)
 
 **Champion vs Challenger vs Semi-Pro Result**
-
+| Team       | Round Points   | Round Rank | Overall Rank |
+| :---       |     :---:      | :---:      | :---:        |
+| Champion   | 1237           | 5425      | 7643        |
+| Challenger |             | B.Couch    |                 |
+| Control    |              | C.Lynn     |                |
 
 ### <ins>Round 3</ins>
 **AI Team Round Trades**
 
-| Traded In  | Fantasy Points | Traded Out    |
-| :---       |     :---:      | :---          |
-| J.Edwards  | 24             | J.Behrendorff |
-| H.Kerr     | 104            | H.Cartwright  |
-| M.Stoinis  | 51             | B.Webster     |
+![](strategy/Results/Round-3/ChrisLynnTheorem/trades.png)
+
+**Round Summary**
 
 ![](strategy/Results/Round-3/ChrisLynnTheorem/Team%20Summary.png)
-- AI Captain: Jack Edwards (24 points - 2.93%)
 
 **Selected Team**
 
 ![](strategy/Results/Round-3/ChrisLynnTheorem/Team%20Performance.png)
 
 **Champion vs Challenger vs Semi-Pro Result**
+| Team       | Round Points   | Round Rank | Overall Rank |
+| :---       |     :---:      | :---:      | :---:        |
+| Champion   | 1160           | 4171      | 4651        |
+| Challenger |             | B.Couch    |                 |
+| Control    |              | C.Lynn     |                |
 
 ### <ins>Round 4</ins>
 **AI Team Round Trades**
 
-| Traded In    | Fantasy Points | Traded Out |
-| :---         |     :---:      | :---       |
-| J.Brown      | 128            | T.Curran   |
-| F.O'Niell    | 16             | M.Short    |
-| W.Sutherland | 66             | P.Walter   |
+![](strategy/Results/Round-4/ChrisLynnTheorem/trades.png)
+
+**Round Summary**
 
 ![](strategy/Results/Round-4/ChrisLynnTheorem/Team%20Summary.png)
-- AI Captain: Jamie Overton (142 points - 18.56%)
 
 **Selected Team**
 
 ![](strategy/Results/Round-4/ChrisLynnTheorem/Team%20Performance.png)
 
 **Champion vs Challenger vs Semi-Pro Result**
+| Team       | Round Points   | Round Rank | Overall Rank |
+| :---       |     :---:      | :---:      | :---:        |
+| Champion   | 848            | 23,424     | 8,476        |
+| Challenger |             | B.Couch    |                 |
+| Control    |              | C.Lynn     |                |
 
 ### <ins>Round 5</ins>
 **AI Team Round Trades**
 
-| Traded In  | Fantasy Points | Traded Out  |
-| :---       |     :---:      | :---        |
-| W.Agar     | 4              | B.Dhawshuis |
-| S.Billings | 13             | H.Kerr      |
-| L.Ferguson | 8              | S.Konstas   |
-| *D.Sams*   | *15*           | *F.O'Niell* |
+![](strategy/Results/Round-5/ChrisLynnTheorem/trades.png)
+
+**Round Summary**
 
 ![](strategy/Results/Round-5/ChrisLynnTheorem/Team%20Summary.png)
-- AI Captain: Henry Thornton (54 points - 14.83%)
 
 **Selected Team**
 
 ![](strategy/Results/Round-5/ChrisLynnTheorem/Team%20Performance.png)
 
 **Champion vs Challenger vs Semi-Pro Result**
+| Team       | Round Points   | Round Rank | Overall Rank |
+| :---       |     :---:      | :---:      | :---:        |
+| Champion   | 941            | 2,441      | 6,516        |
+| Challenger |             | B.Couch    |                 |
+| Control    |              | C.Lynn     |                |
 
 ### <ins>Round 6</ins>
 **AI Team Round Trades**
 
-| Traded In  | Fantasy Points | Traded Out   |
-| :---       |     :---:      | :---         |
-| C.Green    | 10             | L.Pope       |
-| S.Johnson  | 81             | J.Overton    |
-| G.Sandhu   | 19             | D.Sams       |
-| *D.Warner* | *70*           | *H.Thornton* |
+![](strategy/Results/Round-6/ChrisLynnTheorem/trades.png)
 
+**Round Summary**
 ![](strategy/Results/Round-6/ChrisLynnTheorem/Team%20Summary.png)
-- AI Captain: Wes Agar (48 points - 7.21%)
 
 **Selected Team**
 
 ![](strategy/Results/Round-6/ChrisLynnTheorem/Team%20Performance.png)
 
 **Champion vs Challenger vs Semi-Pro Result**
+| Team       | Round Points   | Round Rank | Overall Rank |
+| :---       |     :---:      | :---:      | :---:        |
+| Champion   | 1122           | 1,355      | 3,997        |
+| Challenger |             | B.Couch    |                 |
+| Control    |              | C.Lynn     |                |
 
 ### <ins>Round 7</ins>
 **AI Team Round Trades**
 
-| Traded In   | Fantasy Points | Traded Out   |
-| :---        |     :---:      | :---         |
-| P.Hatzoglu  | 14             | L.Ferguson   |
-| C.Jordan    | 48             | G.Sandhu     |
-| B.McDermott | 0              | M.Stoinis    |
+![](strategy/Results/Round-7/ChrisLynnTheorem/trades.png)
 
+**Round Summary**
 ![](strategy/Results/Round-7/ChrisLynnTheorem/Team%20Summary.png)
-- AI Captain: Will Sunderland (90 points - 16.89%)
 
 **Selected Team**
 
 ![](strategy/Results/Round-7/ChrisLynnTheorem/Team%20Performance.png)
 
 **Champion vs Challenger vs Semi-Pro Result**
+| Team       | Round Points   | Round Rank | Overall Rank |
+| :---       |     :---:      | :---:      | :---:        |
+| Champion   | 849            | 8,139      | 3,404        |
+| Challenger |             | B.Couch    |                 |
+| Control    |              | C.Lynn     |                |
 
 ### <ins>Round 8</ins>
 **AI Team Round Trades**
 
-| Traded In  | Fantasy Points | Traded Out   |
-| :---       |     :---:      | :---         |
-| N.Ellis    | 143            | W.Agar       |
-| M.Owen     | 219            | G.McDermott  |
-| B.Stanlake | 13             | P.Siddle     |
+![](strategy/Results/Round-8/ChrisLynnTheorem/trades.png)
 
+**Round Summary**
 ![](strategy/Results/Round-8/ChrisLynnTheorem/Team%20Summary.png)
-- AI Captain: Peter Hatzoglou (22 points - 2.74%)
 
 **Selected Team**
 
 ![](strategy/Results/Round-8/ChrisLynnTheorem/Team%20Performance.png)
 
 **Champion vs Challenger vs Semi-Pro Result**
+| Team       | Round Points   | Round Rank | Overall Rank |
+| :---       |     :---:      | :---:      | :---:        |
+| Champion   | 852            | 7,300      | 3,058        |
+| Challenger |             | B.Couch    |                 |
+| Control    |              | C.Lynn     |                |
 
 ### <ins>Round 9</ins>
 
 **AI Team Round Trades**
 
-| Traded In  | Fantasy Points | Traded Out   |
-| :---       |     :---:      | :---         |
-| J.Clarke   | 0              | C.Green      |
-| M.Neser    | 42             | B.Stanlake   |
-| T.Rogers   | 30             | D.Warner     |
+![](strategy/Results/Round-9/ChrisLynnTheorem/trades.png)
+
+**Round Summary**
 
 ![](strategy/Results/Round-9/ChrisLynnTheorem/Team%20Summary.png)
-- AI Captain: Nathan Ellis (178 points - 27.22%)
 
 **Selected Team**
 
 ![](strategy/Results/Round-9/ChrisLynnTheorem/Team%20Performance.png)
 
 **Champion vs Challenger vs Semi-Pro Result**
+| Team       | Round Points   | Round Rank | Overall Rank |
+| :---       |     :---:      | :---:      | :---:        |
+| Champion   | 649            | 16,239     | 4,945        |
+| Challenger |             | B.Couch    |                 |
+| Control    |              | C.Lynn     |                |
 
 ## AI Team Next Season Improvements
 
@@ -241,6 +283,9 @@ Team Rank
 - **Alternative Modelling Techniques:** Currently all models are XGBoost models, but should look into 
 - **Explainable & Casual Modelling Techniques:** As can be seen in many of the models, they consist of several feature all providing similar amounts of information. Leveraging advanced explainable & casual ML techniques could help dive deeper to identify the true key drivers and features of player performance.
 - **Rebuilding current models:** Due to the numerous models built and features created, their are several different options and experiments which can be considered to construct the best solution. Though I consider several approaches, due to time limitations and the face pace of the tournament I definetely did not exhaust all possible modelling ideas and I would like to focus deeper into the raw modelling.
+- **Adjustment Factors:** By shifting to the response variable to the average points across the entire season, I am unable to leverage previously created game specific features such as Venue & Opposition. My initial idea is that post modelling adjustment factors can be created to add this additional information prior to optimisation.
+-**Ordinal Performance Metrics:** As the strategy is only allowed to make limited trades to change the team, not only is the magnitude of points important, but the models ability to accurately rank the players correctly. A bespoke performance metric/s should be designed to consider this.
+
 
 ### Strategy (via Optimisation)
 - This is the section which I developed the most enhancements and I was very happy with its performance. 
