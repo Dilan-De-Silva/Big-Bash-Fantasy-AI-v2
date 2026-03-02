@@ -110,8 +110,8 @@ Majority of the process will be the same for the Champion and Challenger strateg
 | Team       | Round Points   | Round Rank | Overall Rank |
 | :---       |     :---:      | :---:      | :---:        |
 | Champion   | 824            | 16256      | 16256        |
-| Challenger |             | B.Couch    |                 |
-| Control    |              | C.Lynn     |                |
+| Challenger | 824            | 16256      | 16256        |
+| Control    |                |            |              |
 
 ### <ins>Round 2</ins>
 **AI Team Round Trades**
@@ -129,9 +129,9 @@ Majority of the process will be the same for the Champion and Challenger strateg
 **Champion vs Challenger vs Semi-Pro Result**
 | Team       | Round Points   | Round Rank | Overall Rank |
 | :---       |     :---:      | :---:      | :---:        |
-| Champion   | 1237           | 5425      | 7643        |
-| Challenger |             | B.Couch    |                 |
-| Control    |              | C.Lynn     |                |
+| Champion   | 1237           | 5425       | 7643         |
+| Challenger | 1147           | 9269       | 10343        |
+| Control    |                |            |              |
 
 ### <ins>Round 3</ins>
 **AI Team Round Trades**
@@ -149,9 +149,9 @@ Majority of the process will be the same for the Champion and Challenger strateg
 **Champion vs Challenger vs Semi-Pro Result**
 | Team       | Round Points   | Round Rank | Overall Rank |
 | :---       |     :---:      | :---:      | :---:        |
-| Champion   | 1160           | 4171      | 4651        |
-| Challenger |             | B.Couch    |                 |
-| Control    |              | C.Lynn     |                |
+| Champion   | 1160           | 4171       | 4651         |
+| Challenger | 1207           | 2545       | 5505         |
+| Control    |                |            |              |
 
 ### <ins>Round 4</ins>
 **AI Team Round Trades**
@@ -170,8 +170,8 @@ Majority of the process will be the same for the Champion and Challenger strateg
 | Team       | Round Points   | Round Rank | Overall Rank |
 | :---       |     :---:      | :---:      | :---:        |
 | Champion   | 848            | 23,424     | 8,476        |
-| Challenger |             | B.Couch    |                 |
-| Control    |              | C.Lynn     |                |
+| Challenger | 831            | 24414      | 9559         |
+| Control    |                |            |              |
 
 ### <ins>Round 5</ins>
 **AI Team Round Trades**
@@ -190,8 +190,8 @@ Majority of the process will be the same for the Champion and Challenger strateg
 | Team       | Round Points   | Round Rank | Overall Rank |
 | :---       |     :---:      | :---:      | :---:        |
 | Champion   | 941            | 2,441      | 6,516        |
-| Challenger |             | B.Couch    |                 |
-| Control    |              | C.Lynn     |                |
+| Challenger | 922            | 3442       | 7683         |
+| Control    |                |            |              |
 
 ### <ins>Round 6</ins>
 **AI Team Round Trades**
@@ -209,8 +209,8 @@ Majority of the process will be the same for the Champion and Challenger strateg
 | Team       | Round Points   | Round Rank | Overall Rank |
 | :---       |     :---:      | :---:      | :---:        |
 | Champion   | 1122           | 1,355      | 3,997        |
-| Challenger |             | B.Couch    |                 |
-| Control    |              | C.Lynn     |                |
+| Challenger | 974            | 6416       | 6634         |
+| Control    |                |            |              |
 
 ### <ins>Round 7</ins>
 **AI Team Round Trades**
@@ -228,8 +228,8 @@ Majority of the process will be the same for the Champion and Challenger strateg
 | Team       | Round Points   | Round Rank | Overall Rank |
 | :---       |     :---:      | :---:      | :---:        |
 | Champion   | 849            | 8,139      | 3,404        |
-| Challenger |             | B.Couch    |                 |
-| Control    |              | C.Lynn     |                |
+| Challenger | 832            | 9668       | 6064         |
+| Control    |                |            |              |
 
 ### <ins>Round 8</ins>
 **AI Team Round Trades**
@@ -247,8 +247,8 @@ Majority of the process will be the same for the Champion and Challenger strateg
 | Team       | Round Points   | Round Rank | Overall Rank |
 | :---       |     :---:      | :---:      | :---:        |
 | Champion   | 852            | 7,300      | 3,058        |
-| Challenger |             | B.Couch    |                 |
-| Control    |              | C.Lynn     |                |
+| Challenger | 812            | 10775      | 5844         |
+| Control    |                |            |              |
 
 ### <ins>Round 9</ins>
 
@@ -268,8 +268,8 @@ Majority of the process will be the same for the Champion and Challenger strateg
 | Team       | Round Points   | Round Rank | Overall Rank |
 | :---       |     :---:      | :---:      | :---:        |
 | Champion   | 649            | 16,239     | 4,945        |
-| Challenger |             | B.Couch    |                 |
-| Control    |              | C.Lynn     |                |
+| Challenger | 672            | 15103      | 7169         |
+| Control    |                |            |              |
 
 ## AI Team Next Season Improvements
 
