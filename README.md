@@ -107,11 +107,11 @@ Majority of the process will be the same for the Champion and Challenger strateg
 ![](strategy/Results/Round-1/ChrisLynnTheorem/Team%20Performance.png)
 
 **Champion vs Challenger vs Semi-Pro Result**
-| Team       | Round Points   | Round Rank | Overall Rank |
-| :---       |     :---:      | :---:      | :---:        |
-| Champion   | 824            | 16256      | 16256        |
-| Challenger | 824            | 16256      | 16256        |
-| Control    |                |            |              |
+| Team | Round Points | Round Rank | Overall Rank | Team Value | Surplass | Team Budget |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| Champion | 824 | 16256 | 16256 | $1900k | $57k | $1957k |
+| Challenger | 824 | 16256 | 16256 | $1874k | $79k | $1953k |
+| Control | 728 | 24574 | 24574 | $1853k | $96k | $1949k |
 
 ### <ins>Round 2</ins>
 **AI Team Round Trades**
@@ -127,11 +127,11 @@ Majority of the process will be the same for the Champion and Challenger strateg
 ![](strategy/Results/Round-2/ChrisLynnTheorem/Team%20Performance.png)
 
 **Champion vs Challenger vs Semi-Pro Result**
-| Team       | Round Points   | Round Rank | Overall Rank |
-| :---       |     :---:      | :---:      | :---:        |
-| Champion   | 1237           | 5425       | 7643         |
-| Challenger | 1147           | 9269       | 10343        |
-| Control    |                |            |              |
+| Team | Round Points | Round Rank | Overall Rank | Team Value | Surplass | Team Budget |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| Champion | 1237 | 5425 | 7643 | $1965k | $22k | $1987k |
+| Challenger | 1147 | 9269 | 10343 | $1919k | $45k | $1963k |
+| Control | 1393 | 1189 | 6065 | $2008k | $5k | $2013k |
 
 ### <ins>Round 3</ins>
 **AI Team Round Trades**
@@ -147,11 +147,11 @@ Majority of the process will be the same for the Champion and Challenger strateg
 ![](strategy/Results/Round-3/ChrisLynnTheorem/Team%20Performance.png)
 
 **Champion vs Challenger vs Semi-Pro Result**
-| Team       | Round Points   | Round Rank | Overall Rank |
-| :---       |     :---:      | :---:      | :---:        |
-| Champion   | 1160           | 4171       | 4651         |
-| Challenger | 1207           | 2545       | 5505         |
-| Control    |                |            |              |
+| Team | Round Points | Round Rank | Overall Rank | Team Value | Surplass | Team Budget |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| Champion | 1160 | 4171 | 4651 | $2020k | $0k | $2020k |
+| Challenger | 1207 | 2545 | 5505 | $1999k | $2k | $2002k |
+| Control | 1129 | 5690 | 4114 | $2039k | $3k | $2042k |
 
 ### <ins>Round 4</ins>
 **AI Team Round Trades**
@@ -167,11 +167,11 @@ Majority of the process will be the same for the Champion and Challenger strateg
 ![](strategy/Results/Round-4/ChrisLynnTheorem/Team%20Performance.png)
 
 **Champion vs Challenger vs Semi-Pro Result**
-| Team       | Round Points   | Round Rank | Overall Rank |
-| :---       |     :---:      | :---:      | :---:        |
-| Champion   | 848            | 23,424     | 8,476        |
-| Challenger | 831            | 24414      | 9559         |
-| Control    |                |            |              |
+| Team | Round Points | Round Rank | Overall Rank | Team Value | Surplass | Team Budget |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| Champion | 848 | 23424 | 8476 | $2033k | $57k | $2090k |
+| Challenger | 831 | 24414 | 9559 | $2019k | $55k | $2074k |
+| Control | 1211 | 2214 | 2455 | $2108k | $0k | $2108k |
 
 ### <ins>Round 5</ins>
 **AI Team Round Trades**
@@ -187,11 +187,11 @@ Majority of the process will be the same for the Champion and Challenger strateg
 ![](strategy/Results/Round-5/ChrisLynnTheorem/Team%20Performance.png)
 
 **Champion vs Challenger vs Semi-Pro Result**
-| Team       | Round Points   | Round Rank | Overall Rank |
-| :---       |     :---:      | :---:      | :---:        |
-| Champion   | 941            | 2,441      | 6,516        |
-| Challenger | 922            | 3442       | 7683         |
-| Control    |                |            |              |
+| Team | Round Points | Round Rank | Overall Rank | Team Value | Surplass | Team Budget |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| Champion | 941 | 2441 | 6516 | $2109k | $17k | $2127k |
+| Challenger | 922 | 3442 | 7683 | $2054k | $56k | $2110k |
+| Control | 980 | 1036 | 1413 | $2116k | $39k | $2156k |
 
 ### <ins>Round 6</ins>
 **AI Team Round Trades**
@@ -206,11 +206,11 @@ Majority of the process will be the same for the Champion and Challenger strateg
 ![](strategy/Results/Round-6/ChrisLynnTheorem/Team%20Performance.png)
 
 **Champion vs Challenger vs Semi-Pro Result**
-| Team       | Round Points   | Round Rank | Overall Rank |
-| :---       |     :---:      | :---:      | :---:        |
-| Champion   | 1122           | 1,355      | 3,997        |
-| Challenger | 974            | 6416       | 6634         |
-| Control    |                |            |              |
+| Team | Round Points | Round Rank | Overall Rank | Team Value | Surplass | Team Budget |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| Champion | 1122 | 1355 | 3997 | $2076k | $37k | $2113k |
+| Challenger | 974 | 6416 | 6634 | $1982k | $88k | $2070k |
+| Control | 1070 | 2475 | 1052 | $2183k | $1k | $2184k |
 
 ### <ins>Round 7</ins>
 **AI Team Round Trades**
@@ -225,11 +225,11 @@ Majority of the process will be the same for the Champion and Challenger strateg
 ![](strategy/Results/Round-7/ChrisLynnTheorem/Team%20Performance.png)
 
 **Champion vs Challenger vs Semi-Pro Result**
-| Team       | Round Points   | Round Rank | Overall Rank |
-| :---       |     :---:      | :---:      | :---:        |
-| Champion   | 849            | 8,139      | 3,404        |
-| Challenger | 832            | 9668       | 6064         |
-| Control    |                |            |              |
+| Team | Round Points | Round Rank | Overall Rank | Team Value | Surplass | Team Budget |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| Champion | 849 | 8139 | 3404 | $2044k | $40k | $2084k |
+| Challenger | 832 | 9668 | 6064 | $2009k | $30k | $2039k |
+| Control | 898 | 4676 | 674 | $2147k | $3k | $2150k |
 
 ### <ins>Round 8</ins>
 **AI Team Round Trades**
@@ -244,11 +244,11 @@ Majority of the process will be the same for the Champion and Challenger strateg
 ![](strategy/Results/Round-8/ChrisLynnTheorem/Team%20Performance.png)
 
 **Champion vs Challenger vs Semi-Pro Result**
-| Team       | Round Points   | Round Rank | Overall Rank |
-| :---       |     :---:      | :---:      | :---:        |
-| Champion   | 852            | 7,300      | 3,058        |
-| Challenger | 812            | 10775      | 5844         |
-| Control    |                |            |              |
+| Team | Round Points | Round Rank | Overall Rank | Team Value | Surplass | Team Budget |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| Champion | 852 | 7300 | 3058 | $2047k | $2k | $2049k |
+| Challenger | 812 | 10775 | 5844 | $1955k | $42k | $1997k |
+| Control | 741 | 18173 | 1056 | $2154k | $2k | $2156k |
 
 ### <ins>Round 9</ins>
 
@@ -265,11 +265,11 @@ Majority of the process will be the same for the Champion and Challenger strateg
 ![](strategy/Results/Round-9/ChrisLynnTheorem/Team%20Performance.png)
 
 **Champion vs Challenger vs Semi-Pro Result**
-| Team       | Round Points   | Round Rank | Overall Rank |
-| :---       |     :---:      | :---:      | :---:        |
-| Champion   | 649            | 16,239     | 4,945        |
-| Challenger | 672            | 15103      | 7169         |
-| Control    |                |            |              |
+| Team | Round Points | Round Rank | Overall Rank | Team Value | Surplass | Team Budget |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| Champion | 649 | 16239 | 4945 | $1939k | $8k | $1947k |
+| Challenger | 672 | 15103 | 7169 | $1875k | $2k | $1878k |
+| Control | 643 | 16592 | 2750 | $2101k | $0k | $2101k |
 
 ## AI Team Next Season Improvements
 
