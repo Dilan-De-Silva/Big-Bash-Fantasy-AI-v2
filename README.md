@@ -290,4 +290,5 @@ Majority of the process will be the same for the Champion and Challenger strateg
 
 ### Strategy (via Optimisation)
 - This is the section which I developed the most enhancements and I was very happy with its performance. 
+- **Build intricate game mechanics:** This season, I was helping the AI team by setting the team to consider fantasy game tricks which rely on leveraging the bench players, emergency player functionality and the vice captain role. Their are two advanced game strategies derived from these game mechanics which are: Vice Captain Trick & Emergency Trick. This season, I manually completed these tricks based on the model outputs. Next season, these mechanics should be built into the main optimisation or additional team setup optimisation, which will guide me exactly how to setup the team.
 - **Addition of new rules:** Build additional constraints to capture new fantasy rules
